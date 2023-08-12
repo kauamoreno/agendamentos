@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:agendamentos/constants/Cores.dart';
+import '../services/Autenticacao.dart';
+import 'package:agendamentos/constants/Cores.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -12,12 +13,15 @@ class _TelaLoginState extends State<TelaLogin> {
     super.initState();
   }
 
+  final _emailController = TextEditingController();
+  final _senhaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
 
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).height,
 
@@ -33,7 +37,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       'AGS',
                       textAlign: TextAlign.center,
@@ -48,12 +52,10 @@ class _TelaLoginState extends State<TelaLogin> {
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height * 0.45,
+                height: MediaQuery.sizeOf(context).height * 0.55,
                 decoration: BoxDecoration(
                   color: Color(0xFFB71835),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0),
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
@@ -73,10 +75,11 @@ class _TelaLoginState extends State<TelaLogin> {
                             labelText: "Email",
                             hintText: "email@mail.com",
                             prefixIcon: Padding(
-                              child: Icon(Icons.email),
                               padding: EdgeInsets.all(5),
+                              child: Icon(Icons.email, color: Cores.light),
                             )
                           ),
+                          controller: _emailController,
                         ),
 
                         TextField(
@@ -85,14 +88,14 @@ class _TelaLoginState extends State<TelaLogin> {
                           decoration: InputDecoration(
                             labelText: "Senha",
                             prefixIcon: Padding(
-                              child: Icon(Icons.password),
                               padding: EdgeInsets.all(5),
+                              child: Icon(Icons.password, color: Cores.light),
                             )
                           ),
+                          controller: _senhaController,
                         ),
                           
                         ElevatedButton(
-                          onPressed: () {},
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
@@ -100,6 +103,13 @@ class _TelaLoginState extends State<TelaLogin> {
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
+                          onPressed: () {
+                            Autenticacao().fazerLogin(
+                              email: _emailController.text, 
+                              senha: _senhaController.text, 
+                              context: context
+                            );
+                          },
                         )
                       ],
                     ),
