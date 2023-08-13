@@ -14,4 +14,6 @@ class Cores {
   static const Color gray = Color.fromRGBO(108, 117, 125, 1.0);
   static const Color black = Color.fromRGBO(51, 51, 51, 1.0);
   
+  static const Color azul = Color.fromRGBO(0, 123, 255, 1.0);
+  
 } 
