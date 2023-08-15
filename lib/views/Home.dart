@@ -18,6 +18,14 @@ class _HomeState extends State<Home> {
     setState(() {
       pageSelecionada = index;
     });
+    switch (index) {
+                case 0:
+                  Navigator.pushReplacementNamed(context, '/home');
+                  break;
+                case 1:
+                  Navigator.pushReplacementNamed(context, '/perfil');
+                  break;
+          }
   }
 
   @override
@@ -25,6 +33,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        automaticallyImplyLeading: false, //USADO PARA REMOVER A SETINHA DO APPBAR
       ),
 
       //NAVIGATION BAR
@@ -34,27 +43,18 @@ class _HomeState extends State<Home> {
              MensagemSnackBar mensagemSnackBar = MensagemSnackBar();
              mensagemSnackBar.showErro(context, 'Errou');
         }, child: Text("Teste"))
-        ],
+        ],    
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.red,
+        currentIndex: pageSelecionada,
+        onTap:itemSelecionado,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_3_sharp), label: "Perfil")
         ],
         selectedItemColor: Colors.white,
-        currentIndex: pageSelecionada,
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacementNamed(context, '/home');
-              break;
-            case 1:
-              Navigator.pushReplacementNamed(context, '/perfil');
-              break;
-          }
-        },
       ),
     );
   }

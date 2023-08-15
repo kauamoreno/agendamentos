@@ -11,12 +11,19 @@ class Perfil extends StatefulWidget {
 
 class _PerfilState extends State<Perfil> {
   int pageSelecionada = 0;
-  late PageController animationPage;
 
   void itemSelecionado(int index) {
     setState(() {
       pageSelecionada = index;
     });
+    switch (index) {
+      case 0:
+        Navigator.pushReplacementNamed(context, '/home');
+        break;
+      case 1:
+        Navigator.pushReplacementNamed(context, '/perfil');
+        break;
+    }
   }
 
   @override
@@ -24,6 +31,7 @@ class _PerfilState extends State<Perfil> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Perfil do Usuario"),
+        automaticallyImplyLeading: false, //USADO PARA REMOVER A SETINHA DO APPBAR
       ),
       //NAVIGATION BAR
       body: Column(
@@ -31,26 +39,17 @@ class _PerfilState extends State<Perfil> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.red,
+        currentIndex: pageSelecionada,
+        onTap: itemSelecionado,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Home",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_3_sharp), label: "Perfil")
+              icon: Icon(Icons.person_3_sharp), label: "Perfil",)
         ],
         selectedItemColor: Colors.white,
-        currentIndex: pageSelecionada,
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacementNamed(context, '/home');
-              break;
-            case 1:
-              Navigator.pushReplacementNamed(context, '/perfil');
-              break;
-          }
-        },
       ),
     );
   }
