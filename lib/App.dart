@@ -21,8 +21,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.red
       ),
       //INICIANDO ROTAS 
+      initialRoute: '/', //DEFININDO ROTA PRINCIPAL
       routes:{
-        '/':(context) => TelaLogin(), //TELA PRINCIPAL
+        '/':(context) => TelaLogin(), //PUXANDO ROTA PRINCIPAL
         '/home':(context) => Home(),
         '/perfil':(context) => Perfil()
       },

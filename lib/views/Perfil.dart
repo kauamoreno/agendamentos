@@ -37,17 +37,17 @@ class _PerfilState extends State<Perfil> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_3_outlined), label: "Perfil")
+              icon: Icon(Icons.person_3_sharp), label: "Perfil")
         ],
         selectedItemColor: Colors.white,
         currentIndex: pageSelecionada,
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushNamed(context, '/perfil');
+              Navigator.pushReplacementNamed(context, '/perfil');
               break;
           }
         },

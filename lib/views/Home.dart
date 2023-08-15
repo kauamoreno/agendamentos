@@ -2,6 +2,7 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 import '../App.dart';
 import 'Perfil.dart';
+import '../components/MensagemSnackBar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,7 +29,12 @@ class _HomeState extends State<Home> {
 
       //NAVIGATION BAR
       body: Column(
-        children: <Widget>[],
+        children: [
+          ElevatedButton(onPressed: () {
+             MensagemSnackBar mensagemSnackBar = MensagemSnackBar();
+             mensagemSnackBar.showErro(context, 'Errou');
+        }, child: Text("Teste"))
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.red,
@@ -42,10 +48,10 @@ class _HomeState extends State<Home> {
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushNamed(context, '/perfil');
+              Navigator.pushReplacementNamed(context, '/perfil');
               break;
           }
         },
