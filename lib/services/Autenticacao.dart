@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../components/MensagemSnackBar.dart';
+import 'UsuarioFirestore.dart';
 
 class Autenticacao {
 
   MensagemSnackBar mensagemSnackBar = MensagemSnackBar();
-  
+
   //CREATE
   criarUsuario ({
     required BuildContext context,
@@ -14,11 +15,19 @@ class Autenticacao {
   }) async {
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: senha,
       );
-      print('Usuário criado com sucesso');
+
+      String userId = '';
+      User? user = userCredential.user;
+      if (user != null) {
+        userId = user.uid;
+      }
+      UsuarioFirestore().criarUsuario(userId, email);
+
+      mensagemSnackBar.showSucesso(context, 'Usuário criado com sucesso');
       
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
