@@ -49,11 +49,28 @@ class Autenticacao {
   }) async {
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: senha
       );
-      Navigator.of(context).pushReplacementNamed('/home');
+      
+      String userId = '';
+      User? user = userCredential.user;
+      if (user != null) {
+        userId = user.uid;
+      }
+
+      bool? permissaoRetornada = await UsuarioFirestore().getPermissao(userId);
+      switch (permissaoRetornada) {
+        case true:
+          Navigator.of(context).pushReplacementNamed('/admHome');      
+          break;
+        case false:
+          Navigator.of(context).pushReplacementNamed('/home');
+          break;
+        default:
+          Navigator.of(context).pushReplacementNamed('/admHome');
+      }
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
