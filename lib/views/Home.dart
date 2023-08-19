@@ -1,8 +1,4 @@
-import 'dart:html';
 import 'package:flutter/material.dart';
-import '../App.dart';
-import 'Perfil.dart';
-import '../components/MensagemSnackBar.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,13 +15,13 @@ class _HomeState extends State<Home> {
       pageSelecionada = index;
     });
     switch (index) {
-                case 0:
-                  Navigator.pushReplacementNamed(context, '/home');
-                  break;
-                case 1:
-                  Navigator.pushReplacementNamed(context, '/perfil');
-                  break;
-          }
+      case 0:
+        Navigator.pushReplacementNamed(context, '/home');
+        break;
+      case 1:
+        Navigator.pushReplacementNamed(context, '/perfil');
+        break;
+    }
   }
 
   @override
@@ -36,15 +32,13 @@ class _HomeState extends State<Home> {
         automaticallyImplyLeading: false, //USADO PARA REMOVER A SETINHA DO APPBAR
       ),
 
-      //NAVIGATION BAR
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.red,
         currentIndex: pageSelecionada,
-        onTap:itemSelecionado,
+        onTap: itemSelecionado,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_3_sharp), label: "Perfil")
+          BottomNavigationBarItem(icon: Icon(Icons.person_3_sharp), label: "Perfil")
         ],
         selectedItemColor: Colors.white,
       ),

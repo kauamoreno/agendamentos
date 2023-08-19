@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Home.dart';
-import '../App.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -29,14 +27,16 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Text("Perfil do Usuario"),
         automaticallyImplyLeading: false, //USADO PARA REMOVER A SETINHA DO APPBAR
       ),
-      //NAVIGATION BAR
+
       body: Column(
         children: <Widget>[],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.red,
         currentIndex: pageSelecionada,
@@ -46,8 +46,7 @@ class _PerfilState extends State<Perfil> {
             icon: Icon(Icons.home),
             label: "Home",
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_3_sharp), label: "Perfil",)
+          BottomNavigationBarItem(icon: Icon(Icons.person_3_sharp), label: "Perfil")
         ],
         selectedItemColor: Colors.white,
       ),

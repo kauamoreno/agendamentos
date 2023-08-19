@@ -1,9 +1,9 @@
 import 'package:agendamentos/views/TelaLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'views/TelaLogin.dart'; 
 import './views/Home.dart';
 import './views/Perfil.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -20,10 +20,10 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
-      //INICIANDO ROTAS 
-      initialRoute: '/', //DEFININDO ROTA PRINCIPAL
+
+      initialRoute: '/',
       routes:{
-        '/':(context) => TelaLogin(), //PUXANDO ROTA PRINCIPAL
+        '/':(context) => TelaLogin(),
         '/home':(context) => Home(),
         '/perfil':(context) => Perfil()
       },
