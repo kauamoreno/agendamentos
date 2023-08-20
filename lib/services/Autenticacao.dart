@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../components/MensagemSnackBar.dart';
-import 'UsuarioFirestore.dart';
+import './Firestore/UsuarioFirestore.dart';
 
 class Autenticacao {
 
