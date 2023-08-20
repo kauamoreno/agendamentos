@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import '../constants/Cores.dart';
+
+class TextFieldComponent {
+  static Widget _textFieldComponent(String label,  String hint, IconData icone, TextInputType textInputType, bool isSenha, TextEditingController controller) {
+    
+    return TextField(
+      keyboardType: textInputType,
+      obscureText: isSenha,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Icon(icone, color: Cores.light),
+        )
+      ),
+      controller: controller,
+    );
+  }
+  
+  textFieldEmail({required label, required String hint, required TextEditingController controller}){
+    return _textFieldComponent(label, hint, Icons.email, TextInputType.emailAddress, false, controller);
+  }
+
+  textFieldSenha({required label, required String hint, required TextEditingController controller}){
+    return _textFieldComponent(label, hint, Icons.password, TextInputType.visiblePassword, true, controller);
+  }
+}

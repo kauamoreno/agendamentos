@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/Autenticacao.dart';
-import 'package:agendamentos/constants/Cores.dart';
+import '../components/TextFieldComponent.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -13,6 +13,7 @@ class _TelaLoginState extends State<TelaLogin> {
     super.initState();
   }
 
+  TextFieldComponent textFieldComponent = TextFieldComponent();
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
 
@@ -33,11 +34,11 @@ class _TelaLoginState extends State<TelaLogin> {
               Container(
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height * 0.4,
-                alignment: AlignmentDirectional(0, 0),
-                child: Column(
+                alignment: const AlignmentDirectional(0, 0),
+                child: const Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'AGS',
                       textAlign: TextAlign.center,
@@ -53,7 +54,7 @@ class _TelaLoginState extends State<TelaLogin> {
               Container(
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height * 0.55,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xFFB71835),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -69,35 +70,13 @@ class _TelaLoginState extends State<TelaLogin> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: "Email",
-                            hintText: "email@mail.com",
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Icon(Icons.email, color: Cores.light),
-                            )
-                          ),
-                          controller: _emailController,
-                        ),
 
-                        TextField(
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            labelText: "Senha",
-                            prefixIcon: Padding(
-                              padding: EdgeInsets.all(5),
-                              child: Icon(Icons.password, color: Cores.light),
-                            )
-                          ),
-                          controller: _senhaController,
-                        ),
-                          
+                        textFieldComponent.textFieldEmail(label: "Email", hint: 'email@mail.com', controller: _emailController),
+                        textFieldComponent.textFieldSenha(label: "Senha", hint: '', controller: _senhaController),
+
                         ElevatedButton(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               'Entrar',
                               style: TextStyle(fontSize: 20),
