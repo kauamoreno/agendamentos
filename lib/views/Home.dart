@@ -4,15 +4,16 @@ import 'Perfil.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  @override
   int paginaAtual = 0;
   PageController pc = PageController();
 
+  @override
   void initState() {
     super.initState();
     pc = PageController(initialPage: paginaAtual);
@@ -29,21 +30,26 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: PageView(
         controller: pc,
-        children: [Home(), Perfil()],
+        children: [
+          Container(color: Colors.blue, child: Center(child: Text('Página Home Usuário'))),
+          Perfil(),
+        ],
         onPageChanged: setPagina,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: paginaAtual,
         backgroundColor: Colors.red,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_sharp), label: 'Perfil'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_2_sharp), label: 'Perfil'),
         ],
         selectedItemColor: Cores.white,
         onTap: (pagina) {
-          pc.animateToPage(pagina,
-              duration: Duration(milliseconds: 400), curve: Curves.ease);
+          pc.animateToPage(
+            pagina,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.ease,
+          );
         },
       ),
     );

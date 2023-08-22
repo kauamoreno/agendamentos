@@ -144,20 +144,6 @@ class _PerfilState extends State<Perfil> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.red,
-        currentIndex: pageSelecionada,
-        onTap: itemSelecionado,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_3_sharp), label: "Perfil")
-        ],
-        selectedItemColor: Colors.white,
-      ),
     );
   }
 }
