@@ -1,5 +1,6 @@
 import 'package:agendamentos/constants/Cores.dart';
 import 'package:flutter/material.dart';
+import 'HomePage.dart';
 import 'Perfil.dart';
 
 class Home extends StatefulWidget {
@@ -31,7 +32,7 @@ class _HomeState extends State<Home> {
       body: PageView(
         controller: pc,
         children: [
-          Container(color: Colors.blue, child: Center(child: Text('Página Home Usuário'))),
+          HomePage(),
           Perfil(),
         ],
         onPageChanged: setPagina,
