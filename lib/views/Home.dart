@@ -1,3 +1,4 @@
+import 'package:agendamentos/components/SalasCard.dart';
 import 'package:agendamentos/constants/Cores.dart';
 import 'package:flutter/material.dart';
 import 'Perfil.dart';
@@ -31,7 +32,7 @@ class _HomeState extends State<Home> {
       body: PageView(
         controller: pc,
         children: [
-          Container(color: Colors.blue, child: Center(child: Text('Página Home Usuário'))),
+          Container(color: Colors.blue, child: Center(child: SalasCard(imgUrl: 'https://suzano.sp.senai.br/galeriaimagens/imageviewer.ashx?Url=67222', titulo: "Sala 8", subTitulo: "Salas de Aula"))),
           Perfil(),
         ],
         onPageChanged: setPagina,
