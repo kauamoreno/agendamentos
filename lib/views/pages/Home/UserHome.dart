@@ -1,5 +1,5 @@
-import 'package:agendamentos/components/SalasCard.dart';
-import 'package:agendamentos/constants/Cores.dart';
+import 'package:agendamentos/views/components/SalasCard.dart';
+import 'package:agendamentos/views/constants/Cores.dart';
 import 'package:flutter/material.dart';
 import '../Perfil.dart';
 

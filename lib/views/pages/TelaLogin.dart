@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/Autenticacao.dart';
+import '../../models/services/Autenticacao.dart';
 import '../components/TextFieldComponent.dart';
 
 class TelaLogin extends StatefulWidget {
