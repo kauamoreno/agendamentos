@@ -1,6 +1,6 @@
 import 'package:agendamentos/constants/Cores.dart';
 import 'package:flutter/material.dart';
-import 'Perfil.dart';
+import '../Perfil.dart';
 
 class AdmHome extends StatefulWidget {
   const AdmHome({Key? key}) : super(key: key);

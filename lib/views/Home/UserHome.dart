@@ -1,7 +1,7 @@
 import 'package:agendamentos/components/SalasCard.dart';
 import 'package:agendamentos/constants/Cores.dart';
 import 'package:flutter/material.dart';
-import 'Perfil.dart';
+import '../Perfil.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

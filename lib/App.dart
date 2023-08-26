@@ -1,9 +1,9 @@
 import 'package:agendamentos/views/TelaLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './views/Home.dart';
+import 'views/Home/UserHome.dart';
 import './views/Perfil.dart';
-import './views/AdmHome.dart';
+import 'views/Home/AdmHome.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
