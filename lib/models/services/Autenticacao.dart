@@ -61,16 +61,7 @@ class Autenticacao {
       }
 
       bool? permissaoRetornada = await UsuarioFirestore().getPermissao(userId);
-      switch (permissaoRetornada) {
-        case true:
-          Navigator.of(context).pushReplacementNamed('/admHome');      
-          break;
-        case false:
-          Navigator.of(context).pushReplacementNamed('/home');
-          break;
-        default:
-          Navigator.of(context).pushReplacementNamed('/admHome');
-      }
+      Navigator.of(context).pushNamed('/home', arguments: permissaoRetornada);
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -78,7 +69,7 @@ class Autenticacao {
 
       } else if (e.code == 'wrong-password') {
         mensagemSnackBar.erro(context, 'Senha incorreta');
-        
+
       } else {
         mensagemSnackBar.erro(context, e.toString());
       }

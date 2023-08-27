@@ -8,21 +8,6 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
-  int pageSelecionada = 0;
-
-  void itemSelecionado(int index) {
-    setState(() {
-      pageSelecionada = index;
-    });
-    switch (index) {
-      case 0:
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 1:
-        Navigator.pushReplacementNamed(context, '/perfil');
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

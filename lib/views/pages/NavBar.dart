@@ -1,21 +1,26 @@
-import 'package:agendamentos/views/constants/Cores.dart';
+import 'package:agendamentos/view_model/NavBar_ViewModel.dart';
+import '../constants/Cores.dart';
 import 'package:flutter/material.dart';
 import 'Perfil.dart';
 
-class AdmHome extends StatefulWidget {
-  const AdmHome({Key? key}) : super(key: key);
+class Navbar extends StatefulWidget {
+  final bool isAdm;
+  const Navbar({Key? key, required this.isAdm}) : super(key: key);
 
   @override
-  State<AdmHome> createState() => _AdmHomeState();
+  State<Navbar> createState() => _NavbarState();
 }
 
-class _AdmHomeState extends State<AdmHome> {
+class _NavbarState extends State<Navbar> {
+  
+  late final NavbarViewModel viewModel;
   int paginaAtual = 0;
   PageController pc = PageController();
-
+  
   @override
   void initState() {
     super.initState();
+    viewModel = NavbarViewModel(isAdm: widget.isAdm);
     pc = PageController(initialPage: paginaAtual);
   }
 
@@ -30,11 +35,11 @@ class _AdmHomeState extends State<AdmHome> {
     return Scaffold(
       body: PageView(
         controller: pc,
-        children: [
-          Container(color: Colors.blue, child: Center(child: Text('Página Home ADM'))),
-          Perfil(),
-        ],
         onPageChanged: setPagina,
+        children: [
+          viewModel.escolheTelaHome(),
+          const Perfil()
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: paginaAtual,
