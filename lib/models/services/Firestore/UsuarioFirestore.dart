@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../../views/components/MensagemSnackBar.dart';
+import '../../../view_model/SnackBarViewModel.dart';
 
 class UsuarioFirestore {
 
-  MensagemSnackBar mensagemSnackBar = MensagemSnackBar();
+  SnackBarViewModel mensagemSnackBar = SnackBarViewModel();
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('usuarios');
 
   //CREATE
@@ -21,8 +21,8 @@ class UsuarioFirestore {
   //DELETE
   deletarUsuario(BuildContext context, String id) {
     db.doc(id).delete().then(
-      (doc) => mensagemSnackBar.showSucesso(context, "Documento deletado"),
-      onError: (e) => mensagemSnackBar.showErro(context, "Erro em apagar o usuário"),
+      (doc) => mensagemSnackBar.sucesso(context, "Documento deletado"),
+      onError: (e) => mensagemSnackBar.erro(context, "Erro em apagar o usuário"),
     );
   }
 

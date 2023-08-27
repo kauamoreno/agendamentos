@@ -11,10 +11,10 @@ class MensagemSnackBar {
             icone,
             color: Cores.white
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text( 
             mensagem, 
-            style: TextStyle(
+            style: const TextStyle(
               color: Cores.white
             )
           )
@@ -33,8 +33,8 @@ class MensagemSnackBar {
     _show(context, erroMensagem, Icons.error_outline, Cores.redDanger);
   }
 
-  showSucesso(BuildContext context, String erroMensagem){
-    _show(context, erroMensagem, Icons.check_circle_outline, Cores.azul);
+  showSucesso(BuildContext context, String sucessoMensagem){
+    _show(context, sucessoMensagem, Icons.check_circle_outline, Cores.azul);
   }
   
 }

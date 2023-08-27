@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../views/components/MensagemSnackBar.dart';
+import '../../view_model/SnackBarViewModel.dart';
 import './Firestore/UsuarioFirestore.dart';
 
 class Autenticacao {
 
-  MensagemSnackBar mensagemSnackBar = MensagemSnackBar();
+  SnackBarViewModel mensagemSnackBar = SnackBarViewModel();
 
   //CREATE
   criarUsuario ({
@@ -27,17 +27,17 @@ class Autenticacao {
       }
       UsuarioFirestore().criarUsuario(userId, email);
 
-      mensagemSnackBar.showSucesso(context, 'Usuário criado com sucesso');
+      mensagemSnackBar.sucesso(context, 'Usuário criado com sucesso');
       
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        mensagemSnackBar.showErro(context, 'Senha muito fraca, crie uma mais forte');   
+        mensagemSnackBar.erro(context, 'Senha muito fraca, crie uma mais forte');   
         
       } else if (e.code == 'email-already-in-use') {
-        mensagemSnackBar.showErro(context, 'A conta já existe para esse e-mail.');   
+        mensagemSnackBar.erro(context, 'A conta já existe para esse e-mail.');   
       }
     } catch (e) {
-      mensagemSnackBar.showErro(context, e.toString());
+      mensagemSnackBar.erro(context, e.toString());
     }
   }
 
@@ -74,10 +74,13 @@ class Autenticacao {
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        mensagemSnackBar.showErro(context, 'Usuário não encontrado com esse email');
+        mensagemSnackBar.erro(context, 'Usuário não encontrado com esse email');
 
       } else if (e.code == 'wrong-password') {
-        mensagemSnackBar.showErro(context, 'Senha incorreta');
+        mensagemSnackBar.erro(context, 'Senha incorreta');
+        
+      } else {
+        mensagemSnackBar.erro(context, e.toString());
       }
     }
   }
