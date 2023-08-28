@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
 import '../constants/Cores.dart';
 
-class SalasCard extends StatelessWidget {
-  final String imgUrl;
-  final String titulo;
-  final String subTitulo;
+class SalasCard {
 
-  SalasCard({
-    required this.imgUrl,
-    required this.titulo,
-    required this.subTitulo,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  static Widget SalasConjuntoComponent(BuildContext context, String titulo, String subTitulo, String imgUrl) { 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
@@ -60,5 +50,8 @@ class SalasCard extends StatelessWidget {
       ),
     );
   }
-}
 
+  salaConjunto({required BuildContext context, required String titulo, required String subTitulo, required String imgUrl}){
+    return SalasConjuntoComponent(context, titulo, subTitulo, imgUrl);
+  }
+}
