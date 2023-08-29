@@ -61,7 +61,7 @@ class Autenticacao {
       }
 
       bool? permissaoRetornada = await UsuarioFirestore().getPermissao(userId);
-      Navigator.of(context).pushNamed('/home', arguments: permissaoRetornada);
+      Navigator.of(context).pushReplacementNamed('/home', arguments: permissaoRetornada);
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
