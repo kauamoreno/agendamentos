@@ -1,7 +1,7 @@
 import 'package:agendamentos/views/components/SalasCard.dart';
 import 'package:flutter/material.dart';
 import '../../components/TextFieldComponent.dart';
-import '../../components/DialogoAlerta.dart';
+import '../../components/CustomAppBar.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({Key? key}) : super(key: key);
@@ -19,20 +19,7 @@ class _UserHomeState extends State<UserHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            tooltip: 'Show Snackbar',
-            onPressed: () {
-              showDialog(context: context, builder: (context) => const DialogoAlerta());
-            },
-          )
-        ],
-
-      ),
+      appBar: const CustomAppBar(titulo: 'Home'),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
         child: Column(

@@ -1,3 +1,4 @@
+import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
 class Perfil extends StatefulWidget {
@@ -12,11 +13,7 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Perfil do Usuario"),
-        automaticallyImplyLeading:
-            false, //USADO PARA REMOVER A SETINHA DO APPBAR
-      ),
+      appBar: const CustomAppBar(titulo: 'Perfil'),
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(

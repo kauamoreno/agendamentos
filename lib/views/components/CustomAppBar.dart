@@ -1,20 +1,49 @@
 import 'package:flutter/material.dart';
 
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
+  final String titulo;
+
+  const CustomAppBar({super.key, required this.titulo});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(titulo),
+      automaticallyImplyLeading: false,
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.more_vert),
+          onPressed: () {
+            showDialog(context: context, builder: (context) => DialogoAlerta());
+          },
+        )
+      ],
+    );
+  }
+  
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+
+//DialogoAlerta-----------------------------------------------------------------------------------
 class DialogoAlerta extends StatefulWidget {
-  const DialogoAlerta({super.key});
 
   @override
   State<DialogoAlerta> createState() => _DialogoAlertaState();
 }
 
 class _DialogoAlertaState extends State<DialogoAlerta> {
+  final TextEditingController _controller = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey(); 
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Form(
-        // key: _formKey,
+        key: _formKey,
         child: TextFormField(
-          // controller: _controller,
+          controller: _controller,
           keyboardType: TextInputType.multiline,
           decoration: const InputDecoration(
             hintText: 'Forneça o seu feedback',
@@ -38,8 +67,8 @@ class _DialogoAlertaState extends State<DialogoAlerta> {
         ),
         TextButton(
           child: const Text('Enviar'),
-          onPressed: (){}
-        ),   
+          onPressed: (){ }
+        ), 
       ],
     );
   }
