@@ -1,3 +1,5 @@
+import 'package:agendamentos/view_model/SnackBarViewModel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
@@ -34,6 +36,7 @@ class DialogoAlerta extends StatefulWidget {
 }
 
 class _DialogoAlertaState extends State<DialogoAlerta> {
+  SnackBarViewModel mensagemSnackBar = SnackBarViewModel();
   final TextEditingController _controller = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey(); 
 
@@ -67,7 +70,22 @@ class _DialogoAlertaState extends State<DialogoAlerta> {
         ),
         TextButton(
           child: const Text('Enviar'),
-          onPressed: (){ }
+          onPressed: ()async {
+            if(_formKey.currentState!.validate()) {
+              try {
+                final collection = FirebaseFirestore.instance.collection('feedback');
+
+                await collection.doc().set({
+                  'timestamp': FieldValue.serverTimestamp(),
+                  'feedback': _controller.text,
+                });
+                mensagemSnackBar.sucesso(context, 'Feedback enviado');
+                Navigator.pop(context);
+              } catch (e) {
+                mensagemSnackBar.erro(context, 'Erro durante o envio do Feedback');
+              }
+            }
+          }
         ), 
       ],
     );
