@@ -12,8 +12,8 @@ class SalasFirestore {
     final salaConjunto = {
       "nome": "Mecânica",
       "salas": [
-        {"nome": "Sala1", "capacidade": 32, "isLivre": true},
-        {"nome": "Sala2", "capacidade": 16, "isLivre": false},
+        {"nome": "Sala1", "subTitulo": "test", "capacidade": 32, "isLivre": true},
+        {"nome": "Sala2", "subTitulo": "test", "capacidade": 16, "isLivre": false},
       ]
     };
 
@@ -31,8 +31,8 @@ class SalasFirestore {
     );
   }
 
-  //READ SALACONJUNTO
-  Future<Map<String, dynamic>?> getSalaConjunto(String idConjunto) async {
+  //READ SALACONJUNTO ESPECIFICA
+  Future<Map<String, dynamic>?> getSalaConjuntoUnico(String idConjunto) async {
     final docRef = db.doc(idConjunto);
 
     try {
@@ -49,7 +49,7 @@ class SalasFirestore {
   //READ SALA ISLIVRE
   Future<bool?> getSalaIsLivre(String idConjunto, String idSala) async {
 
-    Map<String, dynamic>? salaConjuntoMap = await getSalaConjunto(idConjunto);
+    Map<String, dynamic>? salaConjuntoMap = await getSalaConjuntoUnico(idConjunto);
 
     if (salaConjuntoMap != null && salaConjuntoMap.containsKey('salas')) {
       List<dynamic> salas = salaConjuntoMap['salas'];
@@ -63,4 +63,16 @@ class SalasFirestore {
 
     return null;
   }
+
+  //READ TODAS SALACONJUNTO 
+  Future<QuerySnapshot<Map<String, dynamic>>?> getSalasConjunto() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> doc = await db.get();
+      return doc;
+    } catch (e) {
+      print("Erro: $e");
+      return null;
+    }
+  }
+
 }
