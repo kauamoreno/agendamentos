@@ -3,6 +3,7 @@ import 'package:agendamentos/views/components/SalasCard.dart';
 import 'package:flutter/material.dart';
 import '../../components/TextFieldComponent.dart';
 import '../../components/CustomAppBar.dart';
+import '../Erros/ErrorPage.dart';
 
 class UserHome extends StatefulWidget {
   const UserHome({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _UserHomeState extends State<UserHome> {
             return const Center(child: CircularProgressIndicator());
 
           } else if (snapshot.hasError) {
-            return Text('Erro: ${snapshot.error}');
+            return ErrorPage(erroMensagem: snapshot.error);
 
           } else {
             return Padding(
