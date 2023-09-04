@@ -16,4 +16,7 @@ class Cores {
   
   static const Color azul = Color.fromRGBO(0, 123, 255, 1.0);
   
+  //Card Color
+  static const Color fundoCard = Color(0xFFF7F2F9);
+  static const Color letraCard = Color(0xFF650000);
 } 
