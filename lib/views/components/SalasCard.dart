@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/Cores.dart';
+import 'Texto.dart';
 
 class SalasCard {
 
@@ -10,7 +11,7 @@ class SalasCard {
         onTap: () => print("clicado"),
         child: Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          color: Cores.white,
+          color: Cores.fundoCard,
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Container(
@@ -37,8 +38,8 @@ class SalasCard {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('$titulo', style: TextStyle(fontSize: 25)),
-                        Text('$subTitulo', style: TextStyle(fontSize: 18)),
+                        ElementoTexto().escreverTexto(texto: titulo, tamanho: 25, corFonte: Cores.letraCard),
+                        ElementoTexto().escreverTexto(texto: subTitulo, tamanho: 18, corFonte: Cores.letraCard)
                       ],
                     ),
                   ),

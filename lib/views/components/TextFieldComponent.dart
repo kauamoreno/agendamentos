@@ -28,6 +28,6 @@ class TextFieldComponent {
   }
 
   textFieldPesquisa({required label, required String hint, required TextEditingController controller}){
-    return _textFieldComponent(label, hint, Icons.search, TextInputType.text, true,Cores.black, controller);
+    return _textFieldComponent(label, hint, Icons.search, TextInputType.text, false,Cores.black, controller);
   }
 }
