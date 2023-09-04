@@ -1,6 +1,6 @@
 import 'package:agendamentos/view_model/SnackBarViewModel.dart';
 import 'package:flutter/material.dart';
-import '../../models/services/Feedback.dart';
+import '../../models/services/Firestore/Feedback.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final String titulo;

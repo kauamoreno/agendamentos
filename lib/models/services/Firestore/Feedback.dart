@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../view_model/SnackBarViewModel.dart';
+import '../../../view_model/SnackBarViewModel.dart';
 
 class FeedbackService {
 
@@ -26,11 +26,8 @@ class FeedbackService {
         Navigator.pop(context);
 
       } catch (e) {
-
         mensagemSnackBar.erro(context, 'Erro durante o envio do Feedback');
-
       }
-
     }
   }
 }
