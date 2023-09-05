@@ -19,10 +19,9 @@ class Botao extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-          label,
-          style: TextStyle(color: Colors.white, fontSize: 20),
-          )
-          
+            label,
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
         ),
       ),
     );

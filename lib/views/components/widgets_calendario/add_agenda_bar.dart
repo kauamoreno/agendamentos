@@ -1,6 +1,6 @@
 import 'package:agendamentos/views/pages/Temas.dart';
-import 'package:agendamentos/views/pages/widgets/botao.dart';
-import 'package:agendamentos/views/pages/widgets/inputs.dart';
+import 'package:agendamentos/views/components/widgets_calendario/botao.dart';
+import 'package:agendamentos/views/components/widgets_calendario/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +13,6 @@ class addAgendametoPagina extends StatefulWidget {
 }
 
 class _addAgendametoPaginaState extends State<addAgendametoPagina> {
-  // final TaskControle _taskControle = Get.put(TaskControle());
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _notaController = TextEditingController();
 
@@ -186,37 +185,6 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
     );
   }
 
-  // _validacaoDeData() {
-  //   if (_tituloController.text.isNotEmpty && _notaController.text.isNotEmpty) {
-  //     _addAgendamentoParaODb();
-  //     Get.back();
-  //   } else if (_tituloController.text.isEmpty || _notaController.text.isEmpty) {
-  //     Get.snackbar("Requerido", " Todos os campos são obrigatorios!",
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         backgroundColor: Colors.white,
-  //         icon: Icon(
-  //           Icons.warning_amber_rounded,
-  //           color: Colors.red,
-  //         ));
-  //   }
-  // }
-
-  // _addAgendamentoParaODb() async {
-  //   int valor = await _taskControle.addTask(
-  //       task: Task(
-  //     nota: _notaController.text,
-  //     titulo: _tituloController.text,
-  //     data: DateFormat.yMd().format(dataSelecionada),
-  //     tempoInicial: tempoInicial,
-  //     tempoFinal: tempoFinal,
-  //     lembrar: _lenbreteSelecionado,
-  //     repetir: _lenbreteSelecionadoRepetir,
-  //     cor: _corSelecionada,
-  //     estaCompleto: 0,
-  //   ));
-  //   print("Meu id é" + "$valor");
-  // }
-
   _paletaDeCor() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,19 +206,10 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: CircleAvatar(
-                    radius: 14,
-                    backgroundColor: index == 0
-                        ? primaryClr
-                        : index == 1
-                            ? rosaClr
-                            : amareloClr,
-                    child: _corSelecionada == index
-                        ? Icon(
-                            Icons.done,
-                            color: Colors.white,
-                            size: 16,
-                          )
-                        : Container()),
+                  radius: 14,
+                  backgroundColor: index == 0? primaryClr: index == 1? rosaClr: amareloClr,
+                  child: _corSelecionada == index? Icon(Icons.done,color: Colors.white,size: 16,): Container(),
+                ),
               ),
             );
           }),
@@ -310,10 +269,12 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
 
   exibirTempoDoUsuario() {
     return showTimePicker(
-        initialEntryMode: TimePickerEntryMode.input,
-        context: context,
-        initialTime: TimeOfDay(
-            hour: int.parse(tempoInicial.split(":")[0]),
-            minute: int.parse(tempoInicial.split(":")[1].split(" ")[0])));
+      initialEntryMode: TimePickerEntryMode.input,
+      context: context,
+      initialTime: TimeOfDay(
+          hour: int.parse(tempoInicial.split(":")[0]),
+          minute: int.parse(tempoInicial.split(":")[1].split(" ")[0])
+      )
+    );
   }
 }
