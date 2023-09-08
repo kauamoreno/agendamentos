@@ -35,7 +35,11 @@ dependencies:
   cloud_firestore: ^4.8.5
   url_launcher: ^6.1.14
   auto_size_text: ^3.0.0
-
+  google_fonts:
+  get_storage:
+  get: 
+  date_picker_timeline:
+  intl: 
 dev_dependencies:
   flutter_test:
     sdk: flutter
