@@ -1,4 +1,5 @@
-import 'package:agendamentos/views/pages/Temas.dart';
+import 'package:agendamentos/views/components/CustomAppBar.dart';
+import 'package:agendamentos/views/constants/Temas.dart';
 import 'package:agendamentos/views/components/widgets_calendario/botao.dart';
 import 'package:agendamentos/views/components/widgets_calendario/inputs.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.backgroundColor,
-      appBar: _AppBar(context),
+      appBar: CustomAppBar(titulo: "Adicionar Agendamento"),
       body: Container(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: SingleChildScrollView(
@@ -175,7 +176,10 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _paletaDeCor(),
-                   Botao(label: "Criar Age", onTap: () {  },)
+                  Botao(
+                    label: "Criar Age",
+                    onTap: () {},
+                  )
                 ],
               ),
             ],
@@ -207,32 +211,24 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: CircleAvatar(
                   radius: 14,
-                  backgroundColor: index == 0? primaryClr: index == 1? rosaClr: amareloClr,
-                  child: _corSelecionada == index? Icon(Icons.done,color: Colors.white,size: 16,): Container(),
+                  backgroundColor: index == 0
+                      ? Colors.white
+                      : index == 1
+                          ? Colors.red
+                          : Colors.amber,
+                  child: _corSelecionada == index
+                      ? Icon(
+                          Icons.done,
+                          color: Colors.white,
+                          size: 16,
+                        )
+                      : Container(),
                 ),
               ),
             );
           }),
         ),
       ],
-    );
-  }
-
-  _AppBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: context.theme.backgroundColor,
-      leading: GestureDetector(
-        onTap: () {
-          Get.back();
-        },
-        child: Icon(
-          Icons.arrow_back_ios,
-          size: 20,
-          color: Get.isDarkMode ? Colors.white : Colors.black,
-        ),
-      ),
-      actions: [],
     );
   }
 
@@ -269,12 +265,10 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
 
   exibirTempoDoUsuario() {
     return showTimePicker(
-      initialEntryMode: TimePickerEntryMode.input,
-      context: context,
-      initialTime: TimeOfDay(
-          hour: int.parse(tempoInicial.split(":")[0]),
-          minute: int.parse(tempoInicial.split(":")[1].split(" ")[0])
-      )
-    );
+        initialEntryMode: TimePickerEntryMode.input,
+        context: context,
+        initialTime: TimeOfDay(
+            hour: int.parse(tempoInicial.split(":")[0]),
+            minute: int.parse(tempoInicial.split(":")[1].split(" ")[0])));
   }
 }
