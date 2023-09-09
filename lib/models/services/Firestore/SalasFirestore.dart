@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../../view_model/SnackBarViewModel.dart';
+import '../../Sala.dart';
 
 class SalasFirestore {
 
@@ -8,60 +9,39 @@ class SalasFirestore {
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('salaConjunto');
 
   //CREATE
-  criarSalaConjunto(String nome) {
+  criarSalaConjunto(String nomeConjunto) {
     final salaConjunto = {
-      "nome": "Mecânica",
-      "salas": [
-        {"nome": "Sala1", "subTitulo": "test", "capacidade": 32, "isLivre": true},
-        {"nome": "Sala2", "subTitulo": "test", "capacidade": 16, "isLivre": false},
-      ]
+      "nome": nomeConjunto,
+      "salas": []
     };
+    db.doc(nomeConjunto).set(salaConjunto);
+  }
 
-    db.doc().set(salaConjunto);
+  criarSala(BuildContext context, String nomeConjunto, bool isLivre, int capacidade, String nomeSala) {
+    final sala = Sala(
+      isLivre: isLivre, 
+      capacidade: capacidade, 
+      nomeSala: nomeSala
+    );
+    
+    db.doc(nomeConjunto).update({
+      'salas': FieldValue.arrayUnion([sala]),
+    }).then((_) {
+      mensagemSnackBar.sucesso(context, "Sala adicionada com sucesso!");
+    }).catchError((error) {
+      mensagemSnackBar.erro(context, "Erro ao adicionar a sala: $error");
+    });
   }
 
   //DELETE
-  deletarSala(BuildContext context, String idConjunto, String idSala) {
-    DocumentReference salaConjuntoDocRef = db.doc(idConjunto);
+  deletarSala(BuildContext context, String nomeConjunto, String idSala) {
+    DocumentReference salaConjuntoDocRef = db.doc(nomeConjunto);
     CollectionReference salasCollection = salaConjuntoDocRef.collection('salas');
     
     salasCollection.doc(idSala).delete().then(
       (doc) => mensagemSnackBar.sucesso(context, "Documento deletado"),
       onError: (e) => mensagemSnackBar.erro(context, "Erro em apagar o usuário"),
     );
-  }
-
-  //READ SALACONJUNTO ESPECIFICA
-  Future<Map<String, dynamic>?> getSalaConjuntoUnico(String idConjunto) async {
-    final docRef = db.doc(idConjunto);
-
-    try {
-      DocumentSnapshot doc = await docRef.get();
-      Map<String, dynamic> salaConjunto = doc.data() as Map<String, dynamic>;
-      return salaConjunto;
-
-    } catch (e) {
-      print("Erro: $e");
-      return null;
-    }
-  }
-
-  //READ SALA ISLIVRE
-  Future<bool?> getSalaIsLivre(String idConjunto, String idSala) async {
-
-    Map<String, dynamic>? salaConjuntoMap = await getSalaConjuntoUnico(idConjunto);
-
-    if (salaConjuntoMap != null && salaConjuntoMap.containsKey('salas')) {
-      List<dynamic> salas = salaConjuntoMap['salas'];
-
-      for (dynamic sala in salas) {
-        if (sala['id'] == idSala) {
-          return sala['livre'] as bool;
-        }
-      }
-    }
-
-    return null;
   }
 
   //READ TODAS SALACONJUNTO 
