@@ -1,10 +1,11 @@
-import 'package:agendamentos/views/pages/Temas.dart';
+import 'package:agendamentos/views/constants/Temas.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Botao extends StatelessWidget {
   final String label;
   final Function()? onTap;
+
   const Botao({Key? key, required this.label, required this.onTap});
 
   @override
@@ -15,7 +16,9 @@ class Botao extends StatelessWidget {
         width: 120,
         height: 50,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: primaryClr),
+          borderRadius: BorderRadius.circular(20),
+          color: Color.fromARGB(255, 78, 81, 247),
+        ),
         child: Align(
           alignment: Alignment.center,
           child: Text(

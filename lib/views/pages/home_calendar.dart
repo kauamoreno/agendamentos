@@ -1,6 +1,6 @@
 import 'dart:html';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
-import 'package:agendamentos/views/pages/Temas.dart';
+import 'package:agendamentos/views/constants/Temas.dart';
 import 'package:agendamentos/views/components/widgets_calendario/add_agenda_bar.dart';
 import 'package:agendamentos/views/components/widgets_calendario/botao.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
@@ -64,7 +64,7 @@ class _HomeCalendarState extends State<HomeCalendar> {
         height: 100,
         width: 80,
         initialSelectedDate: DateTime.now(),
-        selectionColor: primaryClr,
+        selectionColor: Color.fromARGB(255, 78, 81, 247),
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
             textStyle: TextStyle(
@@ -120,32 +120,6 @@ class _HomeCalendarState extends State<HomeCalendar> {
               }) //BOTAO PARA FAZER O LIGAMENTO ENTRE A PAGINA HOME E AGENDAMENTO
         ],
       ),
-    );
-  }
-
-  _AppBar() {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: context.theme.backgroundColor,
-      leading: GestureDetector(
-        onTap: () {
-          // temasServicos().trocarTema();
-          notificacao.displayNotification(
-              Title: "TEMA TROCADO",
-              body:
-                  Get.isDarkMode ? "ATIVADO MODO DARK" : "ATIVADO MODO CLARO");
-        },
-        child: Icon(Icons.nightlight_round,
-            size: 20, color: Get.isDarkMode ? Colors.white : Colors.black),
-      ),
-      actions: [
-        CircleAvatar(
-          backgroundImage: AssetImage("images/perfil.png"),
-        ),
-        SizedBox(
-          width: 20,
-        )
-      ],
     );
   }
 }
