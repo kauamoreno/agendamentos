@@ -1,46 +1,43 @@
-import 'dart:html';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
-import 'package:agendamentos/views/constants/Temas.dart';
-import 'package:agendamentos/views/components/widgets_calendario/add_agenda_bar.dart';
-import 'package:agendamentos/views/components/widgets_calendario/botao.dart';
+import 'package:agendamentos/views/constants/Texto.dart';
+import 'package:agendamentos/views/components/AgendaWidgets/botao.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class HomeCalendar extends StatefulWidget {
-  const HomeCalendar({super.key});
+class Calendario extends StatefulWidget {
+  const Calendario({super.key});
 
   @override
-  State<HomeCalendar> createState() => _HomeCalendarState();
+  State<Calendario> createState() => _CalendarioState();
 }
 
-class _HomeCalendarState extends State<HomeCalendar> {
+class _CalendarioState extends State<Calendario> {
   DateTime _dataSelecionanda = DateTime.now();
-  var notificacao;
+  late String notificacao;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(titulo: "Calendario"),
-      backgroundColor: context.theme.backgroundColor,
-      body: Column(children: [
-        addAgendamento(),
-        addDataBar(), //BOTAO DOS AGENDAMENTO SENDO CHAMADO AQUI,
-        SizedBox(
-          height: 10,
-        ),
-      ]),
+      appBar: const CustomAppBar(titulo: "Calendário"),
+      body: Column(
+        children: [
+          addAgendamento(),
+          addDataBar(),
+          const SizedBox(height: 10)
+        ]
+      ),
     );
   }
 
-  botoesCancelareCompletar(
-      {required String label,
-      required Function()? onTap,
-      required Color clr,
-      bool fechar = false,
-      required BuildContext context}) {
+  botoesCancelareCompletar({
+    required String label,
+    required Function()? onTap,
+    required Color clr,
+    required BuildContext context,
+    bool fechar = false
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -49,8 +46,8 @@ class _HomeCalendarState extends State<HomeCalendar> {
         width: MediaQuery.of(context).size.width * 0.9,
         color: fechar == true ? Colors.red : clr,
         decoration: BoxDecoration(
-            //PAREI AQUI 45:00
-            ),
+          //PAREI AQUI 45:00
+        ),
       ),
     );
   }
@@ -64,26 +61,29 @@ class _HomeCalendarState extends State<HomeCalendar> {
         height: 100,
         width: 80,
         initialSelectedDate: DateTime.now(),
-        selectionColor: Color.fromARGB(255, 78, 81, 247),
+        selectionColor:const Color.fromARGB(255, 78, 81, 247),
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.grey,
-        )),
+          textStyle: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey,
+          )
+        ),
         dayTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-          color: Colors.grey,
-        )),
+          textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey,
+          )
+        ),
         monthTextStyle: GoogleFonts.lato(
-            textStyle: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-          color: Colors.grey,
-        )),
+          textStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey,
+          )
+        ),
         onDateChange: (data) {
           _dataSelecionanda = data;
         },
@@ -114,10 +114,11 @@ class _HomeCalendarState extends State<HomeCalendar> {
             ),
           ),
           Botao(
-              label: "+Add Ag",
-              onTap: () async {
-                await Get.to(() => addAgendametoPagina());
-              }) //BOTAO PARA FAZER O LIGAMENTO ENTRE A PAGINA HOME E AGENDAMENTO
+            label: "+Add Ag",
+            onTap: () {
+              Navigator.of(context).pushNamed('/agendamento');
+            }
+          )
         ],
       ),
     );
