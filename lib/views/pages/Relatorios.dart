@@ -1,5 +1,3 @@
-import 'package:agendamentos/views/components/CustomAppBar.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +8,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Relatórios',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: RelatoriosPage(),
     );
@@ -25,50 +24,61 @@ class RelatoriosPage extends StatefulWidget {
 }
 
 class _RelatoriosPageState extends State<RelatoriosPage> {
-  String selecionarTipoSala = 'Todas as Salas'; // Valor padrão
+  String selectedRoomType = 'Todas as Salas'; // Valor padrão
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(titulo: "Relatorios"),
+      appBar: AppBar(
+        title: Text('Relatórios'),
+      ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start, // Alinhar à esquerda
           children: <Widget>[
-            Icon(
-              Icons.analytics,
-              size: 100.0,
-              color: Colors.red,
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(
+                    Icons.analytics,
+                    color: Colors.red,
+                    size: 50.0,
+                  ),
+                ),
+                Text(
+                  'Filtrar por Sala:',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 20.0),
-            Text(
-              'Seus Relatórios',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                value: selectedRoomType,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedRoomType = newValue!;
+                  });
+                },
+                items: <String>[
+                  'Todas as Salas',
+                  'Salas de Aula',
+                  'Salas de Informática',
+                  'Salas Eletroeletrônica',
+                  'Salas de Mecânica',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
               ),
             ),
-            SizedBox(height: 20.0),
-            DropdownButton<String>(
-              value: selecionarTipoSala,
-              onChanged: (String? newValue) {
-                setState(() {
-                  selecionarTipoSala = newValue!;
-                });
-              },
-              items: <String>[
-                'Todas as Salas',
-                'Salas de Aula',
-                'Salas de Informática',
-                'Salas Eletroeletrônica',
-                'Salas de Mecânica',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
+            // Conteúdo do relatório aqui...
           ],
         ),
       ),
