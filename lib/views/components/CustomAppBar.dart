@@ -4,14 +4,15 @@ import '../../models/services/Firestore/Feedback.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final String titulo;
+  final bool voltar;
 
-  const CustomAppBar({super.key, required this.titulo});
+  const CustomAppBar({super.key, required this.titulo, this.voltar = false});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(titulo),
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: voltar,
       actions: [
         IconButton(
           icon: const Icon(Icons.more_vert),
