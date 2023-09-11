@@ -1,8 +1,11 @@
 import 'package:agendamentos/views/pages/TelaLogin.dart';
+import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './views/pages/NavBar.dart';
 import './views/pages/Erros/ErrorPage.dart';
+import './views/pages/Relatorios.dart';
+import 'views/pages/Agenda/Calendario.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -21,7 +24,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.red
       ),
 
-      initialRoute: '/',
+      initialRoute: '/calendario',
       routes:{
         '/': (context) => TelaLogin(),
         '/home': (context) {
@@ -34,6 +37,9 @@ class App extends StatelessWidget {
             erroMensagem: 'Desculpe, mas parece que houve um problema ao tentar exibir a página inicial. Por favor, tente novamente',
           );
         },
+        '/relatorio': (context) => RelatoriosPage(),
+        '/calendario': (context) => const Calendario(),
+        '/agendamento': (context) => const AddAgendamento(),
       },
     );
   }
