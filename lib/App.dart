@@ -1,3 +1,4 @@
+import 'package:agendamentos/views/pages/GerenciarUser.dart';
 import 'package:agendamentos/views/pages/TelaLogin.dart';
 import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.red
       ),
 
-      initialRoute: '/calendario',
+      initialRoute: '/',
       routes:{
         '/': (context) => TelaLogin(),
         '/home': (context) {
@@ -38,6 +39,7 @@ class App extends StatelessWidget {
           );
         },
         '/relatorio': (context) => RelatoriosPage(),
+        '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/calendario': (context) => const Calendario(),
         '/agendamento': (context) => const AddAgendamento(),
       },
