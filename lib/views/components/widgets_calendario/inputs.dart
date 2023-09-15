@@ -1,4 +1,4 @@
-import 'package:agendamentos/views/constants/Temas.dart';
+import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

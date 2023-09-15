@@ -61,7 +61,16 @@ class Autenticacao {
       }
 
       bool? permissaoRetornada = await UsuarioFirestore().getPermissao(userId);
-      Navigator.of(context).pushReplacementNamed('/home', arguments: permissaoRetornada);
+      switch (permissaoRetornada) {
+        case true:
+          Navigator.of(context).pushReplacementNamed('/admHome');      
+          break;
+        case false:
+          Navigator.of(context).pushReplacementNamed('/userHome');
+          break;
+        default:
+          Navigator.of(context).pushReplacementNamed('/erro', arguments: 'Desculpe, mas parece que houve um problema ao tentar exibir a página inicial. Por favor, tente novamente');
+      }
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

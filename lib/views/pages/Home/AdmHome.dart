@@ -13,7 +13,7 @@ class _AdmHomeState extends State<AdmHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: 'Perfil'),
+      appBar: const CustomAppBar(titulo: 'Home'),
       body: Center(
         child: Text('ADM'),
       

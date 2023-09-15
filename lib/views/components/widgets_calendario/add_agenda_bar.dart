@@ -1,5 +1,5 @@
 import 'package:agendamentos/views/components/CustomAppBar.dart';
-import 'package:agendamentos/views/constants/Temas.dart';
+import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:agendamentos/views/components/widgets_calendario/botao.dart';
 import 'package:agendamentos/views/components/widgets_calendario/inputs.dart';
 import 'package:flutter/material.dart';

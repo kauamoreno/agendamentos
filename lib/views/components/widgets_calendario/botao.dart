@@ -1,5 +1,3 @@
-import 'package:agendamentos/views/constants/Temas.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Botao extends StatelessWidget {

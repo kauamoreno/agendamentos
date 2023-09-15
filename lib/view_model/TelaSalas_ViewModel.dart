@@ -4,7 +4,7 @@ import '../models/services/Firestore/SalasFirestore.dart';
 import '../views/components/SalasCard.dart';
 import 'SnackBarViewModel.dart';
 
-class UserHome_ViewModel {
+class TelaSalas_ViewModel {
 
   SalasFirestore sala = SalasFirestore();
   SnackBarViewModel snack = SnackBarViewModel();

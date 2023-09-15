@@ -1,10 +1,11 @@
+import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:agendamentos/views/pages/GerenciarUser.dart';
+import 'package:agendamentos/views/pages/Home/AdmHome.dart';
+import 'package:agendamentos/views/pages/Home/UserHome.dart';
 import 'package:agendamentos/views/pages/TelaLogin.dart';
 import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './views/pages/NavBar.dart';
-import './views/pages/Erros/ErrorPage.dart';
 import './views/pages/Relatorios.dart';
 import 'views/pages/Agenda/Calendario.dart';
 
@@ -28,20 +29,20 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes:{
         '/': (context) => TelaLogin(),
-        '/home': (context) {
-          final args = ModalRoute.of(context)?.settings.arguments;
-          if (args is bool) {
-            return Navbar(isAdm: args);
-          }
-          
-          return const ErrorPage(
-            erroMensagem: 'Desculpe, mas parece que houve um problema ao tentar exibir a página inicial. Por favor, tente novamente',
-          );
-        },
+        '/userHome':(context) => UserHome(),
+        '/admHome':(context) => AdmHome(),
         '/relatorio': (context) => RelatoriosPage(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/calendario': (context) => const Calendario(),
         '/agendamento': (context) => const AddAgendamento(),
+        '/erro': (context) { 
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if (args is bool) {
+            return ErrorPage(erroMensagem: args);
+          }
+          
+          return const ErrorPage(erroMensagem: 'Error');
+        }
       },
     );
   }
