@@ -4,6 +4,7 @@ import 'package:agendamentos/views/pages/Home/AdmHome.dart';
 import 'package:agendamentos/views/pages/Home/UserHome.dart';
 import 'package:agendamentos/views/pages/TelaLogin.dart';
 import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
+import 'package:agendamentos/views/pages/TelaSalas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './views/pages/Relatorios.dart';
@@ -14,33 +15,28 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //Para sempre ficar em vertical o app, nao permitir rolagem
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp
-    ]);
-    
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red
-      ),
-
+      theme: ThemeData(primarySwatch: Colors.red),
       initialRoute: '/',
-      routes:{
+      routes: {
         '/': (context) => TelaLogin(),
-        '/userHome':(context) => UserHome(),
-        '/admHome':(context) => AdmHome(),
+        '/userHome': (context) => UserHome(),
+        '/admHome': (context) => AdmHome(),
         '/relatorio': (context) => RelatoriosPage(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
-        '/calendario': (context) => const Calendario(),
+        '/calendario': (context) => Calendario(),
         '/agendamento': (context) => const AddAgendamento(),
-        '/erro': (context) { 
+        '/telaSalas': (context) => TelaSalas(),
+        '/erro': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is bool) {
             return ErrorPage(erroMensagem: args);
           }
-          
+
           return const ErrorPage(erroMensagem: 'Error');
         }
       },
