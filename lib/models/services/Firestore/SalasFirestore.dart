@@ -17,11 +17,11 @@ class SalasFirestore {
     db.doc(nomeConjunto).set(salaConjunto);
   }
 
-  criarSala(BuildContext context, String nomeConjunto, bool isLivre, int capacidade, String nomeSala) {
+  criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala) {
     final sala = Sala(
-      isLivre: isLivre, 
       capacidade: capacidade, 
-      nomeSala: nomeSala
+      nomeSala: nomeSala, 
+      agendamentos: []
     );
     
     db.doc(nomeConjunto).update({
@@ -30,6 +30,41 @@ class SalasFirestore {
       mensagemSnackBar.sucesso(context, "Sala adicionada com sucesso!");
     }).catchError((error) {
       mensagemSnackBar.erro(context, "Erro ao adicionar a sala: $error");
+    });
+  }
+
+  criarAgendamento({
+    required BuildContext context,
+    required String nomeConjunto,
+    required String nomeSala,
+    required String titulo,
+    String ?nota,
+    required String data,
+    required String timeInicial,
+    required String timeFinal,
+    required String lembrete
+  }) {
+    final agendamento = {
+      "titulo": titulo,
+      "nota": nota,
+      "data": data,
+      "timeInicial": timeInicial,
+      "timeFinal": timeFinal,
+      "lembrete": lembrete,
+    };
+
+    // Atualize o array "agendamentos" dentro do documento da sala correspondente
+    db.doc(nomeConjunto).update({
+      'salas': FieldValue.arrayUnion([
+        {
+          'nomeSala': nomeSala,
+          'agendamentos': [agendamento],
+        },
+      ]),
+    }).then((_) {
+      mensagemSnackBar.sucesso(context, "Agendamento adicionado com sucesso!");
+    }).catchError((error) {
+      mensagemSnackBar.erro(context, "Erro ao adicionar o agendamento: $error");
     });
   }
 
