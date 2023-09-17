@@ -1,3 +1,4 @@
+import 'package:agendamentos/view_model/VM_AddAgendamentos.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:agendamentos/views/components/AgendaWidgets/botao.dart';
@@ -13,12 +14,16 @@ class AddAgendamento extends StatefulWidget {
 }
 
 class _AddAgendamentoState extends State<AddAgendamento> {
+
+  VM_AddAgendamentos vm = VM_AddAgendamentos();
+
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _notaController = TextEditingController();
 
   DateTime dataSelecionada = DateTime.now();
   String tempoFinal = "00:00";
   String tempoInicial = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  
   int _lenbreteSelecionado = 5;
   List<int> listaLembrete = [
     5,
@@ -27,21 +32,13 @@ class _AddAgendamentoState extends State<AddAgendamento> {
     20,
   ];
 
-  String _lenbreteSelecionadoRepetir = "Nenhum";
-  List<String> listaRepetir = [
-    "Nenhum",
-    "Diário",
-    "Semanalmente",
-    "Mensalmente"
-  ];
-
   int _corSelecionada = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        titulo: "Adicionar Agendamento",
+        titulo: "",
         voltar: true
       ),
       body: Container(
@@ -49,6 +46,8 @@ class _AddAgendamentoState extends State<AddAgendamento> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(height: 30),
+
               Text(
                 "Add Agendamento",
                 style: headingStyle,
@@ -65,14 +64,16 @@ class _AddAgendamentoState extends State<AddAgendamento> {
               ),
               InputAgendamentos(
                 titulo: "Data",
-                dica: DateFormat.yMd().format(dataSelecionada),
+                dica: DateFormat('dd/MM/yyyy').format(dataSelecionada),
                 widget: IconButton(
                   icon: const Icon(
                     Icons.calendar_today_outlined,
                     color: Colors.grey,
                   ),
                   onPressed: () {
-                    _pegarDataDoUsuario();
+                    setState(() {
+                      _pegarDataDoUsuario();
+                    });
                   },
                 ),
               ),
@@ -144,39 +145,6 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                 )
               ),
               
-              InputAgendamentos(
-                titulo: "Repetir",
-                dica: _lenbreteSelecionadoRepetir,
-                widget: DropdownButton(
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.grey,
-                  ),
-                  
-                  iconSize: 32,
-                  elevation: 4,
-                  style: subTituloStyle,
-                  underline: Container(
-                    height: 0,
-                  ),
-                  
-                  onChanged: (String? novoValor) {
-                    setState(() {
-                      _lenbreteSelecionadoRepetir = novoValor!;
-                    });
-                  },
-                  items: listaRepetir.map<DropdownMenuItem<String>>((String? valor) {
-                    return DropdownMenuItem<String>(
-                      value: valor.toString(),
-                      child: Text(
-                        valor!,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    );
-                  }).toList(),
-                )
-              ),
-              
               const SizedBox(height: 18),
               
               Row(
@@ -185,8 +153,18 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                 children: [
                   _paletaDeCor(),
                   Botao(
-                    label: "Criar Age",
-                    onTap: () {},
+                    label: "Criar",
+                    onTap: () {
+                      vm.validaDados(
+                        titulo: _tituloController.text, 
+                        nota: _notaController.text, 
+                        data: DateFormat('dd/MM/yyyy').format(dataSelecionada), 
+                        timeInicial: tempoInicial, 
+                        timeFinal: tempoFinal, 
+                        lembrete: '', 
+                        context: context
+                      );
+                    },
                   )
                 ],
               ),
@@ -213,7 +191,6 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                 onTap: () {
                   setState(() {
                     _corSelecionada = index;
-                    print("$index");
                   });
                 },
                 child: Padding(
@@ -221,13 +198,13 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                   child: CircleAvatar(
                     radius: 14,
                     backgroundColor: index == 0
-                    ? Colors.white : index == 1
+                    ? Colors.black : index == 1
                     ? Colors.red   : Colors.amber,
                     child: _corSelecionada == index
                       ? const Icon(
-                        Icons.done,
-                        color: Colors.white,
-                        size: 16,
+                          Icons.done,
+                          color: Colors.white,
+                          size: 16,
                         )
                       : Container(),
                   ),
@@ -245,23 +222,19 @@ class _AddAgendamentoState extends State<AddAgendamento> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2023),
-      lastDate: DateTime(2100));
-
-      if (pegarData != null) {
-        setState(() {
-          dataSelecionada = pegarData;
-          print(dataSelecionada);
-        });
-      } else {}
+      lastDate: DateTime(2100),
+    );
+      
+    if (pegarData != null) {
+      dataSelecionada = pegarData;
+    }
   }
 
   _pegarTempoDoUsuario({required bool oTempoInicial}) async {
     var pegarTempo = await exibirTempoDoUsuario();
     String tempoFormatado = pegarTempo.format(context);
     
-    if (pegarTempo == null) {
-      print("");
-    } else if (oTempoInicial == true) {
+    if (oTempoInicial == true) {
       setState(() {
         tempoInicial = tempoFormatado;
       });
@@ -274,7 +247,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
 
   exibirTempoDoUsuario() {
     return showTimePicker(
-      initialEntryMode: TimePickerEntryMode.input,
+      initialEntryMode: TimePickerEntryMode.dial,
       context: context,
       initialTime: TimeOfDay(
         hour: int.parse(tempoInicial.split(":")[0]),
