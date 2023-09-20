@@ -2,7 +2,7 @@ import 'package:agendamentos/view_model/SnackBarViewModel.dart';
 import 'package:flutter/material.dart';
 import '../../models/services/Firestore/Feedback.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titulo;
   final bool voltar;
 
@@ -13,25 +13,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
     return AppBar(
       title: Text(titulo),
       automaticallyImplyLeading: voltar,
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.more_vert),
-          onPressed: () {
-            showDialog(context: context, builder: (context) => DialogoAlerta());
-          },
-        )
-      ],
     );
   }
-  
+
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
-
 //DialogoAlerta-----------------------------------------------------------------------------------
 class DialogoAlerta extends StatefulWidget {
-
   @override
   State<DialogoAlerta> createState() => _DialogoAlertaState();
 }
@@ -70,11 +60,11 @@ class _DialogoAlertaState extends State<DialogoAlerta> {
           onPressed: () => Navigator.pop(context),
         ),
         TextButton(
-          child: const Text('Enviar'),
-          onPressed: () {
-            FeedbackService().enviarFeedback(key: _formKey, controller: _controller, context: context);
-          }
-        ), 
+            child: const Text('Enviar'),
+            onPressed: () {
+              FeedbackService().enviarFeedback(
+                  key: _formKey, controller: _controller, context: context);
+            }),
       ],
     );
   }

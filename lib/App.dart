@@ -17,19 +17,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //Para sempre ficar em vertical o app, nao permitir rolagem
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp
-    ]);
-    
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
 
-      initialRoute: '/salasConjunto',
+      initialRoute: '/',
       routes:{
         '/': (context) => TelaLogin(),
         '/userHome':(context) => const UserHome(),
@@ -46,7 +44,7 @@ class App extends StatelessWidget {
           if (args is bool) {
             return ErrorPage(erroMensagem: args);
           }
-          
+
           return const ErrorPage(erroMensagem: 'Error');
         }
       },
