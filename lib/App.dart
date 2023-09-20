@@ -1,7 +1,9 @@
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
+import 'package:agendamentos/views/pages/GerenciarSalas.dart';
 import 'package:agendamentos/views/pages/GerenciarUser.dart';
 import 'package:agendamentos/views/pages/Home/AdmHome.dart';
 import 'package:agendamentos/views/pages/Home/UserHome.dart';
+import 'package:agendamentos/views/pages/Sala/SalasConjunto.dart';
 import 'package:agendamentos/views/pages/TelaLogin.dart';
 import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
 import 'package:agendamentos/views/pages/TelaSalas.dart';
@@ -20,18 +22,24 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.red),
+
+      theme: ThemeData(
+        primarySwatch: Colors.red
+      ),
+
       initialRoute: '/',
-      routes: {
+      routes:{
         '/': (context) => TelaLogin(),
-        '/userHome': (context) => UserHome(),
-        '/admHome': (context) => AdmHome(),
+        '/userHome':(context) => const UserHome(),
+        '/admHome':(context) => const AdmHome(),
         '/relatorio': (context) => RelatoriosPage(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
-        '/calendario': (context) => Calendario(),
+        '/gerenciarSalas': (context) => const GerenciaSala(),
+        '/calendario': (context) => const Calendario(),
         '/agendamento': (context) => const AddAgendamento(),
-        '/telaSalas': (context) => TelaSalas(),
-        '/erro': (context) {
+        '/salasConjunto': (context) => const SalasConjunto(),
+        '/salas': (context) => const TelaSalas(),
+        '/erro': (context) { 
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is bool) {
             return ErrorPage(erroMensagem: args);

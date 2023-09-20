@@ -43,16 +43,7 @@ class InputAgendamentos extends StatelessWidget {
                       decoration: InputDecoration(
                         hintText: dica,
                         hintStyle: subTituloStyle,
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 0,
-                          ),
-                        ),
-                        enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 0,
-                          ),
-                        ),
+                        border: InputBorder.none
                       ),
                     ),
                   ),
