@@ -18,14 +18,10 @@ class _UserHomeState extends State<UserHome> {
         child: GridView.count(
           crossAxisCount: 2, // 2 colunas
           children: [
-            BotoesHome(context, 'Agenda', Icons.calendar_today,
-                const Color.fromARGB(255, 235, 229, 229), '/calendario'),
-            BotoesHome(context, 'Feedback', Icons.feedback,
-                const Color.fromARGB(255, 235, 229, 229), '/feedback'),
-            BotoesHome(context, 'Salas', Icons.room,
-                const Color.fromARGB(255, 235, 229, 229), '/telaSalas'),
-            BotoesHome(context, 'Notícias', Icons.new_releases,
-                const Color.fromARGB(255, 235, 229, 229), '/noticias'),
+            BotoesHome(context, 'Agenda', Icons.calendar_today,Colors.grey, '/calendario'),
+            BotoesHome(context, 'Feedback', Icons.feedback,Colors.grey, '/feedback'),
+            BotoesHome(context, 'Salas', Icons.room,Colors.grey, '/telaSalas'),
+            BotoesHome(context, 'Notícias', Icons.new_releases,Colors.grey, '/noticias'),
           ],
         ),
       ),

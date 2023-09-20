@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'CustomAppBar.dart';
 
-BotoesHome(BuildContext context, String text, IconData icon, Color color,
-    String route) {
+BotoesHome(BuildContext context, String text, IconData icon, Color color, String route) {
   return GestureDetector(
     onTap: () {
       if (route == '/feedback') {
@@ -15,7 +14,7 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color,
       margin: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
