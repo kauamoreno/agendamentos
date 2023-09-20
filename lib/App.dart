@@ -17,14 +17,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     //Para sempre ficar em vertical o app, nao permitir rolagem
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp
-    ]);
-    
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
         primarySwatch: Colors.red
       ),
