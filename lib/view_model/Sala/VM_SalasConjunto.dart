@@ -22,7 +22,7 @@ class VM_SalasConjunto {
           title: Text(data['nome']),
           subtitle: Text(data['subTitulo']),
           trailing: const Icon(Icons.chevron_right_sharp),
-          onTap: () => Navigator.of(context).pushReplacementNamed('/salas')
+          onTap: () => Navigator.of(context).pushReplacementNamed('/salas', arguments: doc.id)
         );
 
         print('${doc.id} => ${doc.data()}');
