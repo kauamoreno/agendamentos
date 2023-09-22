@@ -3,7 +3,7 @@ import 'TextFieldComponent.dart';
 
 class FormsPopUp {
   TextFieldComponent textFieldComponent = TextFieldComponent();
-  _forms(BuildContext context, Column colunaForms) {
+  _forms(BuildContext context, Column colunaForms, Function funcao) {
     return showDialog(context: context, builder: (context) => 
       AlertDialog(
         content: Form(
@@ -19,7 +19,9 @@ class FormsPopUp {
           ),
           TextButton(
             child: const Text('Enviar'),
-            onPressed: () {}
+            onPressed: () {
+              funcao();
+            }
           ), 
         ],
       )
@@ -29,18 +31,19 @@ class FormsPopUp {
   formsProfessor({
     required BuildContext context, 
     required TextEditingController nomeProfController, 
-    required TextEditingController cargoProfController, 
-    required TextEditingController escolaProfController
+    required TextEditingController emailProfController, 
+    required TextEditingController senhaProfController,
+    required Function funcaoCreate
   }) {
     Column colunaForms = 
       Column(
         children: [
-          textFieldComponent.textFieldCustom(label: 'Nome do Professor', icone: Icons.abc, hint: '', controller: nomeProfController),
-          textFieldComponent.textFieldCustom(label: 'Cargo', icone: Icons.co_present, hint: 'Professor', controller: cargoProfController),
-          textFieldComponent.textFieldCustom(label: 'Escola', icone: Icons.room, hint: 'Nome da Escola', controller: escolaProfController, tipoTeclado: TextInputType.number)
+          textFieldComponent.textFieldCustom(label: 'Nome do Professor', icone: Icons.abc, hint: 'Nome Completo', controller: nomeProfController),
+          textFieldComponent.textFieldCustom(label: 'E-mail', icone: Icons.mail, hint: 'example@gmail.com', controller: emailProfController),
+          textFieldComponent.textFieldCustom(label: 'Senha', icone: Icons.key, hint: 'Senha', controller: senhaProfController)
         ],
       );
 
-    return _forms(context, colunaForms);
+    return _forms(context, colunaForms, funcaoCreate);
   }
 }

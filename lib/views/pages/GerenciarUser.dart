@@ -1,3 +1,4 @@
+import 'package:agendamentos/view_model/VM_AdicionarUsuarios.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/components/Texto.dart';
 import '../components/Cards.dart';
@@ -17,8 +18,8 @@ class _GerenciarProfState extends State<GerenciarProf> {
   FormsPopUp formsPopUp = FormsPopUp();
   ElementoCard cardElemento = ElementoCard();
   final _nomeProfController = TextEditingController();
-  final _cargoProfController = TextEditingController();
-  final _escolaProfController = TextEditingController();
+  final _emailProfController = TextEditingController();
+  final _senhaProfController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -68,10 +69,10 @@ class _GerenciarProfState extends State<GerenciarProf> {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      cardElemento.cardProfessor(context: context, nome: 'Carlinhos', cargo: 'Instrutor', escola: 'Senai Nami Jafet 117'),
-                      cardElemento.cardProfessor(context: context, nome: 'Édson', cargo: 'Instrutor', escola: 'Senai Nami Jafet 117'),
-                      cardElemento.cardProfessor(context: context, nome: 'Bruno', cargo: 'Instrutor', escola: 'Senai Nami Jafet 117'),
-                      cardElemento.cardProfessor(context: context, nome: 'Silas', cargo: 'Instrutor', escola: 'Senai Nami Jafet 117')
+                      cardElemento.cardProfessor(context: context, nome: 'Carlinhos', email: 'carlinhos@gmail.com'),
+                      cardElemento.cardProfessor(context: context, nome: 'Édson', email: 'edson.cod@gmail.com'),
+                      cardElemento.cardProfessor(context: context, nome: 'Bruno', email: 'bruno.messias@gmail.com'),
+                      cardElemento.cardProfessor(context: context, nome: 'Silas', email: 'silasbast@gmail.com')
                     ],
                   ),
                 ),
@@ -85,8 +86,16 @@ class _GerenciarProfState extends State<GerenciarProf> {
           formsPopUp.formsProfessor(
             context: context, 
             nomeProfController: _nomeProfController, 
-            cargoProfController: _cargoProfController, 
-            escolaProfController: _escolaProfController
+            emailProfController: _emailProfController, 
+            senhaProfController: _senhaProfController,
+            funcaoCreate: () {
+              GerenciarUsuario().cadastro(
+                context,
+                _nomeProfController.text,
+                _emailProfController.text,
+                _senhaProfController.text
+              );
+            }
           );
         },
         child: Icon(Icons.person_add_alt_sharp, size: 40),

@@ -96,10 +96,9 @@ class ElementoCard {
   cardProfessor({
     required BuildContext context, 
     required String nome, 
-    required String cargo, 
-    required String escola
+    required String email
   }) {
-    Text infoProf = elementoTexto.escreverTexto(texto: '$nome\n$cargo\n$escola', expessura: FontWeight.bold);
+    Text infoProf = elementoTexto.escreverTexto(texto: '$nome\n$email', expessura: FontWeight.bold, tamanho: 18);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
       
     return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf);
