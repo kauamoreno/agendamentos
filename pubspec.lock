@@ -184,6 +184,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  form_validation:
+    dependency: "direct main"
+    description:
+      name: form_validation
+      sha256: "971d0a0d5031615e4abd215d87b6076cefaf8fbcd5f93d1fd52658652be524f9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0+4"
   get:
     dependency: "direct main"
     description:
@@ -248,6 +256,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json_class:
+    dependency: transitive
+    description:
+      name: json_class
+      sha256: d2b277b2eef3addd26035d1d1479f06ccc465fa3ad29c2f4e7725a83cc448b3b
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0+4"
   lints:
     dependency: transitive
     description:
@@ -256,6 +272,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   matcher:
     dependency: transitive
     description:
