@@ -38,13 +38,18 @@ class App extends StatelessWidget {
         '/calendario': (context) => const Calendario(),
         '/agendamento': (context) => const AddAgendamento(),
         '/salasConjunto': (context) => const SalasConjunto(),
-        '/salas': (context) => const TelaSalas(),
+        '/salas': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if(args is String) {
+            return TelaSalas(nomeConjunto: args);
+          }
+          return const ErrorPage(erroMensagem: 'Error');
+        }, 
         '/erro': (context) { 
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is bool) {
             return ErrorPage(erroMensagem: args);
           }
-
           return const ErrorPage(erroMensagem: 'Error');
         }
       },

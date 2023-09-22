@@ -1,3 +1,4 @@
+import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:agendamentos/view_model/TelaSalas_ViewModel.dart';
 import 'package:agendamentos/views/components/SalasCard.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,11 @@ import '../components/CustomAppBar.dart';
 import 'Erros/ErrorPage.dart';
 
 class TelaSalas extends StatefulWidget {
-  const TelaSalas({Key? key}) : super(key: key);
+  final String nomeConjunto;
+  const TelaSalas({
+    super.key, 
+    required this.nomeConjunto
+  });
 
   @override
   State<TelaSalas> createState() => _TelaSalasState();
@@ -17,7 +22,13 @@ class _TelaSalasState extends State<TelaSalas> {
   TextFieldComponent textFieldComponent = TextFieldComponent();
   final _pesquisaController = TextEditingController();
   SalasCard salasCard = SalasCard();
-  TelaSalas_ViewModel telaSalas_ViewModel = TelaSalas_ViewModel();
+  late VM_Salas vm;
+
+  @override
+  void initState() {
+    super.initState();
+    vm = VM_Salas(nomeConjunto: widget.nomeConjunto);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +36,7 @@ class _TelaSalasState extends State<TelaSalas> {
       appBar: const CustomAppBar(titulo: 'Salas', voltar: true),
       body: FutureBuilder(
 
-        future: telaSalas_ViewModel.mostrarSalasConjunto(context),
+        future: vm.mostrarSalas(context),
         builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
