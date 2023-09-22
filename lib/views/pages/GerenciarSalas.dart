@@ -1,3 +1,4 @@
+import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:flutter/material.dart';
 import '../components/CustomAppBar.dart';
 import '../components/TextFieldComponent.dart';
@@ -12,6 +13,9 @@ class GerenciaSala extends StatefulWidget {
 }
 
 class _GerenciaSalaState extends State<GerenciaSala> {
+
+  //VM_Salas vm = VM_Salas(nomeConjunto: nomeConjunto);
+
   ElementoTexto elementoTexto = ElementoTexto();
   TextFieldComponent textFieldComponent = TextFieldComponent();
   final _nomeSalaController = TextEditingController();
@@ -26,7 +30,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
             child: Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               color: Cores.fundoCard,
@@ -38,13 +42,13 @@ class _GerenciaSalaState extends State<GerenciaSala> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.room_preferences_rounded,
                     color: Cores.letraCard,
                     size: 75,
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                     child: elementoTexto.escreverTexto(
                       texto: 'Gerenciar\nSalas',
                       alinhamento: TextAlign.center,
@@ -59,7 +63,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+              padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
               child: Container(
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height * 0.6,
@@ -99,8 +103,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:
-                                      EdgeInsetsDirectional.fromSTEB(0, 0, 5, 5),
+                                    padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 5, 5),
                                     child: elementoTexto.escreverTexto(
                                       texto: 'Sala 1\nSalas de Aula\n32 Lugares',
                                       expessura: FontWeight.w900,
@@ -112,8 +115,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
-                                        padding: 
-                                          EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+                                        padding: const EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                                         child: ElevatedButton(
                                           onPressed: () {
                                             print('Editar');
@@ -125,8 +127,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
                                         )
                                       ),
                                       Padding(
-                                        padding: 
-                                          EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                                         child: ElevatedButton(
                                           onPressed: () {
                                             showDialog(context: context, builder: (context) => 
@@ -168,6 +169,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
           ),
         ],
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(context: context, builder: (context) => 
@@ -191,12 +193,14 @@ class _GerenciaSalaState extends State<GerenciaSala> {
                 ),
                 TextButton(
                   child: const Text('Enviar'),
-                  onPressed: () {}
+                  onPressed: () {
+                  }
                 ), 
               ],
             )
           );
         },
+
         child: Icon(Icons.add_business, size: 40),
         backgroundColor: Cores.azul,
       )
