@@ -8,9 +8,9 @@ class UsuarioFirestore {
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('usuarios');
 
   //CREATE
-  criarUsuario(String id, String email) {
+  criarUsuario(String id, String nome, String email) {
     final usuario = {
-      "nome": "Teste",
+      "nome": nome,
       "email": email,
       "isAdm": false,
     };

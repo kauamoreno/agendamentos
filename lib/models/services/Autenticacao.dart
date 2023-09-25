@@ -8,12 +8,12 @@ class Autenticacao {
   SnackBarViewModel mensagemSnackBar = SnackBarViewModel();
 
   //CREATE
-  criarUsuario ({
+  Future<bool> criarUsuario ({
     required BuildContext context,
+    required String nome,
     required String email,
     required String senha
   }) async {
-
     try {
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
@@ -25,20 +25,25 @@ class Autenticacao {
       if (user != null) {
         userId = user.uid;
       }
-      UsuarioFirestore().criarUsuario(userId, email);
+      UsuarioFirestore().criarUsuario(userId, nome, email);
 
       mensagemSnackBar.sucesso(context, 'Usuário criado com sucesso');
-      
+      return true;
+
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         mensagemSnackBar.erro(context, 'Senha muito fraca, crie uma mais forte');   
-        
+        return false;
+
       } else if (e.code == 'email-already-in-use') {
-        mensagemSnackBar.erro(context, 'A conta já existe para esse e-mail.');   
+        mensagemSnackBar.erro(context, 'A conta já existe para esse e-mail.');
+        return false;
       }
     } catch (e) {
       mensagemSnackBar.erro(context, e.toString());
+      return false;
     }
+    return false;
   }
 
   //LOGIN

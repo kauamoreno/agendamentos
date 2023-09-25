@@ -1,3 +1,4 @@
+import 'package:agendamentos/models/services/Autenticacao.dart';
 import 'package:agendamentos/view_model/SnackBarViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validation/form_validation.dart';
@@ -6,7 +7,7 @@ class GerenciarUsuario {
   SnackBarViewModel mensagemSnackBar = SnackBarViewModel();
 
   //FUTURE
-  cadastro(BuildContext context, String nome, String email, String senha) {
+  cadastro(BuildContext context, String nome, String email, String senha) async {
     //Verifica Nome
     bool nomeValido = false;
     if (nome.length < 5) {
@@ -50,7 +51,11 @@ class GerenciarUsuario {
 
     //Chamar model
     if (nomeValido & mailValido & senhaValida) {
-      mensagemSnackBar.sucesso(context, 'Cadastro Realizado');
+      if (await Autenticacao().criarUsuario(context: context, nome: nome, email: email, senha: senha)) {
+        print('deu certo');
+      }else {
+        print('não deu');
+      }
     }
   }
 }
