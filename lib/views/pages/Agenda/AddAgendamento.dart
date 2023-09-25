@@ -7,7 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddAgendamento extends StatefulWidget {
-  const AddAgendamento({super.key});
+
+  final String nomeConjunto;
+  final String nomeSala;
+
+  const AddAgendamento({super.key, required this.nomeConjunto, required this.nomeSala});
 
   @override
   State<AddAgendamento> createState() => _AddAgendamentoState();
@@ -15,7 +19,13 @@ class AddAgendamento extends StatefulWidget {
 
 class _AddAgendamentoState extends State<AddAgendamento> {
 
-  VM_AddAgendamentos vm = VM_AddAgendamentos();
+  late VM_AddAgendamentos vm;
+
+  @override
+  void initState() {
+    super.initState();
+    vm = VM_AddAgendamentos(nomeConjunto: widget.nomeConjunto, nomeSala: widget.nomeSala);
+  }
 
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _notaController = TextEditingController();

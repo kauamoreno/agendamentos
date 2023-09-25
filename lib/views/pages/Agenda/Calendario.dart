@@ -7,7 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class Calendario extends StatefulWidget {
-  const Calendario({super.key});
+  
+  final String nomeConjunto;
+  final String nomeSala;
+
+  const Calendario({super.key, required this.nomeConjunto, required this.nomeSala});
 
   @override
   State<Calendario> createState() => _CalendarioState();
@@ -116,7 +120,7 @@ class _CalendarioState extends State<Calendario> {
           Botao(
             label: "+Add Ag",
             onTap: () {
-              Navigator.of(context).pushNamed('/agendamento');
+              Navigator.pushNamed(context, '/agendamento', arguments: {'nomeConjunto': widget.nomeConjunto, 'nomeSala': widget.nomeSala});
             }
           )
         ],

@@ -41,15 +41,15 @@ class VM_Salas {
 
       if (salas != null) {
         for (var salaData in salas) {
-          var nomeSala = salaData['nome'];
-          var capacidadeSala = salaData['capacidade'];
 
-          var salaWidget = SalasCard.SalasConjuntoComponent(
-            context, 
-            nomeSala,
-            capacidadeSala.toString(), 
-            'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg'
-          );
+          var salaWidget = salaCards.salaConjunto(
+          context: context,
+          imgUrl: 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg',
+          subTitulo: "Acrescentar subtitulo", //salaData['subTitulo']
+          titulo: salaData['nome'], 
+          nomeConjunto: nomeConjunto, 
+          nomeSala: salaData['nome'],
+        );
           cards.add(salaWidget);
         }
       } else {

@@ -19,7 +19,7 @@ class VM_SalasConjunto {
         var data = doc.data();
         var salasConjunto = ListTile(
           leading: Image.network('https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg'),
-          title: Text(data['nome']),
+          title: Text(data['nomeConjunto']),
           subtitle: Text(data['subTitulo']),
           trailing: const Icon(Icons.chevron_right_sharp),
           onTap: () => Navigator.of(context).pushReplacementNamed('/salas', arguments: doc.id)

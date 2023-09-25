@@ -27,7 +27,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.red
       ),
 
-      initialRoute: '/',
+      initialRoute: '/salasConjunto',
       routes:{
         '/': (context) => TelaLogin(),
         '/userHome':(context) => const UserHome(),
@@ -36,9 +36,30 @@ class App extends StatelessWidget {
         '/escolhaDeGerenciamento': (context) => TelaEscolhaGerenciamento(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/gerenciarSalas': (context) => const GerenciaSala(),
-        '/calendario': (context) => const Calendario(),
-        '/agendamento': (context) => const AddAgendamento(),
         '/salasConjunto': (context) => const SalasConjunto(),
+        '/calendario': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if (args is Map<String, String>) {
+            final nomeConjunto = args['nomeConjunto'];
+            final nomeSala = args['nomeSala'];
+            if (nomeConjunto != null && nomeSala != null) {
+              return Calendario(nomeConjunto: nomeConjunto, nomeSala: nomeSala);
+            }
+          }
+          return const ErrorPage(erroMensagem: 'Error');
+        },
+
+        '/agendamento': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if (args is Map<String, String>) {
+            final nomeConjunto = args['nomeConjunto'];
+            final nomeSala = args['nomeSala'];
+            if (nomeConjunto != null && nomeSala != null) {
+              return AddAgendamento(nomeConjunto: nomeConjunto, nomeSala: nomeSala);
+            }
+          }
+          return const ErrorPage(erroMensagem: 'Error');
+        },
         '/salas': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           if(args is String) {

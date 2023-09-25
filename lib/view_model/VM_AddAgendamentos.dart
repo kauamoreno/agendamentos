@@ -3,6 +3,14 @@ import '../models/services/Firestore/SalasFirestore.dart';
 
 class VM_AddAgendamentos {
 
+  final String nomeConjunto;
+  final String nomeSala;
+
+  VM_AddAgendamentos({
+    required this.nomeConjunto,
+    required this.nomeSala
+  });
+
   SalasFirestore fire = SalasFirestore(); 
 
   validaDados({
@@ -15,22 +23,18 @@ class VM_AddAgendamentos {
     required String lembrete
   }) {
 
-    if(titulo.isNotEmpty){
-      // fire.criarAgendamento(
-      //   context: context, 
-      //   nomeConjunto: nomeConjunto, // doc.id
-      //   nomeSala: nomeSala, // PRECISA VER
-      //   titulo: titulo, 
-      //   data: data, 
-      //   timeInicial: timeInicial, 
-      //   timeFinal: timeFinal, 
-      //   lembrete: lembrete
-      // ); 
+    if(titulo.isNotEmpty /*Ver se não tem horarios iguais*/){
+      fire.criarAgendamento(
+        context: context, 
+        nomeConjunto: nomeConjunto, 
+        nomeSala: nomeSala,
+        titulo: titulo, 
+        data: data, 
+        timeInicial: timeInicial, 
+        timeFinal: timeFinal, 
+        lembrete: lembrete
+      ); 
     }
-    
-    print(
-      '---------------------------------------------------------------------- \n Titulo: $titulo \n Nota: $nota \n Data: $data \n Inicio: $timeInicial \n Final: $timeFinal \n Lembrete: $lembrete',
-    );
     
   }
 }
