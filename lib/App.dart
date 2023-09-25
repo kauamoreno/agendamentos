@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './views/pages/Relatorios.dart';
 import 'views/pages/Agenda/Calendario.dart';
-
+import 'package:agendamentos/views/pages/Tela_Escolha_Gerenciamento.dart';
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -33,6 +33,7 @@ class App extends StatelessWidget {
         '/userHome':(context) => const UserHome(),
         '/admHome':(context) => const AdmHome(),
         '/relatorio': (context) => RelatoriosPage(),
+        '/escolhaDeGerenciamento': (context) => TelaEscolhaGerenciamento(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/gerenciarSalas': (context) => const GerenciaSala(),
         '/calendario': (context) => const Calendario(),

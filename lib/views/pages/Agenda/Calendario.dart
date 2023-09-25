@@ -46,7 +46,7 @@ class _CalendarioState extends State<Calendario> {
         width: MediaQuery.of(context).size.width * 0.9,
         color: fechar == true ? Colors.red : clr,
         decoration: BoxDecoration(
-          //PAREI AQUI 45:00
+
         ),
       ),
     );

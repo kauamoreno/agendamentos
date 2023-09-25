@@ -1,6 +1,4 @@
 import 'package:agendamentos/views/components/CustomAppBar.dart';
-import 'package:agendamentos/views/constants/Cores.dart';
-import 'package:agendamentos/views/pages/Agenda/Calendario.dart';
 import 'package:flutter/material.dart';
 import 'package:agendamentos/views/components/botoes_homes.dart';
 
@@ -20,17 +18,12 @@ class _AdmHomeState extends State<AdmHome> {
         child: GridView.count(
           crossAxisCount: 2, // 2 colunas
           children: <Widget>[
-            BotoesHome(context, 'Agenda', Icons.calendar_today, Colors.grey,
-                '/calendario'),
-            BotoesHome(
-                context, 'Feedback', Icons.feedback, Colors.grey, '/feedback'),
+            BotoesHome(context, 'Agenda', Icons.calendar_today, Colors.grey,'/calendario'),
+            BotoesHome(context, 'Feedback', Icons.feedback, Colors.grey, '/feedback'),
             BotoesHome(context, 'Salas', Icons.room, Colors.grey, '/telaSalas'),
-            BotoesHome(context, 'Notícias', Icons.new_releases, Colors.grey,
-                '/noticias'),
-            BotoesHome(context, 'Relatório', Icons.insert_chart, Colors.grey,
-                '/relatorio'),
-            BotoesHome(context, 'Gerenciamento', Icons.settings, Colors.grey,
-                '/gerenciarProfessores'),
+            BotoesHome(context, 'Notícias', Icons.new_releases, Colors.grey,'/noticias'),
+            BotoesHome(context, 'Relatório', Icons.insert_chart, Colors.grey,'/relatorio'),
+            BotoesHome(context, 'Gerenciamento', Icons.settings, Colors.grey,'/escolhaDeGerenciamento'),
           ],
         ),
       ),
