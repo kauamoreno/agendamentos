@@ -6,6 +6,7 @@ class UsuarioFirestore {
 
   SnackBarViewModel mensagemSnackBar = SnackBarViewModel();
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('usuarios');
+  
 
   //CREATE
   criarUsuario(String id, String nome, String email) {
@@ -24,6 +25,17 @@ class UsuarioFirestore {
       (doc) => mensagemSnackBar.sucesso(context, "Documento deletado"),
       onError: (e) => mensagemSnackBar.erro(context, "Erro em apagar o usuário"),
     );
+  }
+
+  //READ ALL USERS
+  getTodosUsuarios() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> doc = await db.get();
+      return doc;
+    } catch (e) {
+      print("Erro: $e");
+      return null;
+    }
   }
 
   //READ USER

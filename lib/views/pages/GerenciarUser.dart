@@ -1,4 +1,4 @@
-import 'package:agendamentos/view_model/VM_AdicionarUsuarios.dart';
+import 'package:agendamentos/view_model/Usuarios/VM_Usuarios.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/components/Texto.dart';
 import '../components/Cards.dart';
@@ -25,61 +25,63 @@ class _GerenciarProfState extends State<GerenciarProf> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(titulo: 'Gerenciar', voltar: true),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-            child: Card(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: Cores.fundoCard,
-              elevation: 2,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(
-                    Icons.manage_accounts,
-                    color: Cores.letraCard,
-                    size: 75,
+      body: FutureBuilder(
+        future: GerenciarUsuario().mostrarUsuarios(context),
+        builder: (context, snapshot) {
+          return Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+                child: Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color: Cores.fundoCard,
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                    child: elementoTexto.escreverTexto(
-                      texto: 'Gerenciar\nProfessores',
-                      alinhamento: TextAlign.center,
-                      tamanho: 20,
-                      expessura: FontWeight.bold,
-                      corFonte: Cores.letraCard
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
-              child: Container(
-                width: MediaQuery.sizeOf(context).width,
-                child: SingleChildScrollView(
-                  child: Column(
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      cardElemento.cardProfessor(context: context, nome: 'Carlinhos', email: 'carlinhos@gmail.com'),
-                      cardElemento.cardProfessor(context: context, nome: 'Édson', email: 'edson.cod@gmail.com'),
-                      cardElemento.cardProfessor(context: context, nome: 'Bruno', email: 'bruno.messias@gmail.com'),
-                      cardElemento.cardProfessor(context: context, nome: 'Silas', email: 'silasbast@gmail.com')
+                      Icon(
+                        Icons.manage_accounts,
+                        color: Cores.letraCard,
+                        size: 75,
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                        child: elementoTexto.escreverTexto(
+                          texto: 'Gerenciar\nProfessores',
+                          alinhamento: TextAlign.center,
+                          tamanho: 20,
+                          expessura: FontWeight.bold,
+                          corFonte: Cores.letraCard
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
-            ),
-          ),
-        ],
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
