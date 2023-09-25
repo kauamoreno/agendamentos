@@ -1,4 +1,3 @@
-import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:flutter/material.dart';
 import '../components/CustomAppBar.dart';
 import '../components/TextFieldComponent.dart';

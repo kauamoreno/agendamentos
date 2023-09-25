@@ -41,6 +41,11 @@ dependencies:
   date_picker_timeline:
   intl: 
   internet_connection_checker: ^1.0.0+1
+  firebase_messaging: ^14.6.7
+  flutter_local_notifications: ^15.1.1
+  timezone: ^0.9.2
+  flutter_native_timezone: ^2.0.0
+  provider:
 dev_dependencies:
   flutter_test:
     sdk: flutter

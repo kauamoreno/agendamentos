@@ -1,5 +1,4 @@
 import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
-import 'package:agendamentos/view_model/TelaSalas_ViewModel.dart';
 import 'package:agendamentos/views/components/SalasCard.dart';
 import 'package:flutter/material.dart';
 import '../components/TextFieldComponent.dart';
