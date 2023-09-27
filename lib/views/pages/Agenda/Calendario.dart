@@ -1,6 +1,8 @@
+import 'package:agendamentos/view_model/Agenda/VM_Calendario.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:agendamentos/views/components/AgendaWidgets/botao.dart';
+import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,8 +20,16 @@ class Calendario extends StatefulWidget {
 }
 
 class _CalendarioState extends State<Calendario> {
+
   DateTime _dataSelecionanda = DateTime.now();
   late String notificacao;
+  late VM_Calendario vm;
+
+  @override
+  void initState() {
+    super.initState();
+    vm = VM_Calendario(nomeConjunto: widget.nomeConjunto, nomeSala: widget.nomeSala);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +39,38 @@ class _CalendarioState extends State<Calendario> {
         children: [
           addAgendamento(),
           addDataBar(),
-          const SizedBox(height: 10)
+          const SizedBox(height: 10),
+          Expanded(
+            child: FutureBuilder(
+              future: vm.getAgendamentos(context, _dataSelecionanda), 
+              builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+
+          } else if (snapshot.hasError) {
+            return ErrorPage(erroMensagem: snapshot.error);
+
+          } else {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
+              child: Column(
+                children: [
+                  const SizedBox(height: 30), //Espaço
+
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: snapshot.data ?? [], // Lista de widgets de cards.
+                      ),
+                    )
+                  )
+                ],
+              ),
+            );
+          }
+        },
+            )
+          )
         ]
       ),
     );
@@ -59,14 +100,15 @@ class _CalendarioState extends State<Calendario> {
   addDataBar() {
     return Container(
       margin: const EdgeInsets.only(top: 20, left: 20),
+
       child: DatePicker(
-        //USADO PARA CHAMAR UMA LISTA COM VARIAS DATAS
         DateTime.now(),
         height: 100,
         width: 80,
         initialSelectedDate: DateTime.now(),
         selectionColor:const Color.fromARGB(255, 78, 81, 247),
         selectedTextColor: Colors.white,
+
         dateTextStyle: GoogleFonts.lato(
           textStyle: const TextStyle(
             fontSize: 20,
@@ -120,7 +162,10 @@ class _CalendarioState extends State<Calendario> {
           Botao(
             label: "+Add Ag",
             onTap: () {
-              Navigator.pushNamed(context, '/agendamento', arguments: {'nomeConjunto': widget.nomeConjunto, 'nomeSala': widget.nomeSala});
+              Navigator.pushNamed(context, '/agendamento', arguments: {
+                'nomeConjunto': widget.nomeConjunto, 
+                'nomeSala': widget.nomeSala
+              });
             }
           )
         ],

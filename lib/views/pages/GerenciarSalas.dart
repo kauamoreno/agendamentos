@@ -1,4 +1,3 @@
-import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:flutter/material.dart';
 import '../components/CustomAppBar.dart';
 import '../components/TextFieldComponent.dart';
@@ -13,8 +12,6 @@ class GerenciaSala extends StatefulWidget {
 }
 
 class _GerenciaSalaState extends State<GerenciaSala> {
-
-  //VM_Salas vm = VM_Salas(nomeConjunto: nomeConjunto);
 
   ElementoTexto elementoTexto = ElementoTexto();
   TextFieldComponent textFieldComponent = TextFieldComponent();

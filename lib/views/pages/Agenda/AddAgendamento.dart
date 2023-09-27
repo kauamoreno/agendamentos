@@ -1,4 +1,4 @@
-import 'package:agendamentos/view_model/VM_AddAgendamentos.dart';
+import 'package:agendamentos/view_model/Agenda/VM_AddAgendamentos.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:agendamentos/views/components/AgendaWidgets/botao.dart';

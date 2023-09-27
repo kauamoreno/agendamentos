@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/services/Firestore/SalasFirestore.dart';
+import '../../models/services/Firestore/SalasFirestore.dart';
 
 class VM_AddAgendamentos {
 
