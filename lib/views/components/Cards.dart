@@ -4,7 +4,7 @@ import 'Texto.dart';
 
 class ElementoCard {
   ElementoTexto elementoTexto = ElementoTexto();
-  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label) {
+  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       elevation: 4,
@@ -74,7 +74,11 @@ class ElementoCard {
                                 ),
                                 TextButton(
                                   child: elementoTexto.escreverTexto(texto: 'EXCLUIR', corFonte: Cores.red),
-                                  onPressed: () {}
+                                  onPressed: () {
+                                    
+                                    print(id);
+                                    Navigator.pop(context);
+                                  }
                                 ), 
                               ],
                             )
@@ -96,12 +100,13 @@ class ElementoCard {
   cardProfessor({
     required BuildContext context, 
     required String nome, 
-    required String email
+    required String email,
+    required String id
   }) {
     Text infoProf = elementoTexto.escreverTexto(texto: '$nome\n$email', expessura: FontWeight.bold, tamanho: 18);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
       
-    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf);
+    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id);
   }
   
   cardSala({
@@ -109,11 +114,12 @@ class ElementoCard {
     required String nome, 
     required String tipo, 
     required int quantidade,
-    required String foto
+    required String foto,
+    required String id
   }) {
     Text infoProf = elementoTexto.escreverTexto(texto: '$nome\n$tipo\n$quantidade Lugares', expessura: FontWeight.bold, tamanho: 18);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
       
-    return _Card(context, caixaFoto, foto, 150, infoProf);
+    return _Card(context, caixaFoto, foto, 150, infoProf, id);
   }
 }

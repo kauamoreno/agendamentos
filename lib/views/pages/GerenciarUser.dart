@@ -5,6 +5,7 @@ import '../components/Cards.dart';
 import '../components/Forms.dart';
 import 'package:agendamentos/views/constants/Cores.dart';
 import 'package:flutter/material.dart';
+import './Erros/ErrorPage.dart';
 
 class GerenciarProf extends StatefulWidget {
   const GerenciarProf({super.key});
@@ -27,64 +28,81 @@ class _GerenciarProfState extends State<GerenciarProf> {
       appBar: const CustomAppBar(titulo: 'Gerenciar', voltar: true),
       body: FutureBuilder(
         future: GerenciarUsuario().mostrarUsuarios(context),
-        builder: (context, snapshot) {
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-                child: Card(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  color: Cores.fundoCard,
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Icon(
-                        Icons.manage_accounts,
-                        color: Cores.letraCard,
-                        size: 75,
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                        child: elementoTexto.escreverTexto(
-                          texto: 'Gerenciar\nProfessores',
-                          alinhamento: TextAlign.center,
-                          tamanho: 20,
-                          expessura: FontWeight.bold,
-                          corFonte: Cores.letraCard
+        builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+
+          } else if (snapshot.hasError) {
+            return ErrorPage(erroMensagem: snapshot.error);
+
+          } else {
+
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+                  child: Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: Cores.fundoCard,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(
+                          Icons.manage_accounts,
+                          color: Cores.letraCard,
+                          size: 75,
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                          child: elementoTexto.escreverTexto(
+                            texto: 'Gerenciar\nProfessores',
+                            alinhamento: TextAlign.center,
+                            tamanho: 20,
+                            expessura: FontWeight.bold,
+                            corFonte: Cores.letraCard
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          
-                        ],
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 70),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children:
+                              snapshot.data ?? [],
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
+              ],
+            );
+          }
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //Limpar forms ao abrir novamente
+          _nomeProfController.text = "";
+          _emailProfController.text = "";
+          _senhaProfController.text = "";
+          
+          //Abrir forms
           formsPopUp.formsProfessor(
             context: context, 
             nomeProfController: _nomeProfController, 

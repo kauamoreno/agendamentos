@@ -76,15 +76,17 @@ class GerenciarUsuario {
 
     if (usuariosWidget != null) {
       for (var doc in usuariosWidget.docs) {
-
         // Acesse os dados de cada documento usando doc.data()
         var data = doc.data();
-        var usuarios = cardElemento.cardProfessor(context: context, nome: data['nome'], email: data['email']);
 
-        print('${doc.id} => ${doc.data()}');
-        
-        // Adicione a instância à lista de widgets
-        cards.add(usuarios);
+        if (!data['isAdm']) {
+          var usuarios = cardElemento.cardProfessor(context: context, nome: data['nome'], email: data['email'], id: doc.id);
+
+          print('${doc.id} => ${doc.data()}');
+
+          // Adicione a instância à lista de widgets
+          cards.add(usuarios);
+        }
       }
 
     } else {
