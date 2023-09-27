@@ -24,7 +24,9 @@ class TelaSalas_ViewModel {
           context: context,
           imgUrl: 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg',
           subTitulo: data['subTitulo'],
-          titulo: data['nome'],
+          titulo: data['nome'], 
+          nomeConjunto: '', 
+          nomeSala: data['id'],
         );
 
         // Adicione a instância à lista de widgets

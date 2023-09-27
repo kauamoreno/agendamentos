@@ -38,12 +38,12 @@ class SalasFirestore {
     required String nomeConjunto,
     required String nomeSala,
     required String titulo,
-    String ?nota,
+    String? nota,
     required String data,
     required String timeInicial,
     required String timeFinal,
-    required String lembrete
-  }) {
+    required String lembrete,
+  }) async {
     final agendamento = {
       "titulo": titulo,
       "nota": nota,
@@ -53,20 +53,36 @@ class SalasFirestore {
       "lembrete": lembrete,
     };
 
-    // Atualize o array "agendamentos" dentro do documento da sala correspondente
-    db.doc(nomeConjunto).update({
-      'salas': FieldValue.arrayUnion([
-        {
-          'nomeSala': nomeSala,
-          'agendamentos': [agendamento],
-        },
-      ]),
-    }).then((_) {
-      mensagemSnackBar.sucesso(context, "Agendamento adicionado com sucesso!");
-    }).catchError((error) {
-      mensagemSnackBar.erro(context, "Erro ao adicionar o agendamento: $error");
-    });
+    try {
+      final salaDoc = await db.doc(nomeConjunto).get();
+
+      if (salaDoc.exists) {
+        final salaData = salaDoc.data() as Map<String, dynamic>?;
+        final salas = salaData?['Salas'] as List<dynamic>?;
+
+        if (salas != null) {
+          // Encontre a sala correta na lista de salas
+          final salaIndex = salas.indexWhere((sala) => sala['nome'] == nomeSala);
+
+          if (salaIndex != -1) {
+            // Se a sala foi encontrada, adicione o agendamento à lista de agendamentos dessa sala
+            if (salas[salaIndex]['agendamentos'] == null) {
+              salas[salaIndex]['agendamentos'] = [agendamento];
+            } else {
+              salas[salaIndex]['agendamentos'].add(agendamento);
+            }
+
+            // Atualize a sala no Firestore
+            await db.doc(nomeConjunto).update({'Salas': salas});
+
+            mensagemSnackBar.sucesso(context, "Agendamento adicionado com sucesso!");
+            
+          } else { mensagemSnackBar.erro(context, "Sala não encontrada."); }
+        } else { mensagemSnackBar.erro(context, "Lista de salas não encontrada."); }
+      } else { mensagemSnackBar.erro(context, "Documento de sala não encontrado."); }
+    } catch (error) { mensagemSnackBar.erro(context, "Erro ao adicionar o agendamento: $error"); }
   }
+
 
   //DELETE
   deletarSala(BuildContext context, String nomeConjunto, String idSala) {

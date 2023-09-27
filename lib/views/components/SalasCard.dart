@@ -4,11 +4,10 @@ import 'Texto.dart';
 
 class SalasCard {
 
-  static Widget SalasConjuntoComponent(BuildContext context, String titulo, String subTitulo, String imgUrl) { 
+  static Widget SalasConjuntoComponent(BuildContext context, String titulo, String subTitulo, String imgUrl, String nomeConjunto, String nomeSala) { 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
-        onTap: () => print("clicado"),
         child: Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
           color: Cores.fundoCard,
@@ -48,11 +47,14 @@ class SalasCard {
             ),
           ),
         ),
+        onTap: () => {
+          Navigator.pushNamed(context, '/calendario', arguments: {'nomeConjunto': nomeConjunto, 'nomeSala': nomeSala})
+        },
       ),
     );
   }
 
-  salaConjunto({required BuildContext context, required String titulo, required String subTitulo, required String imgUrl}){
-    return SalasConjuntoComponent(context, titulo, subTitulo, imgUrl);
+  salaConjunto({required BuildContext context, required String titulo, required String subTitulo, required String imgUrl, required String nomeConjunto, required String nomeSala}){
+    return SalasConjuntoComponent(context, titulo, subTitulo, imgUrl, nomeConjunto, nomeSala);
   }
 }
