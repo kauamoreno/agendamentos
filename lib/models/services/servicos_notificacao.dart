@@ -1,7 +1,8 @@
+import 'package:agendamentos/App.dart';
+import 'package:agendamentos/models/services/RoutesparaNotifica%C3%A7%C3%A3o.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:get/get.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
@@ -30,14 +31,14 @@ class NotificacaoEservicos{
 
   Future<void> _setupTimezone() async{
     tz.initializeTimeZones(); //lista internacional de timezones
-    final String? timezone = await FlutterNativeTimezone.getLocalTimezone(); //neste trecho vamos pegar o timeZone do sistema operacional que esta setado
+    final String? timezone = await FlutterNativeTimezone.getLocalTimezone(); //neste trecho vamos pegar o timeZone do sistema operacional que está setado
     tz.setLocalLocation(tz.getLocation(timezone!));
   }
 
   //configuração especifica de cada sistema operacional, IOS ou Android
   _iniciarNotificacao() async{
     //aqui personalizamos o tipo de icone que irá ser exibido nas notificações
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const android = AndroidInitializationSettings('@mipmap/ic_launcher.png');
     //abaixo iremos passar as configurações para cada sistema 
     await localNotificationsPlugin.initialize(
       const InitializationSettings(
@@ -47,12 +48,19 @@ class NotificacaoEservicos{
     );
   }
 
+  //metodo usado para quando a notificação for clicada, ser direcionado para a rota especifica
   _onNotificacaoSelecionada(String? payload){
     if(payload != null && payload.isNotEmpty){
-     // Navigator.of(Routes.navigatorKey!.currentContext).pushReplacementNamed('');
+      Navigator.of(Routes.navegadorChave!.currentContext!).pushReplacementNamed(payload);
     }
+  }
+  
+  mostrarNotificacao(NotificacaoCustomizada notificacaoCustomizada){
+    // androidDetalhes = const AndroidNotificationDetails(
+      
+    // );
   }
 
 }
 
-//https://www.youtube.com/watch?v=ilm89PL6-K8&t=359s => 13:40
+//https://www.youtube.com/watch?v=ilm89PL6-K8&t=359s => 16:40

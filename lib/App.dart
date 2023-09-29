@@ -9,6 +9,7 @@ import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
 import 'package:agendamentos/views/pages/TelaSalas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import './views/pages/Relatorios.dart';
 import 'views/pages/Agenda/Calendario.dart';
 import 'package:agendamentos/views/pages/Tela_Escolha_Gerenciamento.dart';
@@ -53,6 +54,7 @@ class App extends StatelessWidget {
           }
           return const ErrorPage(erroMensagem: 'Error');
         }
+
       },
     );
   }
