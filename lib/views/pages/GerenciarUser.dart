@@ -1,7 +1,11 @@
+import 'package:agendamentos/view_model/Usuarios/VM_Usuarios.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/components/Texto.dart';
+import '../components/Cards.dart';
+import '../components/Forms.dart';
 import 'package:agendamentos/views/constants/Cores.dart';
 import 'package:flutter/material.dart';
+import './Erros/ErrorPage.dart';
 
 class GerenciarProf extends StatefulWidget {
   const GerenciarProf({super.key});
@@ -12,141 +16,111 @@ class GerenciarProf extends StatefulWidget {
 
 class _GerenciarProfState extends State<GerenciarProf> {
   ElementoTexto elementoTexto = ElementoTexto();
+  FormsPopUp formsPopUp = FormsPopUp();
+  ElementoCard cardElemento = ElementoCard();
+  final _nomeProfController = TextEditingController();
+  final _emailProfController = TextEditingController();
+  final _senhaProfController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(titulo: 'Gerenciamento de Professores'),
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-              child: Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                color: Cores.fundoCard,
-                elevation: 2,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Icon(
-                      Icons.manage_accounts,
-                      color: Cores.letraCard,
-                      size: 75,
+      appBar: const CustomAppBar(titulo: 'Gerenciar', voltar: true),
+      body: FutureBuilder(
+        future: GerenciarUsuario().mostrarUsuarios(context),
+        builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+
+          } else if (snapshot.hasError) {
+            return ErrorPage(erroMensagem: snapshot.error);
+
+          } else {
+
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+                  child: Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    color: Cores.fundoCard,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                      child: elementoTexto.escreverTexto(
-                          texto: 'Gerenciar\nProfessores',
-                          alinhamento: TextAlign.center,
-                          tamanho: 20,
-                          expessura: FontWeight.bold,
-                          corFonte: Cores.letraCard),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
-                child: Container(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height * 0.6,
-                  child: SingleChildScrollView(
-                    child: Column(
+                    child: Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
-                                child: Container(
-                                  width: 120,
-                                  height: 120,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Image.network(
-                                    'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 5, 5),
-                                        child: elementoTexto.escreverTexto(
-                                            texto:
-                                                'CARLOS FERREIRA DE SOUZA\nProfessor\nSenai Nami Jafet 117',
-                                            expessura: FontWeight.w900,
-                                            tamanho: 18)),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 0, 5, 0),
-                                            child: ElevatedButton(
-                                                onPressed: () {
-                                                  print('Editar');
-                                                },
-                                                child: Text('Editar'),
-                                                style: ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        Cores.azul))),
-                                        Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5, 0, 5, 0),
-                                            child: ElevatedButton(
-                                                onPressed: () {
-                                                  print('Excluir');
-                                                },
-                                                child: Text('Excluir'))),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                        Icon(
+                          Icons.manage_accounts,
+                          color: Cores.letraCard,
+                          size: 75,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                          child: elementoTexto.escreverTexto(
+                            texto: 'Gerenciar\nProfessores',
+                            alinhamento: TextAlign.center,
+                            tamanho: 20,
+                            expessura: FontWeight.bold,
+                            corFonte: Cores.letraCard
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ),
-            ),
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print('Adicionar');
-          },
-          child: Icon(Icons.person_add_alt_sharp, size: 40),
-          backgroundColor: Cores.azul,
-        ));
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 70),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children:
+                              snapshot.data ?? [],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          //Limpar forms ao abrir novamente
+          _nomeProfController.text = "";
+          _emailProfController.text = "";
+          _senhaProfController.text = "";
+          
+          //Abrir forms
+          formsPopUp.formsProfessor(
+            context: context, 
+            nomeProfController: _nomeProfController, 
+            emailProfController: _emailProfController, 
+            senhaProfController: _senhaProfController,
+            funcaoCreate: () {
+              GerenciarUsuario().cadastro(
+                context,
+                _nomeProfController.text,
+                _emailProfController.text,
+                _senhaProfController.text
+              );
+            }
+          );
+        },
+        child: Icon(Icons.person_add_alt_sharp, size: 40),
+        backgroundColor: Cores.azul,
+      )
+    );
   }
 }
