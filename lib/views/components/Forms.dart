@@ -3,7 +3,7 @@ import 'TextFieldComponent.dart';
 
 class FormsPopUp {
   TextFieldComponent textFieldComponent = TextFieldComponent();
-  _forms(BuildContext context, Column colunaForms, Function funcao) {
+  _forms(BuildContext context, Column colunaForms, Function funcao, Function setState) {
     return showDialog(context: context, builder: (context) => 
       AlertDialog(
         content: Form(
@@ -21,6 +21,9 @@ class FormsPopUp {
             child: const Text('Enviar'),
             onPressed: () {
               funcao();
+              Future.delayed(const Duration(seconds: 2), () {
+                setState();
+              });
             }
           ), 
         ],
@@ -33,7 +36,8 @@ class FormsPopUp {
     required TextEditingController nomeProfController, 
     required TextEditingController emailProfController, 
     required TextEditingController senhaProfController,
-    required Function funcaoCreate
+    required Function funcaoCreate,
+    required Function setState
   }) {
     Column colunaForms = 
       Column(
@@ -44,6 +48,6 @@ class FormsPopUp {
         ],
       );
 
-    return _forms(context, colunaForms, funcaoCreate);
+    return _forms(context, colunaForms, funcaoCreate, setState);
   }
 }

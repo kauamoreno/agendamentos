@@ -13,7 +13,7 @@ class GerenciarUsuario {
   ElementoCard cardElemento = ElementoCard();
 
   //MÉTODO CREATE USUARIO
-  cadastro(BuildContext context, String nome, String email, String senha) async {
+  Future<bool> cadastro(BuildContext context, String nome, String email, String senha) async {
     //Verifica Nome
     bool nomeValido = false;
     if (nome.length < 5) {
@@ -59,9 +59,14 @@ class GerenciarUsuario {
     if (nomeValido & mailValido & senhaValida) {
       if (await Autenticacao().criarUsuario(context: context, nome: nome, email: email, senha: senha)) {
         print('deu certo');
+        Navigator.pop(context);
+        return true;
       }else {
         print('não deu');
+        return false;
       }
+    } else {
+      return false;
     }
   }
 
