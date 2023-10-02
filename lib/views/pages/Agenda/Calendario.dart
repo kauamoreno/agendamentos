@@ -40,37 +40,39 @@ class _CalendarioState extends State<Calendario> {
           addAgendamento(),
           addDataBar(),
           const SizedBox(height: 10),
+
           Expanded(
             child: FutureBuilder(
               future: vm.getAgendamentos(context, _dataSelecionanda), 
               builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
 
-          } else if (snapshot.hasError) {
-            return ErrorPage(erroMensagem: snapshot.error);
+                } else if (snapshot.hasError) {
+                  return ErrorPage(erroMensagem: snapshot.error);
 
-          } else {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
-              child: Column(
-                children: [
-                  const SizedBox(height: 30), //Espaço
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 30), //Espaço
 
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: snapshot.data ?? [], // Lista de widgets de cards.
-                      ),
-                    )
-                  )
-                ],
-              ),
-            );
-          }
-        },
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: snapshot.data ?? [], // Lista de widgets de cards.
+                            ),
+                          )
+                        )
+                      ],
+                    ),
+                  );
+                }
+              },
             )
           )
+
         ]
       ),
     );
@@ -131,7 +133,9 @@ class _CalendarioState extends State<Calendario> {
           )
         ),
         onDateChange: (data) {
-          _dataSelecionanda = data;
+          setState(() {
+            _dataSelecionanda = data;
+          });
         },
       ),
     );

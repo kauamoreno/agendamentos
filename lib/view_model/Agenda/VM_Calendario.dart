@@ -1,5 +1,8 @@
+import 'package:agendamentos/view_model/SnackBarViewModel.dart';
+import 'package:agendamentos/views/components/CardAgendamento.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class VM_Calendario {
   final String nomeConjunto;
@@ -10,63 +13,69 @@ class VM_Calendario {
     required this.nomeSala,
   });
 
+  SnackBarViewModel snack = SnackBarViewModel();
+  CardAgendamento cardAgendamento = CardAgendamento();
+
   Future<List<Widget>> getAgendamentos(BuildContext context, DateTime dataSelecionada) async {
     List<Widget> agendamentoWidgets = [];
 
     try {
-      // Obtém a referência do documento da sala
-      DocumentReference salaDocRef = FirebaseFirestore.instance.collection(nomeConjunto).doc(nomeSala);
+      DocumentReference salaConjuntoDocRef = FirebaseFirestore.instance.collection('salaConjunto').doc(nomeConjunto);
+      DocumentSnapshot salaConjuntoDoc = await salaConjuntoDocRef.get();
 
-      // Obtém o snapshot do documento da sala
-      DocumentSnapshot salaDoc = await salaDocRef.get();
+      if (salaConjuntoDoc.exists) {
+        final salaConjuntoData = salaConjuntoDoc.data() as Map<String, dynamic>?;
 
-      if (salaDoc.exists) {
-        final salaData = salaDoc.data() as Map<String, dynamic>?;
-        final salas = salaData?['salas'] as List<dynamic>?;
+        if (salaConjuntoData != null) {
+          final salas = salaConjuntoData['Salas'] as List<dynamic>?;
 
-        if (salas != null) {
-          // Encontra a sala correta na lista de salas
-          final salaIndex = salas.indexWhere((sala) => sala['nomeSala'] == nomeSala);
+          if (salas != null) {
+            // Encontra a sala específica com base no nome
+            final salaEspecifica = salas.firstWhere((sala) => sala['nome'] == nomeSala,orElse: () => null);
 
-          if (salaIndex != -1) {
-            final agendamentos = salas[salaIndex]['agendamentos'] as List<dynamic>?;
+            if (salaEspecifica != null) {
+              final agendamentos = salaEspecifica['agendamentos'] as List<dynamic>?;
 
-            // if (agendamentos != null) {
-              
-            //   // Filtra os agendamentos que correspondem à data selecionada
-            //   final agendamentosNoDia = agendamentos.where((agendamento) {
-            //     final dataAgendamento = DateTime.parse(agendamento['data']);
-            //     return dataAgendamento.year == dataSelecionada.year &&
-            //         dataAgendamento.month == dataSelecionada.month &&
-            //         dataAgendamento.day == dataSelecionada.day;
-            //   }).toList();
+              if (agendamentos != null) {
+                
+                // Filtra os agendamentos que correspondem à data selecionada no formato "yyyy-MM-dd"
+                final agendamentosNoDia = agendamentos.where((agendamento) {
+                  final dataSelecionadaFormatada = DateFormat('dd/MM/yyyy').format(dataSelecionada);
+                  final dataAgendamento = agendamento['data'];
 
-            //   // Cria widgets de card para os agendamentos do dia
-            //   for (var agendamento in agendamentosNoDia) {
-            //     final titulo = agendamento['titulo'];
-            //     final horaInicial = agendamento['timeInicial'];
-            //     final horaFinal = agendamento['timeFinal'];
-            //     final lembrete = agendamento['lembrete'];
+                  return dataAgendamento == dataSelecionadaFormatada;
+                }).toList();
 
-            //     // Crie um Card personalizado ou widget apropriado aqui com essas informações
-            //     // Exemplo:
-            //     final card = Card(
-            //       child: ListTile(
-            //         title: Text(titulo),
-            //         subtitle: Text('Das $horaInicial às $horaFinal'),
-            //         trailing: Text(lembrete),
-            //       ),
-            //     );
+                // Cria widgets de card para os agendamentos do dia
+                for (var agendamento in agendamentosNoDia) {
+                  final titulo = agendamento['titulo'];
+                  final horaInicial = agendamento['timeInicial'];
+                  final horaFinal = agendamento['timeFinal'];
 
-            //     agendamentoWidgets.add(card);
-            //   }
-            // }
+                  // Crie um Card personalizado ou widget apropriado aqui com essas informações
+                  final card = Card(
+                    child: ListTile(
+                      title: Text(titulo),
+                      subtitle: Text('Das $horaInicial às $horaFinal'),
+                    ),
+                  );
+
+                  final card2 = cardAgendamento.getCard(
+                    "${agendamento['timeInicial']} ás ${agendamento['timeFinal']}", 
+                    agendamento['titulo'], 
+                    agendamento['titulo'], 
+                    () { }
+                  );
+
+                  agendamentoWidgets.add(card2);
+                }
+              }
+            }
           }
         }
       }
     } catch (error) {
-      // Lida com erros aqui, por exemplo, exibindo uma mensagem de erro.
-      print("Erro ao obter agendamentos: $error");
+      snack.erro(context, 'Erro ao obter agendamentos: $error');
     }
 
     return agendamentoWidgets;
