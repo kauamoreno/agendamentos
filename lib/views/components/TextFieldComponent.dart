@@ -31,7 +31,7 @@ class TextFieldComponent {
     return _textFieldComponent(label, hint, Icons.search, TextInputType.text, false,Cores.black, controller);
   }
 
-  textFieldCustom({required label, required IconData icone, TextInputType tipoTeclado = TextInputType.text, required String hint, required TextEditingController controller}){
-    return _textFieldComponent(label, hint, icone, TextInputType.text, false,Cores.black, controller);
+  textFieldCustom({required label, required IconData icone, TextInputType tipoTeclado = TextInputType.text, required String hint, required TextEditingController controller, bool mostrarSenha = false}){
+    return _textFieldComponent(label, hint, icone, TextInputType.text, mostrarSenha,Cores.black, controller);
   }
 }

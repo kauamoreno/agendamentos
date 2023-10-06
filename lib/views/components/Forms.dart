@@ -44,7 +44,7 @@ class FormsPopUp {
         children: [
           textFieldComponent.textFieldCustom(label: 'Nome do Professor', icone: Icons.abc, hint: 'Nome Completo', controller: nomeProfController),
           textFieldComponent.textFieldCustom(label: 'E-mail', icone: Icons.mail, hint: 'example@gmail.com', controller: emailProfController),
-          textFieldComponent.textFieldCustom(label: 'Senha', icone: Icons.key, hint: 'Senha', controller: senhaProfController)
+          textFieldComponent.textFieldCustom(label: 'Senha', icone: Icons.key, hint: 'Senha', mostrarSenha: true, controller: senhaProfController)
         ],
       );
 

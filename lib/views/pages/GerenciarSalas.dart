@@ -22,7 +22,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: 'Gerenciar'),
+      appBar: const CustomAppBar(titulo: 'Gerenciar', voltar: true,),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

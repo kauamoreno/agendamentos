@@ -69,7 +69,7 @@ class _ErrorPageState extends State<ErrorPage> {
               child: const Text('Voltar'),
               
               onPressed: () => { 
-                Navigator.of(context).pushReplacementNamed('/')
+                Navigator.pop(context)
               },
             ),
 
