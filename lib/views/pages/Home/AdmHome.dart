@@ -20,7 +20,7 @@ class _AdmHomeState extends State<AdmHome> {
           children: <Widget>[
             BotoesHome(context, 'Agenda', Icons.calendar_today, Colors.grey,'/calendario'),
             BotoesHome(context, 'Feedback', Icons.feedback, Colors.grey, '/feedback'),
-            BotoesHome(context, 'Salas', Icons.room, Colors.grey, '/telaSalas'),
+            BotoesHome(context, 'Salas', Icons.room, Colors.grey, '/salasConjunto'),
             BotoesHome(context, 'Notícias', Icons.new_releases, Colors.grey,'/noticias'),
             BotoesHome(context, 'Relatório', Icons.insert_chart, Colors.grey,'/relatorio'),
             BotoesHome(context, 'Gerenciamento', Icons.settings, Colors.grey,'/escolhaDeGerenciamento'),

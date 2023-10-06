@@ -20,7 +20,7 @@ class _UserHomeState extends State<UserHome> {
           children: [
             BotoesHome(context, 'Agenda', Icons.calendar_today,Colors.grey, '/calendario'),
             BotoesHome(context, 'Feedback', Icons.feedback,Colors.grey, '/feedback'),
-            BotoesHome(context, 'Salas', Icons.room,Colors.grey, '/telaSalas'),
+            BotoesHome(context, 'Salas', Icons.room,Colors.grey, '/salasConjunto'),
             BotoesHome(context, 'Notícias', Icons.new_releases,Colors.grey, '/noticias'),
           ],
         ),
