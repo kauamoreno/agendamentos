@@ -43,6 +43,7 @@ class SalasFirestore {
     required String timeInicial,
     required String timeFinal,
     required String lembrete,
+    required String nomeProfessor,
   }) async {
     final agendamento = {
       "titulo": titulo,
@@ -51,6 +52,7 @@ class SalasFirestore {
       "timeInicial": timeInicial,
       "timeFinal": timeFinal,
       "lembrete": lembrete,
+      "professor": nomeProfessor,
     };
 
     try {

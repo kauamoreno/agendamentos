@@ -89,4 +89,26 @@ class Autenticacao {
       }
     }
   }
+
+  Future<String?> getNomeProfessorLogado() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        String userId = user.uid;
+        Map<String, dynamic>? usuarioMap = await UsuarioFirestore().getUsuario(userId);
+
+        if (usuarioMap != null && usuarioMap.containsKey('nome')) {
+          String nome = usuarioMap['nome'];
+          return nome;
+        }
+      }
+      return null;
+      
+    } catch (e) {
+      print("Erro ao obter o nome do professor logado: $e");
+      return null;
+    }
+  }
+
 }

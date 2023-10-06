@@ -48,26 +48,17 @@ class VM_Calendario {
 
                 // Cria widgets de card para os agendamentos do dia
                 for (var agendamento in agendamentosNoDia) {
-                  final titulo = agendamento['titulo'];
-                  final horaInicial = agendamento['timeInicial'];
-                  final horaFinal = agendamento['timeFinal'];
 
-                  // Crie um Card personalizado ou widget apropriado aqui com essas informações
-                  final card = Card(
-                    child: ListTile(
-                      title: Text(titulo),
-                      subtitle: Text('Das $horaInicial às $horaFinal'),
-                    ),
+                  final card = cardAgendamento.getCard(
+                    context,
+                    agendamento['timeInicial'],
+                    agendamento['timeFinal'],
+                    nomeSala,
+                    agendamento['professor'],
+                    agendamento['nota'],
                   );
 
-                  final card2 = cardAgendamento.getCard(
-                    "${agendamento['timeInicial']} ás ${agendamento['timeFinal']}", 
-                    agendamento['titulo'], 
-                    agendamento['titulo'], 
-                    () { }
-                  );
-
-                  agendamentoWidgets.add(card2);
+                  agendamentoWidgets.add(card);
                 }
               }
             }

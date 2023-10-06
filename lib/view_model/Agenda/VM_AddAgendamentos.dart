@@ -20,7 +20,8 @@ class VM_AddAgendamentos {
     required String data,
     required String timeInicial,
     required String timeFinal,
-    required String lembrete
+    required String lembrete,
+    required String nomeProfessor,
   }) {
 
     if(titulo.isNotEmpty /*Ver se não tem horarios iguais*/){
@@ -30,9 +31,11 @@ class VM_AddAgendamentos {
         nomeSala: nomeSala,
         titulo: titulo, 
         data: data, 
+        nota: nota,
         timeInicial: timeInicial, 
         timeFinal: timeFinal, 
-        lembrete: lembrete
+        lembrete: lembrete,
+        nomeProfessor: nomeProfessor
       ); 
     }
     
