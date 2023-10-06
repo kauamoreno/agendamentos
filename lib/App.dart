@@ -27,7 +27,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.red
       ),
 
-      initialRoute: '/salasConjunto',
+      initialRoute: '/',
       routes:{
         '/': (context) => TelaLogin(),
         '/userHome':(context) => const UserHome(),

@@ -1,3 +1,4 @@
+import 'package:agendamentos/models/services/Autenticacao.dart';
 import 'package:agendamentos/view_model/Agenda/VM_AddAgendamentos.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/constants/Texto.dart';
@@ -20,6 +21,7 @@ class AddAgendamento extends StatefulWidget {
 class _AddAgendamentoState extends State<AddAgendamento> {
 
   late VM_AddAgendamentos vm;
+  Autenticacao auth = Autenticacao();
 
   @override
   void initState() {
@@ -164,7 +166,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                   _paletaDeCor(),
                   Botao(
                     label: "Criar",
-                    onTap: () {
+                    onTap: () async {
                       vm.validaDados(
                         titulo: _tituloController.text, 
                         nota: _notaController.text, 
@@ -172,7 +174,8 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                         timeInicial: tempoInicial, 
                         timeFinal: tempoFinal, 
                         lembrete: '', 
-                        context: context
+                        context: context, 
+                        nomeProfessor: await auth.getNomeProfessorLogado() as String
                       );
                     },
                   )
