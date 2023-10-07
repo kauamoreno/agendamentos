@@ -115,7 +115,8 @@ class _GerenciarProfState extends State<GerenciarProf> {
                 _emailProfController.text,
                 _senhaProfController.text
               );
-            }
+            },
+            setState: () {setState(() {});}
           );
         },
         child: Icon(Icons.person_add_alt_sharp, size: 40),

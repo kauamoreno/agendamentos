@@ -1,4 +1,5 @@
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
+import 'package:agendamentos/views/pages/GerenciarConjunto.dart';
 import 'package:agendamentos/views/pages/GerenciarSalas.dart';
 import 'package:agendamentos/views/pages/GerenciarUser.dart';
 import 'package:agendamentos/views/pages/Home/AdmHome.dart';
@@ -46,6 +47,7 @@ class App extends StatelessWidget {
         '/relatorio': (context) => RelatoriosPage(),
         '/escolhaDeGerenciamento': (context) => TelaEscolhaGerenciamento(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
+        '/gerenciarConjunto': (context) => const GerenciaConjunto(),
         '/gerenciarSalas': (context) => const GerenciaSala(),
         '/salasConjunto': (context) => const SalasConjunto(),
         '/calendario': (context) {
