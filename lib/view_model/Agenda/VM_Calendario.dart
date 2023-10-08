@@ -58,9 +58,9 @@ class VM_Calendario {
                     agendamento['nota'],
                   );
 
-                  agendamentoWidgets.add(card);
+                  agendamentoWidgets.add(card);                  
                 }
-              }
+              } 
             }
           }
         }
@@ -69,6 +69,15 @@ class VM_Calendario {
       snack.erro(context, 'Erro ao obter agendamentos: $error');
     }
 
+    if(agendamentoWidgets.isEmpty) {
+      agendamentoWidgets.add(
+        const Padding(
+          padding: EdgeInsets.only(top: 25),
+          child: Text('Nenhuma agenda para hoje', style: TextStyle(fontSize: 17)),
+        )
+      );
+    }
     return agendamentoWidgets;
+
   }
 }

@@ -92,9 +92,6 @@ class _CalendarioState extends State<Calendario> {
         height: 55,
         width: MediaQuery.of(context).size.width * 0.9,
         color: fechar == true ? Colors.red : clr,
-        decoration: BoxDecoration(
-
-        ),
       ),
     );
   }
@@ -153,7 +150,7 @@ class _CalendarioState extends State<Calendario> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  DateFormat.yMMMMd().format(DateTime.now()),
+                  DateFormat.yMMMMd('pt_BR').format(DateTime.now()),
                   style: subHeadingStyle,
                 ),
                 Text(
@@ -164,7 +161,7 @@ class _CalendarioState extends State<Calendario> {
             ),
           ),
           Botao(
-            label: "+Add Ag",
+            label: " Agendar ",
             onTap: () {
               Navigator.pushNamed(context, '/agendamento', arguments: {
                 'nomeConjunto': widget.nomeConjunto, 

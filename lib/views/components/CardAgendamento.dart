@@ -98,7 +98,7 @@ class CardAgendamento {
               Text('Horário: $horarioInicial ás $horarioFinal'),
               Text('Sala: $sala'),
               Text('Professor: $professor'),
-              nota != null ? Padding(
+              nota!.isNotEmpty ? Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: Text('Nota: $nota'),
               ) : Container()

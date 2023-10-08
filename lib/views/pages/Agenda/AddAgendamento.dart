@@ -33,18 +33,16 @@ class _AddAgendamentoState extends State<AddAgendamento> {
   final TextEditingController _notaController = TextEditingController();
 
   DateTime dataSelecionada = DateTime.now();
-  String tempoFinal = "00:00";
-  String tempoInicial = DateFormat("hh:mm a").format(DateTime.now()).toString();
+  String tempoFinal = "11:30";
+  String tempoInicial = DateFormat("hh:mm").format(DateTime.now()).toString();
   
-  int _lenbreteSelecionado = 5;
+  int _lembreteSelecionado = 5;
   List<int> listaLembrete = [
     5,
     10,
     15,
     20,
   ];
-
-  int _corSelecionada = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -61,116 +59,125 @@ class _AddAgendamentoState extends State<AddAgendamento> {
               const SizedBox(height: 30),
 
               Text(
-                "Add Agendamento",
+                "Agendamento",
                 style: headingStyle,
               ),
               InputAgendamentos(
                 titulo: "Titulo",
                 dica: "Digite seu titulo...",
-                controller: _tituloController,
+                controller: _tituloController, 
+                desativado: false,
               ),
               InputAgendamentos(
                 titulo: "Nota",
                 dica: "Digite sua nota...",
-                controller: _notaController,
+                controller: _notaController, 
+                desativado: false,
               ),
               InputAgendamentos(
+                desativado: true,
                 titulo: "Data",
-                dica: DateFormat('dd/MM/yyyy').format(dataSelecionada),
-                widget: IconButton(
-                  icon: const Icon(
+                dica: DateFormat('dd/MM/yyyy').format(dataSelecionada), 
+                widget: const Padding(
+                  padding: EdgeInsets.only(right: 8),
+                  child: Icon(
                     Icons.calendar_today_outlined,
                     color: Colors.grey,
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _pegarDataDoUsuario();
-                    });
-                  },
                 ),
+                onTapCallback: () {
+                  _pegarDataDoUsuario();                  
+                }, 
               ),
+
               Row(
                 children: [
                   Expanded(
                     child: InputAgendamentos(
+                      desativado: true,
                       titulo: "Tempo Inicial",
                       dica: tempoInicial,
-                      widget: IconButton(
-                        onPressed: () {
-                          _pegarTempoDoUsuario(oTempoInicial: true);
-                        },
-                        icon: const Icon(
+                      widget: const Padding(
+                        padding: EdgeInsets.only(right: 8),
+                        child: Icon(
                           Icons.access_time_filled_rounded,
                           color: Colors.grey,
                         ),
                       ),
-                    )
+                      onTapCallback: () {
+                        _pegarTempoDoUsuario(oTempoInicial: true);
+                      }, 
+                    ),
                   ),
-
+                  
                   const SizedBox(width: 12),
 
                   Expanded(
                     child: InputAgendamentos(
+                      desativado: true,
                       titulo: "Tempo Final",
                       dica: tempoFinal,
-                      widget: IconButton(
-                        onPressed: () {
-                          _pegarTempoDoUsuario(oTempoInicial: false);
-                        },
-                        icon: const Icon(
+                      widget: const Padding(
+                        padding: EdgeInsets.only(right: 8),
+                        child: Icon(
                           Icons.access_time_filled_rounded,
                           color: Colors.grey,
                         ),
                       ),
-                    )
+                      onTapCallback: () {
+                        _pegarTempoDoUsuario(oTempoInicial: false);
+                      },
+                    ),
                   )
                 ],
               ),
 
               InputAgendamentos(
+                desativado: true,
                 titulo: "Lembrete",
-                dica: "$_lenbreteSelecionado minutos restantes",
-                widget: DropdownButton(
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.grey,
+                dica: "$_lembreteSelecionado minutos restantes",
+                widget: Expanded(
+                  child: DropdownButton(
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.grey,
+                    ),
+                
+                    iconSize: 32,
+                    elevation: 4,
+                    style: subTituloStyle,
+                    underline: Container(
+                      height: 0,
+                    ),
+                    onChanged: (String? novoValor) {
+                      setState(() {
+                        _lembreteSelecionado = int.parse(novoValor!);
+                      });
+                    },
+                      
+                    items: listaLembrete.map<DropdownMenuItem<String>>((int valor) {
+                      return DropdownMenuItem<String>(
+                        value: valor.toString(),
+                        child: Text(valor.toString()),
+                      );
+                    }).toList(),
                   ),
-
-                  iconSize: 32,
-                  elevation: 4,
-                  style: subTituloStyle,
-                  underline: Container(
-                    height: 0,
-                  ),
-                  onChanged: (String? novoValor) {
-                    setState(() {
-                      _lenbreteSelecionado = int.parse(novoValor!);
-                    });
-                  },
-                    
-                  items: listaLembrete.map<DropdownMenuItem<String>>((int valor) {
-                    return DropdownMenuItem<String>(
-                      value: valor.toString(),
-                      child: Text(valor.toString()),
-                    );
-                  }).toList(),
-                )
+                ),
               ),
               
               const SizedBox(height: 18),
               
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _paletaDeCor(),
-                  Botao(
+              Align(
+                alignment: Alignment.centerRight,
+                child: SizedBox(
+                  width: 200,
+                  child: Botao(
                     label: "Criar",
                     onTap: () async {
                       vm.validaDados(
                         titulo: _tituloController.text, 
-                        nota: _notaController.text, 
                         data: DateFormat('dd/MM/yyyy').format(dataSelecionada), 
+                        nota: _notaController.text, 
                         timeInicial: tempoInicial, 
                         timeFinal: tempoFinal, 
                         lembrete: '', 
@@ -178,55 +185,13 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                         nomeProfessor: await auth.getNomeProfessorLogado() as String
                       );
                     },
-                  )
-                ],
+                  ),
+                ),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  _paletaDeCor() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Cores",
-          style: tituloStyle,
-        ),
-        const SizedBox(height: 18),
-        Wrap(
-          children: List<Widget>.generate(
-            3, (int index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _corSelecionada = index;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: CircleAvatar(
-                    radius: 14,
-                    backgroundColor: index == 0
-                    ? Colors.black : index == 1
-                    ? Colors.red   : Colors.amber,
-                    child: _corSelecionada == index
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.white,
-                          size: 16,
-                        )
-                      : Container(),
-                  ),
-                ),
-              );
-            }
-          ),
-        ),
-      ],
     );
   }
 
@@ -239,7 +204,9 @@ class _AddAgendamentoState extends State<AddAgendamento> {
     );
       
     if (pegarData != null) {
-      dataSelecionada = pegarData;
+      setState(() {
+        dataSelecionada = pegarData;
+      });
     }
   }
 

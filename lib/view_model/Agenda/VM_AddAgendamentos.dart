@@ -1,3 +1,4 @@
+import 'package:agendamentos/view_model/SnackBarViewModel.dart';
 import 'package:flutter/material.dart';
 import '../../models/services/Firestore/SalasFirestore.dart';
 
@@ -12,6 +13,7 @@ class VM_AddAgendamentos {
   });
 
   SalasFirestore fire = SalasFirestore(); 
+  SnackBarViewModel snack = SnackBarViewModel();
 
   validaDados({
     required BuildContext context,
@@ -36,7 +38,10 @@ class VM_AddAgendamentos {
         timeFinal: timeFinal, 
         lembrete: lembrete,
         nomeProfessor: nomeProfessor
-      ); 
+      );
+      Navigator.pop(context);
+    } else {
+      snack.erro(context, 'Por favor preencher todos os campos');
     }
     
   }

@@ -12,6 +12,8 @@ import 'package:flutter/services.dart';
 import './views/pages/Relatorios.dart';
 import 'views/pages/Agenda/Calendario.dart';
 import 'package:agendamentos/views/pages/Tela_Escolha_Gerenciamento.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -22,6 +24,15 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('pt', 'BR'), 
+      ],
+      locale: const Locale('pt'),
 
       theme: ThemeData(
         primarySwatch: Colors.red
