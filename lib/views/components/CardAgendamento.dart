@@ -9,10 +9,11 @@ class CardAgendamento {
     String sala, 
     String professor, 
     String ?nota, 
+    String titulo, 
   ) {
     return SizedBox(
       width: 450,
-      height: 155.0,
+      height: 120.0,
 
       child: Card(
         elevation: 5,
@@ -29,7 +30,8 @@ class CardAgendamento {
               horarioFinal,
               sala,
               professor,
-              nota
+              nota,
+              titulo
             );
           },
 
@@ -47,10 +49,18 @@ class CardAgendamento {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
+                      'Título: $titulo',
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    Text(
                       'Horário: $horarioInicial ás $horarioFinal',
                       style: const TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
                         color: Colors.white,
                       ),
                     ),
@@ -80,7 +90,8 @@ class CardAgendamento {
     String horarioFinal, 
     String sala, 
     String professor,
-    String ?nota
+    String ?nota,
+    String titulo
   ) {
     showDialog(
       context: context,
@@ -95,6 +106,7 @@ class CardAgendamento {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              Text('Título: $titulo'),
               Text('Horário: $horarioInicial ás $horarioFinal'),
               Text('Sala: $sala'),
               Text('Professor: $professor'),

@@ -132,7 +132,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                 ],
               ),
               
-              const SizedBox(height: 18),
+              const SizedBox(height: 30),
               
               Align(
                 alignment: Alignment.centerRight,
