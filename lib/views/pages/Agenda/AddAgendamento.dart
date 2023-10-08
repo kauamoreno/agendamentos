@@ -11,8 +11,9 @@ class AddAgendamento extends StatefulWidget {
 
   final String nomeConjunto;
   final String nomeSala;
+  final String dataSelecionada;
 
-  const AddAgendamento({super.key, required this.nomeConjunto, required this.nomeSala});
+  const AddAgendamento({super.key, required this.nomeConjunto, required this.nomeSala, required this.dataSelecionada});
 
   @override
   State<AddAgendamento> createState() => _AddAgendamentoState();
@@ -20,6 +21,7 @@ class AddAgendamento extends StatefulWidget {
 
 class _AddAgendamentoState extends State<AddAgendamento> {
 
+  DateTime dataSelecionada = DateTime.now();
   late VM_AddAgendamentos vm;
   Autenticacao auth = Autenticacao();
 
@@ -28,21 +30,19 @@ class _AddAgendamentoState extends State<AddAgendamento> {
     super.initState();
     vm = VM_AddAgendamentos(nomeConjunto: widget.nomeConjunto, nomeSala: widget.nomeSala);
   }
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Formate a string dataSelecionada para DateTime ao inicializar o widget
+    dataSelecionada = DateFormat('yyyy-MM-dd HH:mm:ss.SSS').parse(widget.dataSelecionada);
+  }
 
   final TextEditingController _tituloController = TextEditingController();
   final TextEditingController _notaController = TextEditingController();
 
-  DateTime dataSelecionada = DateTime.now();
   String tempoFinal = "11:30";
-  String tempoInicial = DateFormat("hh:mm").format(DateTime.now()).toString();
-  
-  int _lembreteSelecionado = 5;
-  List<int> listaLembrete = [
-    5,
-    10,
-    15,
-    20,
-  ];
+  String tempoInicial = "07:30";
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                 style: headingStyle,
               ),
               InputAgendamentos(
-                titulo: "Titulo",
+                titulo: "Titulo *",
                 dica: "Digite seu titulo...",
                 controller: _tituloController, 
                 desativado: false,
@@ -131,39 +131,6 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                   )
                 ],
               ),
-
-              InputAgendamentos(
-                desativado: true,
-                titulo: "Lembrete",
-                dica: "$_lembreteSelecionado minutos restantes",
-                widget: Expanded(
-                  child: DropdownButton(
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.grey,
-                    ),
-                
-                    iconSize: 32,
-                    elevation: 4,
-                    style: subTituloStyle,
-                    underline: Container(
-                      height: 0,
-                    ),
-                    onChanged: (String? novoValor) {
-                      setState(() {
-                        _lembreteSelecionado = int.parse(novoValor!);
-                      });
-                    },
-                      
-                    items: listaLembrete.map<DropdownMenuItem<String>>((int valor) {
-                      return DropdownMenuItem<String>(
-                        value: valor.toString(),
-                        child: Text(valor.toString()),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
               
               const SizedBox(height: 18),
               
@@ -175,14 +142,14 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                     label: "Criar",
                     onTap: () async {
                       vm.validaDados(
-                        titulo: _tituloController.text, 
                         data: DateFormat('dd/MM/yyyy').format(dataSelecionada), 
+                        titulo: _tituloController.text,
                         nota: _notaController.text, 
                         timeInicial: tempoInicial, 
                         timeFinal: tempoFinal, 
-                        lembrete: '', 
                         context: context, 
-                        nomeProfessor: await auth.getNomeProfessorLogado() as String
+                        nomeProfessor: await auth.getIdNomeProfessorLogado(false) as String, 
+                        idProfessor: await auth.getIdNomeProfessorLogado(true) as String
                       );
                     },
                   ),
@@ -198,7 +165,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
   _pegarDataDoUsuario() async {
     DateTime? pegarData = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: dataSelecionada,
       firstDate: DateTime(2023),
       lastDate: DateTime(2100),
     );

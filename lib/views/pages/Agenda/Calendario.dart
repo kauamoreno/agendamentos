@@ -165,7 +165,8 @@ class _CalendarioState extends State<Calendario> {
             onTap: () {
               Navigator.pushNamed(context, '/agendamento', arguments: {
                 'nomeConjunto': widget.nomeConjunto, 
-                'nomeSala': widget.nomeSala
+                'nomeSala': widget.nomeSala,
+                'dataSelecionada': _dataSelecionanda.toString()
               });
             }
           )

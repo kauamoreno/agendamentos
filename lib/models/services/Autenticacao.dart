@@ -90,7 +90,7 @@ class Autenticacao {
     }
   }
 
-  Future<String?> getNomeProfessorLogado() async {
+  Future<String?> getIdNomeProfessorLogado(bool isId) async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
 
@@ -100,7 +100,7 @@ class Autenticacao {
 
         if (usuarioMap != null && usuarioMap.containsKey('nome')) {
           String nome = usuarioMap['nome'];
-          return nome;
+          if(isId) { return userId; } else { return nome; }
         }
       }
       return null;

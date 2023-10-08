@@ -36,22 +36,22 @@ class SalasFirestore {
   criarAgendamento({
     required BuildContext context,
     required String nomeConjunto,
-    required String nomeSala,
     required String titulo,
+    required String nomeSala,
     String? nota,
     required String data,
     required String timeInicial,
     required String timeFinal,
-    required String lembrete,
     required String nomeProfessor,
+    required String idProfessor,
   }) async {
     final agendamento = {
+      "idProfessor": idProfessor,
       "titulo": titulo,
       "nota": nota,
       "data": data,
       "timeInicial": timeInicial,
       "timeFinal": timeFinal,
-      "lembrete": lembrete,
       "professor": nomeProfessor,
     };
 

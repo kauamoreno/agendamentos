@@ -19,34 +19,35 @@ class VM_AddAgendamentos {
 
   validaDados({
     required BuildContext context,
-    required String titulo,
     String ?nota,
     required String data,
+    required String titulo,
     required String timeInicial,
     required String timeFinal,
-    required String lembrete,
     required String nomeProfessor,
+    required String idProfessor,
   }) async {
 
     if(titulo.isNotEmpty){
       if(isHorarioValido(timeInicial, timeFinal)){
         if(await semConflitoDeAgendamento(context, data, timeInicial, timeFinal)) {
+          // ignore: use_build_context_synchronously
           fire.criarAgendamento(
             context: context, 
+            idProfessor: idProfessor,
             nomeConjunto: nomeConjunto, 
             nomeSala: nomeSala,
-            titulo: titulo, 
             data: data, 
             nota: nota,
+            titulo: titulo,
             timeInicial: timeInicial, 
             timeFinal: timeFinal, 
-            lembrete: lembrete,
             nomeProfessor: nomeProfessor
           );
           Navigator.pop(context);
         } else { snack.erro(context, 'Horário ocupado, por favor escolher outro'); }
       } else { snack.erro(context, 'Horário Inválido'); }
-    } else { snack.erro(context, 'Por favor preencher todos os campos'); }
+    } else { snack.erro(context, 'Por favor, preencher com um título'); }
   }
 
   // Função para verificar se o horário inicial é menor que o horário final

@@ -67,8 +67,9 @@ class App extends StatelessWidget {
           if (args is Map<String, String>) {
             final nomeConjunto = args['nomeConjunto'];
             final nomeSala = args['nomeSala'];
-            if (nomeConjunto != null && nomeSala != null) {
-              return AddAgendamento(nomeConjunto: nomeConjunto, nomeSala: nomeSala);
+            final dataSelecionada = args['dataSelecionada'];
+            if (nomeConjunto != null && nomeSala != null && dataSelecionada != null) {
+              return AddAgendamento(nomeConjunto: nomeConjunto, nomeSala: nomeSala, dataSelecionada: dataSelecionada);
             }
           }
           return const ErrorPage(erroMensagem: 'Error');
