@@ -22,7 +22,7 @@ class _SalasConjuntoState extends State<SalasConjunto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: 'Salas'),
+      appBar: const CustomAppBar(titulo: 'Salas', voltar: true),
       body: FutureBuilder(
 
         future: vm.mostrarSalasConjunto(context),

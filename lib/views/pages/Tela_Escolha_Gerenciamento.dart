@@ -14,7 +14,7 @@ class _TelaEscolhaGerenciamentoState extends State<TelaEscolhaGerenciamento> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(titulo: ''),
+      appBar: CustomAppBar(titulo: 'Gerenciar', voltar: true,),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +25,7 @@ class _TelaEscolhaGerenciamentoState extends State<TelaEscolhaGerenciamento> {
                 crossAxisCount: 1, //
                 children: <Widget>[
                   BotoesHome(context, 'Gerenciar Professores', Icons.settings, Colors.grey, '/gerenciarProfessores'),
-                  BotoesHome(context, 'Gerenciar Salas', Icons.settings, Colors.grey, '/gerenciarSalas'),
+                  BotoesHome(context, 'Gerenciar Salas', Icons.settings, Colors.grey, '/gerenciarConjunto'),
                 ],
               ),
             ),

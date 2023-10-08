@@ -3,7 +3,7 @@ import 'TextFieldComponent.dart';
 
 class FormsPopUp {
   TextFieldComponent textFieldComponent = TextFieldComponent();
-  _forms(BuildContext context, Column colunaForms, Function funcao) {
+  _forms(BuildContext context, Column colunaForms, Function funcao, Function setState) {
     return showDialog(context: context, builder: (context) => 
       AlertDialog(
         content: Form(
@@ -21,6 +21,9 @@ class FormsPopUp {
             child: const Text('Enviar'),
             onPressed: () {
               funcao();
+              Future.delayed(const Duration(seconds: 2), () {
+                setState();
+              });
             }
           ), 
         ],
@@ -33,17 +36,18 @@ class FormsPopUp {
     required TextEditingController nomeProfController, 
     required TextEditingController emailProfController, 
     required TextEditingController senhaProfController,
-    required Function funcaoCreate
+    required Function funcaoCreate,
+    required Function setState
   }) {
     Column colunaForms = 
       Column(
         children: [
           textFieldComponent.textFieldCustom(label: 'Nome do Professor', icone: Icons.abc, hint: 'Nome Completo', controller: nomeProfController),
           textFieldComponent.textFieldCustom(label: 'E-mail', icone: Icons.mail, hint: 'example@gmail.com', controller: emailProfController),
-          textFieldComponent.textFieldCustom(label: 'Senha', icone: Icons.key, hint: 'Senha', controller: senhaProfController)
+          textFieldComponent.textFieldCustom(label: 'Senha', icone: Icons.key, hint: 'Senha', mostrarSenha: true, controller: senhaProfController)
         ],
       );
 
-    return _forms(context, colunaForms, funcaoCreate);
+    return _forms(context, colunaForms, funcaoCreate, setState);
   }
 }
