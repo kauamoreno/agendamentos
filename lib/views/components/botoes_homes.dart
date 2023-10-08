@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'CustomAppBar.dart';
 
 BotoesHome(BuildContext context, String text, IconData icon, Color color, String route) {
   return GestureDetector(
-    onTap: () {
+    onTap: () async{
       if (route == '/feedback') {
         showDialog(context: context, builder: (context) => DialogoAlerta());
+      } else if(route == '/noticias'){
+        _launchUrl();
       } else {
         Navigator.pushNamed(context, route);
       }
@@ -36,4 +39,11 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color, String
       ),
     ),
   );
+}
+
+final Uri _url = Uri.parse('https://sp.senai.br/noticias');
+Future<void> _launchUrl() async {
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
+  }
 }
