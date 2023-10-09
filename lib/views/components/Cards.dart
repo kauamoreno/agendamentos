@@ -4,7 +4,7 @@ import 'Texto.dart';
 
 class ElementoCard {
   ElementoTexto elementoTexto = ElementoTexto();
-  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar) {
+  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar, Function funcaoEditar) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       elevation: 4,
@@ -48,7 +48,7 @@ class ElementoCard {
                         EdgeInsetsDirectional.symmetric(horizontal: 5),
                       child: ElevatedButton(
                         onPressed: () {
-                          print('Editar');
+                          funcaoEditar();
                         },
                         child: elementoTexto.escreverTexto(texto: 'Editar', corFonte: Cores.white),
                         style: ElevatedButton.styleFrom(
@@ -121,22 +121,21 @@ class ElementoCard {
         )
       );
       
-    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, (){});
+    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, (){}, (){});
   }
   
   cardSala({
     required BuildContext context, 
-    required String nome, 
-    required String tipo, 
+    required String nome,
     required int quantidade,
     required String foto,
     required String id
   }) {
-    Text infoSala = elementoTexto.escreverTexto(texto: '$nome\n$tipo\n$quantidade Lugares', expessura: FontWeight.bold, tamanho: 18);
+    Text infoSala = elementoTexto.escreverTexto(texto: '$nome\n$quantidade Lugares', expessura: FontWeight.bold, tamanho: 18);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
     Padding botaoExtra = Padding(padding: EdgeInsetsDirectional.zero);
       
-    return _Card(context, caixaFoto, foto, 150, infoSala, id, botaoExtra, (){});
+    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, (){}, () {});
   }
 
   cardConjunto({
@@ -145,9 +144,11 @@ class ElementoCard {
     required String subtitulo,
     required String foto,
     required String id,
-    required Function deletarConjunto
+    required Function deletarConjunto,
+    required Function editarConjunto,
+    required Function verSalas
   }) {
-    Text infoConjunto = elementoTexto.escreverTexto(texto: '$nome\n$subtitulo', expessura: FontWeight.bold, tamanho: 18);
+    Text infoConjunto = elementoTexto.escreverTexto(texto: '$nome\n$subtitulo', expessura: FontWeight.bold, tamanho: 20);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
     Padding botaoExtra =
       Padding(
@@ -155,7 +156,7 @@ class ElementoCard {
           EdgeInsetsDirectional.symmetric(horizontal: 5),
         child: ElevatedButton(
           onPressed: () {
-            print('Ver Salas');
+            verSalas();
           },
           child: elementoTexto.escreverTexto(texto: 'Ver Salas', corFonte: Cores.black),
           style: ElevatedButton.styleFrom(
@@ -164,6 +165,8 @@ class ElementoCard {
         )
       );
 
-    return _Card(context, caixaFoto, foto, 100, infoConjunto, id, botaoExtra, deletarConjunto);
+    editarConjunto;
+
+    return _Card(context, caixaFoto, foto, 100, infoConjunto, id, botaoExtra, deletarConjunto, editarConjunto);
   }
 }

@@ -33,7 +33,7 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color,
                             '        Salas        ',
                             Icons.settings,
                             Color.fromARGB(255, 233, 226, 226),
-                            '/gerenciarSalas'),
+                            '/gerenciarConjunto'),
                         // Adicione mais botões personalizados conforme necessário
                       ],
                     ),
