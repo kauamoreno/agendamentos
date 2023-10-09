@@ -50,4 +50,42 @@ class FormsPopUp {
 
     return _forms(context, colunaForms, funcaoCreate, setState);
   }
+
+  formsConjunto({
+    required BuildContext context, 
+    required TextEditingController tituloController, 
+    required TextEditingController subtituloController,
+    required Function funcaoCreate,
+    required Function setState
+  }) {
+    Column colunaForms = 
+      Column(
+        children: [
+          textFieldComponent.textFieldCustom(label: 'Nome do Conjunto', icone: Icons.abc, hint: 'Ex. Mecânica, TI, Elétrica', controller: tituloController),
+          textFieldComponent.textFieldCustom(label: 'Descrição do Conjunto', icone: Icons.mail, hint: 'Ex. Salas que contém "tal" objeto', controller: subtituloController)
+        ],
+      );
+
+    return _forms(context, colunaForms, funcaoCreate, setState);
+  }
+
+  formsSala({
+    required BuildContext context,
+    required TextEditingController nomeSalaController,
+    required Function funcaoCreate,
+    required Function setState,
+    required String valorSelecionado,
+    required Function array
+  }) {
+
+    Column colunaForms =
+      Column(
+        children: [
+          textFieldComponent.textFieldCustom(label: 'Nome do Conjunto', icone: Icons.abc, hint: 'Ex. Mecânica, TI, Elétrica', controller: nomeSalaController),
+          //Algum tipo de lista para preencher com o conjunto de salas
+        ],
+      );
+
+    return _forms(context, colunaForms, funcaoCreate, setState);
+  }
 }

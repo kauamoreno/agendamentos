@@ -4,7 +4,7 @@ import 'Texto.dart';
 
 class ElementoCard {
   ElementoTexto elementoTexto = ElementoTexto();
-  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra) {
+  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       elevation: 4,
@@ -76,7 +76,7 @@ class ElementoCard {
                                 TextButton(
                                   child: elementoTexto.escreverTexto(texto: 'EXCLUIR', corFonte: Cores.red),
                                   onPressed: () {
-                                    
+                                    funcaoDeletar();
                                     print(id);
                                     Navigator.pop(context);
                                   }
@@ -121,7 +121,7 @@ class ElementoCard {
         )
       );
       
-    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra);
+    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, (){});
   }
   
   cardSala({
@@ -136,7 +136,7 @@ class ElementoCard {
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
     Padding botaoExtra = Padding(padding: EdgeInsetsDirectional.zero);
       
-    return _Card(context, caixaFoto, foto, 150, infoSala, id, botaoExtra);
+    return _Card(context, caixaFoto, foto, 150, infoSala, id, botaoExtra, (){});
   }
 
   cardConjunto({
@@ -144,7 +144,8 @@ class ElementoCard {
     required String nome,
     required String subtitulo,
     required String foto,
-    required String id
+    required String id,
+    required Function deletarConjunto
   }) {
     Text infoConjunto = elementoTexto.escreverTexto(texto: '$nome\n$subtitulo', expessura: FontWeight.bold, tamanho: 18);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
@@ -163,6 +164,6 @@ class ElementoCard {
         )
       );
 
-    return _Card(context, caixaFoto, foto, 100, infoConjunto, id, botaoExtra);
+    return _Card(context, caixaFoto, foto, 100, infoConjunto, id, botaoExtra, deletarConjunto);
   }
 }
