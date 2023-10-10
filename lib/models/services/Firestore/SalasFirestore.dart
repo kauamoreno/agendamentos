@@ -9,12 +9,13 @@ class SalasFirestore {
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('salaConjunto');
 
   //CREATE
-  criarSalaConjunto(String nomeConjunto) {
+  criarSalaConjunto(String nomeConjunto, String subTitulo) {
     final salaConjunto = {
-      "nome": nomeConjunto,
-      "salas": []
+      "nomeConjunto": nomeConjunto,
+      "subTitulo": subTitulo,
+      "Salas": []
     };
-    db.doc(nomeConjunto).set(salaConjunto);
+    db.doc().set(salaConjunto);
   }
 
   criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala) {
@@ -36,22 +37,22 @@ class SalasFirestore {
   criarAgendamento({
     required BuildContext context,
     required String nomeConjunto,
-    required String nomeSala,
     required String titulo,
+    required String nomeSala,
     String? nota,
     required String data,
     required String timeInicial,
     required String timeFinal,
-    required String lembrete,
     required String nomeProfessor,
+    required String idProfessor,
   }) async {
     final agendamento = {
+      "idProfessor": idProfessor,
       "titulo": titulo,
       "nota": nota,
       "data": data,
       "timeInicial": timeInicial,
       "timeFinal": timeFinal,
-      "lembrete": lembrete,
       "professor": nomeProfessor,
     };
 
@@ -97,6 +98,13 @@ class SalasFirestore {
     );
   }
 
+  deletarConjunto(BuildContext context, String idConjunto) {
+    db.doc(idConjunto).delete().then(
+      (doc) => mensagemSnackBar.sucesso(context, "Conjunto Deletado"),
+      onError: (e) => mensagemSnackBar.erro(context, "Erro ao Excluir o Conjunto")
+    );
+  }
+
   //READ TODAS SALACONJUNTO 
   Future<QuerySnapshot<Map<String, dynamic>>?> getSalasConjunto() async {
     try {
@@ -106,6 +114,21 @@ class SalasFirestore {
       print("Erro: $e");
       return null;
     }
+  }
+
+  // Cria uma função para atualizar o nomeConjunto e o subTitulo
+  atualizarSalaConjunto(BuildContext context, String id, String nomeConjunto, String subTitulo) {
+    final dadosAtualizados = {
+      "nomeConjunto": nomeConjunto,
+      "subTitulo": subTitulo,
+    };
+    // Obtém a referência ao documento pelo id
+    var docRef = db.doc(id);
+    // Atualiza os campos usando o método update()
+    docRef.update(dadosAtualizados).then(
+      (doc) => mensagemSnackBar.sucesso(context, "Conjunto Atualizado"),
+      onError: (e) => mensagemSnackBar.erro(context, "Erro ao Atualizar o Conjunto")
+    );
   }
 
 }
