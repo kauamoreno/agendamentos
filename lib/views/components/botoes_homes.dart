@@ -15,38 +15,26 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color,
             context: context,
             builder: (BuildContext context) {
               return Center(
-                child: SingleChildScrollView(
-                  child: Container(
-                    constraints: BoxConstraints(
-                        maxHeight: MediaQuery.of(context).size.height * 0.6),
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    child: AlertDialog(
-                      title: Text('Gerenciar:'),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          BotoesHome(
-                              context,
-                              ' Professores ',
-                              Icons.people_rounded,
-                              Color.fromARGB(255, 233, 226, 226),
-                              '/gerenciarProfessores'),
-                          BotoesHome(
-                              context,
-                              '       Salas       ',
-                              Icons.room,
-                              Color.fromARGB(255, 233, 226, 226),
-                              '/gerenciarSalas'),
-                          // Adicione mais botões personalizados conforme necessário
-                        ],
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('Fechar'),
-                        ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.width * 0.8,
+                  child: AlertDialog(
+                    title: Text('Gerenciar:'),
+                    content: Row(
+                      children: [
+                        BotoesHome(
+                            context,
+                            ' Professores ',
+                            Icons.settings,
+                            Color.fromARGB(255, 233, 226, 226),
+                            '/gerenciarProfessores'),
+                        BotoesHome(
+                            context,
+                            '        Salas        ',
+                            Icons.settings,
+                            Color.fromARGB(255, 233, 226, 226),
+                            '/gerenciarConjunto'),
+                        // Adicione mais botões personalizados conforme necessário
                       ],
                     ),
                   ),

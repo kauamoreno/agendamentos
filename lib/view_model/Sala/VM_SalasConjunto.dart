@@ -1,4 +1,5 @@
 import 'package:agendamentos/views/components/Cards.dart';
+import 'package:agendamentos/views/components/Forms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../models/services/Firestore/SalasFirestore.dart';
@@ -41,7 +42,8 @@ class VM_SalasConjunto {
   }
 
   Future<List<Widget>> gerenciarSalasConjunto(BuildContext context) async {
-
+    final _nomeConjuntoController = TextEditingController();
+    final _subTituloConjuntoController = TextEditingController();
     QuerySnapshot<Map<String, dynamic>>? salasConjuntoWidget = await sala.getSalasConjunto();
     List<Widget> cards = [];
 
@@ -60,6 +62,22 @@ class VM_SalasConjunto {
           deletarConjunto: () {
             excluirConjunto(context, doc.id);
           },
+          editarConjunto: () {
+            _nomeConjuntoController.text = data['nomeConjunto'];
+            _subTituloConjuntoController.text = data['subTitulo'];
+            FormsPopUp().formsConjunto(
+              context: context,
+              tituloController: _nomeConjuntoController,
+              subtituloController: _subTituloConjuntoController,
+              funcaoCreate: () {
+                atualizarConjunto(context, doc.id, _nomeConjuntoController.text, _subTituloConjuntoController.text);
+              },
+              setState: (){}
+            );
+          },
+          verSalas: () {
+            Navigator.of(context).pushReplacementNamed('/gerenciarSalas', arguments: doc.id);
+          }
         );
         // var salasConjunto = ListTile(
         //   leading: Image.network('https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg'),
