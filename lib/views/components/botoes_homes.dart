@@ -15,36 +15,40 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color,
             context: context,
             builder: (BuildContext context) {
               return Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.width * 0.8,
-                  child: AlertDialog(
-                    title: Text('Gerenciar:'),
-                    content: Row(
-                      children: [
-                        BotoesHome(
-                            context,
-                            ' Professores ',
-                            Icons.settings,
-                            Color.fromARGB(255, 233, 226, 226),
-                            '/gerenciarProfessores'),
-                        BotoesHome(
-                            context,
-                            '        Salas        ',
-                            Icons.settings,
-                            Color.fromARGB(255, 233, 226, 226),
-                            '/gerenciarSalas'),
-                        // Adicione mais botões personalizados conforme necessário
+                child: SingleChildScrollView(
+                  child: Container(
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height * 0.6),
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: AlertDialog(
+                      title: Text('Gerenciar:'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          BotoesHome(
+                              context,
+                              ' Professores ',
+                              Icons.people_rounded,
+                              Color.fromARGB(255, 233, 226, 226),
+                              '/gerenciarProfessores'),
+                          BotoesHome(
+                              context,
+                              '       Salas       ',
+                              Icons.room,
+                              Color.fromARGB(255, 233, 226, 226),
+                              '/gerenciarSalas'),
+                          // Adicione mais botões personalizados conforme necessário
+                        ],
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Fechar'),
+                        ),
                       ],
                     ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('Fechar'),
-                      ),
-                    ],
                   ),
                 ),
               );
@@ -72,8 +76,8 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: 100, // Largura do botão
-              height: 100, // Altura do botão
+              width: 85, // Largura do botão
+              height: 85, // Altura do botão
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.red, // Cor do círculo
@@ -81,7 +85,7 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color,
               child: Center(
                 child: Icon(
                   icon,
-                  size: 48.0,
+                  size: 45,
                   color: Colors.white, // Cor do ícone
                 ),
               ),
