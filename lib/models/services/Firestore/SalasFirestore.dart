@@ -20,16 +20,17 @@ class SalasFirestore {
 
   criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala) {
     final sala = Sala(
-      capacidade: capacidade, 
-      nomeSala: nomeSala, 
+      capacidade: capacidade,
+      nome: nomeSala,
       agendamentos: []
     );
     
     db.doc(nomeConjunto).update({
-      'salas': FieldValue.arrayUnion([sala]),
+      'Salas': FieldValue.arrayUnion([sala.toMap()]),
     }).then((_) {
       mensagemSnackBar.sucesso(context, "Sala adicionada com sucesso!");
     }).catchError((error) {
+      print(error);
       mensagemSnackBar.erro(context, "Erro ao adicionar a sala: $error");
     });
   }

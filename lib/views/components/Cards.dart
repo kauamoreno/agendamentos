@@ -29,66 +29,77 @@ class ElementoCard {
             ),
           ),
           Expanded(
-            child: Column(
+            child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding:
-                    EdgeInsetsDirectional.fromSTEB(0, 0, 5, 5),
-                  child: label
+                Expanded(
+                  flex: 10,
+                  child: Padding(
+                    padding:
+                      EdgeInsetsDirectional.fromSTEB(0, 0, 5, 5),
+                    child: label
+                  ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    botaoExtra,
-                    Padding(
-                      padding: 
-                        EdgeInsetsDirectional.symmetric(horizontal: 5),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          funcaoEditar();
-                        },
-                        child: elementoTexto.escreverTexto(texto: 'Editar', corFonte: Cores.white),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Cores.azul
-                        )
-                      )
-                    ),
-                    Padding(
-                      padding: 
-                        EdgeInsetsDirectional.symmetric(horizontal: 5),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(context: context, builder: (context) => 
-                            AlertDialog(
-                              content: Form(
-                                child: elementoTexto.escreverTexto(
-                                  texto: 'Deseja excluir este item permanentemente?'
-                                )
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: elementoTexto.escreverTexto(texto: 'Cancelar', corFonte: Cores.red),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                TextButton(
-                                  child: elementoTexto.escreverTexto(texto: 'EXCLUIR', corFonte: Cores.red),
-                                  onPressed: () {
-                                    funcaoDeletar();
-                                    print(id);
-                                    Navigator.pop(context);
-                                  }
-                                ), 
-                              ],
+                Expanded(
+                  flex: 2,
+                  child: PopupMenuButton(
+                    icon: Icon(Icons.more_vert),
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Padding(
+                          padding: 
+                            EdgeInsetsDirectional.symmetric(horizontal: 5),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              funcaoEditar();
+                            },
+                            child: elementoTexto.escreverTexto(texto: 'Editar', corFonte: Cores.white),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Cores.azul
                             )
-                          );
-                        },
-                        child: elementoTexto.escreverTexto(texto: 'Excluir', corFonte: Cores.white)
-                      )
-                    ),
-                  ],
+                          )
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Padding(
+                          padding: 
+                            EdgeInsetsDirectional.symmetric(horizontal: 5),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(context: context, builder: (context) => 
+                                AlertDialog(
+                                  content: Form(
+                                    child: elementoTexto.escreverTexto(
+                                      texto: 'Deseja excluir este item permanentemente?'
+                                    )
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: elementoTexto.escreverTexto(texto: 'Cancelar', corFonte: Cores.red),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                    TextButton(
+                                      child: elementoTexto.escreverTexto(texto: 'EXCLUIR', corFonte: Cores.red),
+                                      onPressed: () {
+                                        funcaoDeletar();
+                                        print(id);
+                                        Navigator.pop(context);
+                                      }
+                                    ), 
+                                  ],
+                                )
+                              );
+                            },
+                            child: elementoTexto.escreverTexto(texto: 'Excluir', corFonte: Cores.white)
+                          )
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: botaoExtra,
+                      ),
+                    ]
+                  ),
                 ),
               ],
             ),
