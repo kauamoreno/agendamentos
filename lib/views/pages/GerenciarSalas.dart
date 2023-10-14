@@ -1,4 +1,5 @@
 import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
+import 'package:agendamentos/views/components/Forms.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
 import '../components/CustomAppBar.dart';
@@ -21,8 +22,8 @@ class _GerenciaSalaState extends State<GerenciaSala> {
 
   ElementoTexto elementoTexto = ElementoTexto();
   TextFieldComponent textFieldComponent = TextFieldComponent();
+  FormsPopUp formsPopUp = FormsPopUp();
   final _nomeSalaController = TextEditingController();
-  final _tipoSalaController = TextEditingController();
   final _quantidadeController = TextEditingController();
   late VM_Salas vm;
 
@@ -46,10 +47,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
             return ErrorPage(erroMensagem: snapshot.error);
 
           } else {
-        
-        
-        
-        
+
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -108,32 +106,23 @@ class _GerenciaSalaState extends State<GerenciaSala> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(context: context, builder: (context) => 
-            AlertDialog(
-              content: Form(
-                child: Container(
-                  height: 200,
-                  child: Column(
-                    children: [
-                      textFieldComponent.textFieldCustom(label: 'Nome da Sala', icone: Icons.abc, hint: 'Sala 1', controller: _nomeSalaController),
-                      textFieldComponent.textFieldCustom(label: 'Tipo de Sala', icone: Icons.room, hint: 'Sala de Aula', controller: _tipoSalaController),
-                      textFieldComponent.textFieldCustom(label: 'Quantidade', icone: Icons.person, hint: '32 Lugares', controller: _quantidadeController, tipoTeclado: TextInputType.number)
-                    ],
-                  ),
-                )
-              ),
-              actions: [
-                TextButton(
-                  child: const Text('Cancelar'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                TextButton(
-                  child: const Text('Enviar'),
-                  onPressed: () {
-                  }
-                ), 
-              ],
-            )
+          formsPopUp.formsSala(
+            context: context, 
+            nomeSalaController: _nomeSalaController,
+            quantidadeController: _quantidadeController, 
+            uidConjunto: vm.toString(),
+            funcaoCreate: () {
+              vm.criarSala(
+                context, 
+                _quantidadeController.text, 
+                _nomeSalaController.text
+              );
+            }, 
+            setState: () {
+              setState(() {});
+            }, 
+            // valorSelecionado: valorSelecionado, 
+            // array: array, 
           );
         },
 
