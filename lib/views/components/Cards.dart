@@ -140,13 +140,15 @@ class ElementoCard {
     required String nome,
     required int quantidade,
     required String foto,
-    required String id
+    required String id,
+    required Function deletarSala,
+    required Function editarSala
   }) {
     Text infoSala = elementoTexto.escreverTexto(texto: '$nome\n$quantidade Lugares', expessura: FontWeight.bold, tamanho: 18);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
     Padding botaoExtra = Padding(padding: EdgeInsetsDirectional.zero);
       
-    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, (){}, () {});
+    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, deletarSala, editarSala);
   }
 
   cardConjunto({
