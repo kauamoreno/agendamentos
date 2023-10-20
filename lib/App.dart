@@ -1,3 +1,4 @@
+import 'package:agendamentos/views/pages/Agenda/MinhasAgendas.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:agendamentos/views/pages/GerenciarConjunto.dart';
 import 'package:agendamentos/views/pages/GerenciarSalas.dart';
@@ -50,6 +51,7 @@ class App extends StatelessWidget {
         '/gerenciarConjunto': (context) => const GerenciaConjunto(),
         '/gerenciarSalas': (context) => const GerenciaSala(),
         '/salasConjunto': (context) => const SalasConjunto(),
+        '/minhasAgendas': (context) => const MinhasAgendas(),
         '/calendario': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is Map<String, String>) {

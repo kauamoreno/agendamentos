@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'CustomAppBar.dart';
 
-BotoesHome(BuildContext context, String text, IconData icon, Color color, String route) {
+BotoesHome(BuildContext context, String text, IconData icon, Color color, String route, [String? args]) {
   return GestureDetector(
     onTap: () async{
       if (route == '/feedback') {
