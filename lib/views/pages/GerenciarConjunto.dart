@@ -3,6 +3,7 @@ import 'package:agendamentos/views/components/Cards.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
 import '../components/CustomAppBar.dart';
+import '../components/Forms.dart';
 import '../components/TextFieldComponent.dart';
 import '../components/Texto.dart';
 import '../constants/Cores.dart';
@@ -19,8 +20,9 @@ class _GerenciaConjuntoState extends State<GerenciaConjunto> {
   ElementoTexto elementoTexto = ElementoTexto();
   TextFieldComponent textFieldComponent = TextFieldComponent();
   final _nomeConjuntoController = TextEditingController();
-  final _tipoConjuntoController = TextEditingController();
+  final _subTituloConjuntoController = TextEditingController();
   ElementoCard cardElemento = ElementoCard();
+  FormsPopUp formsPopUp = FormsPopUp();
 
   @override
   Widget build(BuildContext context) {
@@ -96,32 +98,18 @@ class _GerenciaConjuntoState extends State<GerenciaConjunto> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(context: context, builder: (context) => 
-            AlertDialog(
-              content: Form(
-                child: Container(
-                  height: 200,
-                  child: Column(
-                    children: [
-                      textFieldComponent.textFieldCustom(label: 'Nome do Conjunto', icone: Icons.abc, hint: 'Ex. Mecânica, TI, Elétrica', controller: _nomeConjuntoController),
-                      textFieldComponent.textFieldCustom(label: 'Descrição do Conjunto', icone: Icons.room, hint: 'Ex. Salas que contém X maquina', controller: _tipoConjuntoController),
-                    ],
-                  ),
-                )
-              ),
-              actions: [
-                TextButton(
-                  child: const Text('Cancelar'),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                TextButton(
-                  child: const Text('Enviar'),
-                  onPressed: () {
-                    print('criar');
-                  }
-                ), 
-              ],
-            )
+          formsPopUp.formsConjunto(
+            context: context,
+            tituloController: _nomeConjuntoController,
+            subtituloController: _subTituloConjuntoController,
+            funcaoCreate: (){
+              VM_SalasConjunto().cadastrarConjunto(
+                context,
+                _nomeConjuntoController.text,
+                _subTituloConjuntoController.text
+              );
+            },
+            setState: () {setState(() {});}
           );
         },
         

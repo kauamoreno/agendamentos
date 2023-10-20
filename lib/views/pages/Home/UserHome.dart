@@ -24,7 +24,7 @@ class _UserHomeState extends State<UserHome> {
             BotoesHome(context, 'Notícias', Icons.new_releases,Colors.grey, '/noticias'),
           ],
         ),
-      ),
+      )
     );
   }
 }

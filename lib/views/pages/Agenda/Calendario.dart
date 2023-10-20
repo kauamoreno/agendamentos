@@ -34,7 +34,7 @@ class _CalendarioState extends State<Calendario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: "Calendário"),
+      appBar: const CustomAppBar(titulo: "Calendário", voltar: true,),
       body: Column(
         children: [
           addAgendamento(),

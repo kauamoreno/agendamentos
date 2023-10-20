@@ -49,7 +49,6 @@ class App extends StatelessWidget {
         '/escolhaDeGerenciamento': (context) => TelaEscolhaGerenciamento(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/gerenciarConjunto': (context) => const GerenciaConjunto(),
-        '/gerenciarSalas': (context) => const GerenciaSala(),
         '/salasConjunto': (context) => const SalasConjunto(),
         '/minhasAgendas': (context) => const MinhasAgendas(),
         '/calendario': (context) {
@@ -76,6 +75,15 @@ class App extends StatelessWidget {
           }
           return const ErrorPage(erroMensagem: 'Error');
         },
+
+        '/gerenciarSalas': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if(args is String) {
+            return GerenciaSala(nomeConjunto: args);
+          }
+          return const ErrorPage(erroMensagem: 'Error'); 
+        },
+
         '/salas': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           if(args is String) {
@@ -83,6 +91,7 @@ class App extends StatelessWidget {
           }
           return const ErrorPage(erroMensagem: 'Error');
         }, 
+
         '/erro': (context) { 
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is bool) {
