@@ -1,4 +1,5 @@
 import 'package:agendamentos/view_model/Agenda/VM_Calendario.dart';
+import 'package:agendamentos/views/constants/Cores.dart';
 import 'package:agendamentos/views/pages/Agenda/MinhasAgendas.dart';
 import 'package:flutter/material.dart';
 import '../../constants/Texto.dart';
@@ -181,6 +182,7 @@ class CardAgendamento {
 
           actions: <Widget>[
             ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Cores.azul)),
               onPressed: () {
                 Navigator.of(context).pop(); // Fecha o modal quando o botão é clicado
               },

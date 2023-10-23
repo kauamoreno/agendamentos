@@ -1,6 +1,6 @@
 import 'package:agendamentos/models/services/Autenticacao.dart';
 import 'package:agendamentos/models/services/Firestore/SalasFirestore.dart';
-import 'package:agendamentos/views/components/CardAgendamento.dart';
+import 'package:agendamentos/views/components/Cards/CardAgendamento.dart';
 import 'package:agendamentos/views/components/Cards/Cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
