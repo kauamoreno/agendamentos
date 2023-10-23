@@ -3,7 +3,7 @@ import 'package:agendamentos/view_model/Agenda/VM_AddAgendamentos.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:agendamentos/views/components/AgendaWidgets/botao.dart';
-import 'package:agendamentos/views/components/AgendaWidgets/inputs.dart';
+import 'package:agendamentos/views/components/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -62,19 +62,17 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                 "Agendamento",
                 style: headingStyle,
               ),
-              InputAgendamentos(
+              Input(
                 titulo: "Titulo *",
                 dica: "Digite seu titulo...",
-                controller: _tituloController, 
-                desativado: false,
+                controller: _tituloController,
               ),
-              InputAgendamentos(
+              Input(
                 titulo: "Nota",
                 dica: "Digite sua nota...",
-                controller: _notaController, 
-                desativado: false,
+                controller: _notaController,
               ),
-              InputAgendamentos(
+              Input(
                 desativado: true,
                 titulo: "Data",
                 dica: DateFormat('dd/MM/yyyy').format(dataSelecionada), 
@@ -93,7 +91,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
               Row(
                 children: [
                   Expanded(
-                    child: InputAgendamentos(
+                    child: Input(
                       desativado: true,
                       titulo: "Tempo Inicial",
                       dica: tempoInicial,
@@ -113,7 +111,7 @@ class _AddAgendamentoState extends State<AddAgendamento> {
                   const SizedBox(width: 12),
 
                   Expanded(
-                    child: InputAgendamentos(
+                    child: Input(
                       desativado: true,
                       titulo: "Tempo Final",
                       dica: tempoFinal,

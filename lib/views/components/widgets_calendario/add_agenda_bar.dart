@@ -1,7 +1,7 @@
 import 'package:agendamentos/views/components/CustomAppBar.dart';
 import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:agendamentos/views/components/widgets_calendario/botao.dart';
-import 'package:agendamentos/views/components/widgets_calendario/inputs.dart';
+import 'package:agendamentos/views/components/inputs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -53,17 +53,17 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
                 style: headingStyle,
               ),
               //CRUD DO AGENDAMENTO
-              InputAgendamentos(
+              Input(
                 titulo: "Titulo",
                 dica: "Digite seu titulo...",
                 controller: _tituloController,
               ),
-              InputAgendamentos(
+              Input(
                 titulo: "Nota",
                 dica: "Digite sua nota...",
                 controller: _notaController,
               ),
-              InputAgendamentos(
+              Input(
                 titulo: "Data",
                 dica: DateFormat.yMd().format(dataSelecionada),
                 widget: IconButton(
@@ -79,7 +79,7 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
               Row(
                 children: [
                   Expanded(
-                      child: InputAgendamentos(
+                      child: Input(
                     titulo: "Tempo Inicial",
                     dica: tempoInicial,
                     widget: IconButton(
@@ -96,7 +96,7 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
                     width: 12,
                   ),
                   Expanded(
-                      child: InputAgendamentos(
+                      child: Input(
                     titulo: "Tempo Final",
                     dica: tempoFinal,
                     widget: IconButton(
@@ -111,7 +111,7 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
                   ))
                 ],
               ),
-              InputAgendamentos(
+              Input(
                   titulo: "Lembrete",
                   dica: "$_lenbreteSelecionado minutos restantes",
                   widget: DropdownButton(
@@ -138,7 +138,7 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
                       );
                     }).toList(),
                   )),
-              InputAgendamentos(
+              Input(
                   titulo: "Repetir",
                   dica: "$_lenbreteSelecionadoRepetir",
                   widget: DropdownButton(
