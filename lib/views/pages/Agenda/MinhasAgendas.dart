@@ -18,7 +18,7 @@ class _MinhasAgendasState extends State<MinhasAgendas> {
     return Scaffold(
       appBar: const CustomAppBar(titulo: 'Minhas Agendas', voltar: true),
       body: FutureBuilder(
-        future: vm.minhasAgendas(),
+        future: vm.minhasAgendas(context),
         builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
