@@ -1,19 +1,18 @@
 import 'package:agendamentos/views/pages/Agenda/MinhasAgendas.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
-import 'package:agendamentos/views/pages/GerenciarConjunto.dart';
-import 'package:agendamentos/views/pages/GerenciarSalas.dart';
-import 'package:agendamentos/views/pages/GerenciarUser.dart';
-import 'package:agendamentos/views/pages/Home/AdmHome.dart';
-import 'package:agendamentos/views/pages/Home/UserHome.dart';
+import 'package:agendamentos/views/pages/Adm/Gerenciar/GerenciarConjunto.dart';
+import 'package:agendamentos/views/pages/Adm/Gerenciar/GerenciarSalas.dart';
+import 'package:agendamentos/views/pages/Adm/Gerenciar/GerenciarUser.dart';
+import 'package:agendamentos/views/pages/Adm/AdmHome.dart';
+import 'package:agendamentos/views/pages/Usuarios/UserHome.dart';
 import 'package:agendamentos/views/pages/Sala/SalasConjunto.dart';
 import 'package:agendamentos/views/pages/TelaLogin.dart';
 import 'package:agendamentos/views/pages/Agenda/AddAgendamento.dart';
-import 'package:agendamentos/views/pages/TelaSalas.dart';
+import 'package:agendamentos/views/pages/Sala/TelaSalas.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './views/pages/Relatorios.dart';
+import 'views/pages/Adm/Relatorios.dart';
 import 'views/pages/Agenda/Calendario.dart';
-import 'package:agendamentos/views/pages/Tela_Escolha_Gerenciamento.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
@@ -46,7 +45,6 @@ class App extends StatelessWidget {
         '/userHome':(context) => const UserHome(),
         '/admHome':(context) => const AdmHome(),
         '/relatorio': (context) => RelatoriosPage(),
-        '/escolhaDeGerenciamento': (context) => TelaEscolhaGerenciamento(),
         '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/gerenciarConjunto': (context) => const GerenciaConjunto(),
         '/salasConjunto': (context) => const SalasConjunto(),

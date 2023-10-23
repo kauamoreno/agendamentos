@@ -2,10 +2,9 @@ import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:agendamentos/views/components/Forms.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
-import '../components/CustomAppBar.dart';
-import '../components/TextFieldComponent.dart';
-import '../components/Texto.dart';
-import '../constants/Cores.dart';
+import '../../../components/CustomAppBar.dart';
+import '../../../components/TextFieldComponent.dart';
+import '../../../constants/Cores.dart';
 
 class GerenciaSala extends StatefulWidget {
   final String nomeConjunto;
@@ -20,7 +19,6 @@ class GerenciaSala extends StatefulWidget {
 
 class _GerenciaSalaState extends State<GerenciaSala> {
 
-  ElementoTexto elementoTexto = ElementoTexto();
   TextFieldComponent textFieldComponent = TextFieldComponent();
   FormsPopUp formsPopUp = FormsPopUp();
   final _nomeSalaController = TextEditingController();
@@ -71,13 +69,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                          child: elementoTexto.escreverTexto(
-                            texto: 'Gerenciar\nSalas',
-                            alinhamento: TextAlign.center,
-                            tamanho: 25,
-                            expessura: FontWeight.bold,
-                            corFonte: Cores.letraCard
-                          ),
+                          child: Text('Gerenciar\nSalas', textAlign: TextAlign.center, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Cores.letraCard))
                         ),
                       ],
                     ),

@@ -1,11 +1,10 @@
 import 'package:agendamentos/view_model/Usuarios/VM_Usuarios.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
-import 'package:agendamentos/views/components/Texto.dart';
-import '../components/Cards.dart';
-import '../components/Forms.dart';
+import '../../../components/Cards/Cards.dart';
+import '../../../components/Forms.dart';
 import 'package:agendamentos/views/constants/Cores.dart';
 import 'package:flutter/material.dart';
-import './Erros/ErrorPage.dart';
+import '../../Erros/ErrorPage.dart';
 
 class GerenciarProf extends StatefulWidget {
   const GerenciarProf({super.key});
@@ -15,7 +14,7 @@ class GerenciarProf extends StatefulWidget {
 }
 
 class _GerenciarProfState extends State<GerenciarProf> {
-  ElementoTexto elementoTexto = ElementoTexto();
+
   FormsPopUp formsPopUp = FormsPopUp();
   ElementoCard cardElemento = ElementoCard();
   final _nomeProfController = TextEditingController();
@@ -60,13 +59,7 @@ class _GerenciarProfState extends State<GerenciarProf> {
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                          child: elementoTexto.escreverTexto(
-                            texto: 'Gerenciar\nProfessores',
-                            alinhamento: TextAlign.center,
-                            tamanho: 20,
-                            expessura: FontWeight.bold,
-                            corFonte: Cores.letraCard
-                          ),
+                          child: Text('Gerenciar\nProfessores', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Cores.letraCard))
                         ),
                       ],
                     ),

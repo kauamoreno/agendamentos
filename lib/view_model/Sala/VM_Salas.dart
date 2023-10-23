@@ -1,8 +1,8 @@
 import 'package:agendamentos/models/services/Firestore/SalasFirestore.dart';
 import 'package:agendamentos/view_model/SnackBarViewModel.dart';
-import 'package:agendamentos/views/components/Cards.dart';
+import 'package:agendamentos/views/components/Cards/Cards.dart';
 import 'package:agendamentos/views/components/Forms.dart';
-import 'package:agendamentos/views/components/SalasCard.dart';
+import 'package:agendamentos/views/components/Cards/SalasCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
