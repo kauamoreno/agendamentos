@@ -1,12 +1,11 @@
 import 'package:agendamentos/view_model/Sala/VM_SalasConjunto.dart';
-import 'package:agendamentos/views/components/Cards.dart';
+import 'package:agendamentos/views/components/Cards/Cards.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
-import '../components/CustomAppBar.dart';
-import '../components/Forms.dart';
-import '../components/TextFieldComponent.dart';
-import '../components/Texto.dart';
-import '../constants/Cores.dart';
+import '../../../components/CustomAppBar.dart';
+import '../../../components/Forms.dart';
+import '../../../components/TextFieldComponent.dart';
+import '../../../constants/Cores.dart';
 
 class GerenciaConjunto extends StatefulWidget {
   const GerenciaConjunto({super.key});
@@ -17,7 +16,6 @@ class GerenciaConjunto extends StatefulWidget {
 
 class _GerenciaConjuntoState extends State<GerenciaConjunto> {
 
-  ElementoTexto elementoTexto = ElementoTexto();
   TextFieldComponent textFieldComponent = TextFieldComponent();
   final _nomeConjuntoController = TextEditingController();
   final _subTituloConjuntoController = TextEditingController();
@@ -61,13 +59,7 @@ class _GerenciaConjuntoState extends State<GerenciaConjunto> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                          child: elementoTexto.escreverTexto(
-                            texto: 'Gerenciar Conjunto\nde Salas',
-                            alinhamento: TextAlign.center,
-                            tamanho: 25,
-                            expessura: FontWeight.bold,
-                            corFonte: Cores.letraCard
-                          ),
+                          child: Text('Gerenciar Conjunto\nde Salas', textAlign: TextAlign.center, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Cores.letraCard))
                         ),
                       ],
                     ),

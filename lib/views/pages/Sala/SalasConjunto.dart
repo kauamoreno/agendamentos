@@ -1,5 +1,5 @@
 import 'package:agendamentos/view_model/Sala/VM_SalasConjunto.dart';
-import 'package:agendamentos/views/components/SalasCard.dart';
+import 'package:agendamentos/views/components/Cards/SalasCard.dart';
 import 'package:flutter/material.dart';
 import '../../components/TextFieldComponent.dart';
 import '../../components/CustomAppBar.dart';

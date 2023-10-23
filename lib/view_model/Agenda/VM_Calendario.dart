@@ -1,5 +1,5 @@
 import 'package:agendamentos/view_model/SnackBarViewModel.dart';
-import 'package:agendamentos/views/components/CardAgendamento.dart';
+import 'package:agendamentos/views/components/Cards/CardAgendamento.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';

@@ -3,7 +3,7 @@
 import 'package:agendamentos/models/services/Autenticacao.dart';
 import 'package:agendamentos/models/services/Firestore/UsuarioFirestore.dart';
 import 'package:agendamentos/view_model/SnackBarViewModel.dart';
-import 'package:agendamentos/views/components/Cards.dart';
+import 'package:agendamentos/views/components/Cards/Cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validation/form_validation.dart';

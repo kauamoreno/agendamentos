@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/Cores.dart';
-import 'Texto.dart';
+import '../../constants/Cores.dart';
 
 class SalasCard {
 
@@ -37,8 +36,8 @@ class SalasCard {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ElementoTexto().escreverTexto(texto: titulo, tamanho: 25, corFonte: Cores.letraCard),
-                        ElementoTexto().escreverTexto(texto: subTitulo, tamanho: 18, corFonte: Cores.letraCard)
+                        Text('$titulo', style: TextStyle(fontSize: 25, color: Cores.letraCard)),
+                        Text('$subTitulo', style: TextStyle(fontSize: 18, color: Cores.letraCard))
                       ],
                     ),
                   ),

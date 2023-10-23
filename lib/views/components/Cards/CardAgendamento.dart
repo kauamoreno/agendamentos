@@ -1,7 +1,7 @@
 import 'package:agendamentos/view_model/Agenda/VM_Calendario.dart';
 import 'package:agendamentos/views/pages/Agenda/MinhasAgendas.dart';
 import 'package:flutter/material.dart';
-import '../constants/Texto.dart';
+import '../../constants/Texto.dart';
 
 class CardAgendamento {
   Widget getCard(
