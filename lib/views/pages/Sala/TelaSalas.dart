@@ -1,9 +1,9 @@
 import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
-import 'package:agendamentos/views/components/SalasCard.dart';
+import 'package:agendamentos/views/components/Cards/SalasCard.dart';
 import 'package:flutter/material.dart';
-import '../components/TextFieldComponent.dart';
-import '../components/CustomAppBar.dart';
-import 'Erros/ErrorPage.dart';
+import '../../components/TextFieldComponent.dart';
+import '../../components/CustomAppBar.dart';
+import '../Erros/ErrorPage.dart';
 
 class TelaSalas extends StatefulWidget {
   final String nomeConjunto;

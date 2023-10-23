@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/Texto.dart';
+import '../../constants/Texto.dart';
 
 class CardAgendamento {
   Widget getCard(

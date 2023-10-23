@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import '../constants/Cores.dart';
-import 'Texto.dart';
+import '../../constants/Cores.dart';
 
 class ElementoCard {
-  ElementoTexto elementoTexto = ElementoTexto();
   _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar, Function funcaoEditar) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -54,7 +52,7 @@ class ElementoCard {
                             onPressed: () {
                               funcaoEditar();
                             },
-                            child: elementoTexto.escreverTexto(texto: 'Editar', corFonte: Cores.white),
+                            child: Text('Editar', style: TextStyle(fontSize: 16)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Cores.azul
                             )
@@ -70,17 +68,15 @@ class ElementoCard {
                               showDialog(context: context, builder: (context) => 
                                 AlertDialog(
                                   content: Form(
-                                    child: elementoTexto.escreverTexto(
-                                      texto: 'Deseja excluir este item permanentemente?'
-                                    )
+                                    child: Text('Deseja excluir este item permanentemente?', style: TextStyle(fontSize: 16))
                                   ),
                                   actions: [
                                     TextButton(
-                                      child: elementoTexto.escreverTexto(texto: 'Cancelar', corFonte: Cores.red),
+                                      child: Text('Cancelar', style: TextStyle(fontSize: 16, color: Cores.red)),
                                       onPressed: () => Navigator.pop(context),
                                     ),
                                     TextButton(
-                                      child: elementoTexto.escreverTexto(texto: 'EXCLUIR', corFonte: Cores.red),
+                                      child: Text('EXCLUIR', style: TextStyle(fontSize: 16, color: Cores.red)),
                                       onPressed: () {
                                         funcaoDeletar();
                                         print(id);
@@ -91,7 +87,7 @@ class ElementoCard {
                                 )
                               );
                             },
-                            child: elementoTexto.escreverTexto(texto: 'Excluir', corFonte: Cores.white)
+                            child: Text('Excluir', style: TextStyle(fontSize: 16))
                           )
                         ),
                       ),
@@ -115,7 +111,7 @@ class ElementoCard {
     required String email,
     required String id
   }) {
-    Text infoProf = elementoTexto.escreverTexto(texto: '$nome\n$email', expessura: FontWeight.bold, tamanho: 18);
+    Text infoProf = Text('$nome\n$email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold));
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
     Padding botaoExtra =
       Padding(
@@ -125,7 +121,7 @@ class ElementoCard {
           onPressed: () {
             print('Ver Agendas');
           },
-          child: elementoTexto.escreverTexto(texto: 'Ver Agendas', corFonte: Cores.black),
+          child: Text('Ver Agendas', style: TextStyle(fontSize: 16, color: Cores.black)),//elementoTexto.escreverTexto(texto: 'Ver Agendas', corFonte: Cores.black),
           style: ElevatedButton.styleFrom(
             backgroundColor: Cores.fundoCard
           )
@@ -144,7 +140,7 @@ class ElementoCard {
     required Function deletarSala,
     required Function editarSala
   }) {
-    Text infoSala = elementoTexto.escreverTexto(texto: '$nome\n$quantidade Lugares', expessura: FontWeight.bold, tamanho: 18);
+    Text infoSala = Text('$nome\n$quantidade Lugares', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold));
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
     Padding botaoExtra = Padding(padding: EdgeInsetsDirectional.zero);
       
@@ -161,7 +157,7 @@ class ElementoCard {
     required Function editarConjunto,
     required Function verSalas
   }) {
-    Text infoConjunto = elementoTexto.escreverTexto(texto: '$nome\n$subtitulo', expessura: FontWeight.bold, tamanho: 20);
+    Text infoConjunto = Text('$nome\n$subtitulo', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));//elementoTexto.escreverTexto(texto: '$nome\n$subtitulo', expessura: FontWeight.bold, tamanho: 20);
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
     Padding botaoExtra =
       Padding(
@@ -171,7 +167,7 @@ class ElementoCard {
           onPressed: () {
             verSalas();
           },
-          child: elementoTexto.escreverTexto(texto: 'Ver Salas', corFonte: Cores.black),
+          child: Text('Ver Salas', style: TextStyle(fontSize: 16, color: Cores.black)),
           style: ElevatedButton.styleFrom(
             backgroundColor: Cores.fundoCard
           )

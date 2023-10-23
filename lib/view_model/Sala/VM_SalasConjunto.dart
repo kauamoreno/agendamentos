@@ -1,4 +1,4 @@
-import 'package:agendamentos/views/components/Cards.dart';
+import 'package:agendamentos/views/components/Cards/Cards.dart';
 import 'package:agendamentos/views/components/Forms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
