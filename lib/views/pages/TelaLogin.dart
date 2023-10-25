@@ -21,6 +21,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(238, 248, 253, 1),
       body: SingleChildScrollView(
         reverse: true,
 
@@ -35,7 +36,7 @@ class _TelaLoginState extends State<TelaLogin> {
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height * 0.4,
+                height: MediaQuery.sizeOf(context).height * 0.5,
                 alignment: const AlignmentDirectional(0, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -47,7 +48,7 @@ class _TelaLoginState extends State<TelaLogin> {
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height * 0.55,
+                height: MediaQuery.sizeOf(context).height * 0.5,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -68,22 +69,25 @@ class _TelaLoginState extends State<TelaLogin> {
                         Input(titulo: 'Senha', dica: '', controller: _senhaController,),
 
                         Padding(
-                          padding: const EdgeInsets.all(40.0),
-                          child: ElevatedButton(
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Entrar',
-                                style: TextStyle(fontSize: 20),
+                          padding: const EdgeInsets.only(top: 25),
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width,
+                            child: ElevatedButton(
+                              child: const Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text(
+                                  'Entrar',
+                                  style: TextStyle(fontSize: 20),
+                                ),
                               ),
+                              onPressed: () {
+                                Autenticacao().fazerLogin(
+                                  email: _emailController.text, 
+                                  senha: _senhaController.text, 
+                                  context: context
+                                );
+                              },
                             ),
-                            onPressed: () {
-                              Autenticacao().fazerLogin(
-                                email: _emailController.text, 
-                                senha: _senhaController.text, 
-                                context: context
-                              );
-                            },
                           ),
                         )
                       ],
