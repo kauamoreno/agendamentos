@@ -65,8 +65,8 @@ class _TelaLoginState extends State<TelaLogin> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
 
-                        Input(titulo: 'Email', dica: 'email@mail.com', controller: _emailController,),
-                        Input(titulo: 'Senha', dica: '', controller: _senhaController,),
+                        Input(titulo: 'Email', dica: 'email@mail.com', controller: _emailController),
+                        Input(titulo: 'Senha', dica: 'digite sua senha', controller: _senhaController, isSenha: true),
 
                         Padding(
                           padding: const EdgeInsets.only(top: 25),

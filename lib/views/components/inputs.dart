@@ -9,6 +9,7 @@ class Input extends StatelessWidget {
   final bool desativado;
   final Color corBorda;
   final Color corTexto;
+  final bool isSenha;
 
   const Input({
     Key? key,
@@ -19,7 +20,8 @@ class Input extends StatelessWidget {
     this.onTapCallback, 
     this.desativado = false,
     this.corBorda = Colors.grey,
-    this.corTexto = Colors.black
+    this.corTexto = Colors.black, 
+    this.isSenha = false
   }) : super(key: key);
 
   @override
@@ -46,6 +48,7 @@ class Input extends StatelessWidget {
                     child: AbsorbPointer(
                       absorbing: desativado,
                       child: TextFormField(
+                        obscureText: isSenha,
                         autofocus: false,
                         cursorColor: corBorda,
                         controller: controller,
