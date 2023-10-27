@@ -1,3 +1,4 @@
+import 'package:agendamentos/views/components/inputs.dart';
 import 'package:flutter/material.dart';
 import '../../models/services/Autenticacao.dart';
 import '../components/TextFieldComponent.dart';
@@ -20,6 +21,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(238, 248, 253, 1),
       body: SingleChildScrollView(
         reverse: true,
 
@@ -34,29 +36,20 @@ class _TelaLoginState extends State<TelaLogin> {
             children: [
               Container(
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height * 0.4,
+                height: MediaQuery.sizeOf(context).height * 0.5,
                 alignment: const AlignmentDirectional(0, 0),
-                child: const Column(
+                child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'AGS',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 100,
-                        fontWeight: FontWeight.w900,
-                        fontStyle: FontStyle.italic
-                      ),
-                    ),
+                    Image.asset('images/agslogo.png', height: MediaQuery.sizeOf(context).height * 0.35,)
                   ]
                 ),
               ),
               Container(
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height * 0.55,
+                height: MediaQuery.sizeOf(context).height * 0.5,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFB71835),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -68,28 +61,34 @@ class _TelaLoginState extends State<TelaLogin> {
                   child: Form(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
 
-                        textFieldComponent.textFieldEmail(label: "Email", hint: 'email@mail.com', controller: _emailController),
-                        textFieldComponent.textFieldSenha(label: "Senha", hint: '', controller: _senhaController),
+                        Input(titulo: 'Email', dica: 'email@mail.com', controller: _emailController,),
+                        Input(titulo: 'Senha', dica: '', controller: _senhaController,),
 
-                        ElevatedButton(
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Entrar',
-                              style: TextStyle(fontSize: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: SizedBox(
+                            width: MediaQuery.sizeOf(context).width,
+                            child: ElevatedButton(
+                              child: const Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text(
+                                  'Entrar',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ),
+                              onPressed: () {
+                                Autenticacao().fazerLogin(
+                                  email: _emailController.text, 
+                                  senha: _senhaController.text, 
+                                  context: context
+                                );
+                              },
                             ),
                           ),
-                          onPressed: () {
-                            Autenticacao().fazerLogin(
-                              email: _emailController.text, 
-                              senha: _senhaController.text, 
-                              context: context
-                            );
-                          },
                         )
                       ],
                     ),

@@ -1,22 +1,25 @@
-import 'package:agendamentos/views/constants/Texto.dart';
 import 'package:flutter/material.dart';
 
-class InputAgendamentos extends StatelessWidget {
+class Input extends StatelessWidget {
   final String titulo;
   final String dica;
   final TextEditingController? controller;
   final Widget? widget;
   final VoidCallback? onTapCallback;
   final bool desativado;
+  final Color corBorda;
+  final Color corTexto;
 
-  const InputAgendamentos({
+  const Input({
     Key? key,
     required this.titulo,
     required this.dica,
     this.controller,
     this.widget,
     this.onTapCallback, 
-    required this.desativado,
+    this.desativado = false,
+    this.corBorda = Colors.grey,
+    this.corTexto = Colors.black
   }) : super(key: key);
 
   @override
@@ -28,13 +31,13 @@ class InputAgendamentos extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(titulo, style: TextStyle(fontWeight: FontWeight.bold, color: corTexto)),
             Container(
               height: 52,
               margin: const EdgeInsets.only(top: 8.0),
               padding: const EdgeInsets.only(left: 14),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey, width: 1.0),
+                border: Border.all(color: corBorda, width: 1.0),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(
@@ -44,12 +47,12 @@ class InputAgendamentos extends StatelessWidget {
                       absorbing: desativado,
                       child: TextFormField(
                         autofocus: false,
-                        cursorColor: Colors.grey,
+                        cursorColor: corBorda,
                         controller: controller,
-                        style: subTituloStyle,
+                        style: TextStyle(color: corTexto),
                         decoration: InputDecoration(
                           hintText: dica,
-                          hintStyle: subTituloStyle,
+                          hintStyle: TextStyle(color: corTexto.withAlpha(100)),
                           border: InputBorder.none,
                         ),
                       ),
