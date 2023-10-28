@@ -87,6 +87,50 @@ class SalasFirestore {
     } catch (error) { mensagemSnackBar.erro(context, "Erro ao adicionar o agendamento: $error"); }
   }
 
+  apagarAgendamento({
+    required BuildContext context,
+    required String nomeConjunto,
+    required String nomeSala,
+    required String dataAgendamento,
+    required String tituloAgendamento,
+  }) {
+    try {
+      // Recupere o documento do conjunto de salas
+      db.doc(nomeConjunto).get().then((conjuntoDoc) {
+        if (conjuntoDoc.exists) {
+          final conjuntoData = conjuntoDoc.data();
+
+          final salas = conjuntoData?['Salas'] as List<dynamic>;
+          final salaIndex = salas.indexWhere((sala) => sala['nome'] == nomeSala);
+
+          // Obtenha a lista de agendamentos da sala
+          final agendamentos = salas[salaIndex]['agendamentos'] as List<dynamic>;
+
+          // Encontre o índice do agendamento com base nos critérios especificados
+          final agendamentoIndex = agendamentos.indexWhere((agendamento) =>
+            agendamento['data'] == dataAgendamento && agendamento['titulo'] == tituloAgendamento
+          );
+
+          // Remova o agendamento da lista de agendamentos
+          agendamentos.removeAt(agendamentoIndex);
+
+          // Atualize a sala no Firestore para refletir as alterações
+          db.doc(nomeConjunto).update({'Salas': salas});
+
+          mensagemSnackBar.sucesso(context, "Agendamento apagado com sucesso!");
+
+        } else {
+          mensagemSnackBar.erro(context, "Documento de conjunto não encontrado.");
+        }
+      }).catchError((error) {
+        mensagemSnackBar.erro(context, "Erro ao apagar o agendamento: $error");
+      });
+    } catch (error) {
+      mensagemSnackBar.erro(context, "Erro ao apagar o agendamento: $error");
+    }
+  }
+
+
 
   //DELETE
   deletarSala(BuildContext context, String nomeConjunto, String nomeSala, int capacidade, List agendamentos) {
