@@ -1,4 +1,3 @@
-import 'package:agendamentos/view_model/Agenda/VM_Calendario.dart';
 import 'package:agendamentos/views/constants/Cores.dart';
 import 'package:agendamentos/views/pages/Agenda/MinhasAgendas.dart';
 import 'package:flutter/material.dart';
@@ -28,17 +27,7 @@ class CardAgendamento {
 
         child: InkWell(
           onTap: () {
-            if (context.widget is VM_Calendario) {
-              _mostraModalSalaAgenda(
-                context, 
-                horarioInicial,
-                horarioFinal,
-                sala,
-                professor,
-                nota,
-                titulo,
-              );
-            } else if(context.widget is MinhasAgendas){
+            if(context.widget is MinhasAgendas){
               _mostraModalMinhasAgendas(
                 context, 
                 horarioInicial,
@@ -47,7 +36,17 @@ class CardAgendamento {
                 professor,
                 nota,
                 titulo,
-                data,
+                data
+              );
+            } else {
+              _mostraModalSalaAgenda(
+                context, 
+                horarioInicial,
+                horarioFinal,
+                sala,
+                professor,
+                nota,
+                titulo,
               );
             }
           },

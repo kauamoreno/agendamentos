@@ -33,8 +33,10 @@ class _MinhasAgendasState extends State<MinhasAgendas> {
                 children: [
                   Expanded(
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: snapshot.data ?? [], // Lista de widgets de cards.
+                      child: Center(
+                        child: Column(
+                          children: snapshot.data ?? [], // Lista de widgets de cards.
+                        ),
                       ),
                     ),
                   ),

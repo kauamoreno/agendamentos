@@ -4,7 +4,6 @@ import 'package:agendamentos/views/components/Cards/CardAgendamento.dart';
 import 'package:agendamentos/views/components/Cards/Cards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class VM_MinhasAgendas {
@@ -12,64 +11,103 @@ class VM_MinhasAgendas {
   Autenticacao auth = Autenticacao();
   ElementoCard cardElemento = ElementoCard();
   CardAgendamento cardAgendamento = CardAgendamento();
+  late String nomeConjunto;
 
   Future<List<Widget>> minhasAgendas(BuildContext context) async {
     String idProfessor = await auth.getIdNomeProfessorLogado(true) as String;
     List<Widget> agendamentosWidgets = [];
+    String? dataAtualString;
 
     try {
       QuerySnapshot<Map<String, dynamic>>? salasConjunto = await firestore.getSalasConjunto();
       DateTime dataAtual = DateTime.now();
       dataAtual = DateTime(dataAtual.year, dataAtual.month, dataAtual.day);
 
+      List<dynamic> agendamentos = [];
 
       for (QueryDocumentSnapshot salaConjuntoDoc in salasConjunto!.docs) {
+        nomeConjunto = salaConjuntoDoc['nomeConjunto'] ?? [];
         List<dynamic> salas = salaConjuntoDoc['Salas'] ?? [];
 
         for (dynamic sala in salas) {
-          List<dynamic> agendamentos = sala['agendamentos'] ?? [];
+          List<dynamic> salaAgendamentos = sala['agendamentos'] ?? [];
 
-          for (dynamic agendamento in agendamentos) {
+          for (dynamic agendamento in salaAgendamentos) {
             String idProfessorAgenda = agendamento['idProfessor'];
 
             String dataAgendamentoString = agendamento['data'];
             DateTime dataAgendamentoDateTime = DateFormat("dd/MM/yyyy").parse(dataAgendamentoString);
 
-            if (idProfessorAgenda == idProfessor && dataAgendamentoDateTime.isAtSameMomentAs(dataAtual) || dataAgendamentoDateTime.isAfter(dataAtual)) {
-              String titulo = agendamento['titulo'] ?? 'Sem título';
-              String data = agendamento['data'] ?? 'Sem data';
-              String horarioInicio = agendamento['timeInicial'] ?? 'Sem horário de início';
-              String horarioFim = agendamento['timeFinal'] ?? 'Sem horário de término';
-              String nota = agendamento['nota'] ?? '';
-              String nomeSala = agendamento['nomeSala'] ?? 'Sem nome de sala';
-              String professor = agendamento['professor'] ?? 'Sem nome de professor';
-
-              // Crie o ListTile com os dados extraídos
-              Widget agendamentoTile = cardAgendamento.getCard(
-                context,
-                horarioInicio,
-                horarioFim,
-                nomeSala,
-                professor,
-                nota,
-                titulo,
-                data
-              );
-
-              // // Adicione o ListTile à lista
-              agendamentosWidgets.add(agendamentoTile);
+            if (idProfessorAgenda == idProfessor && (dataAgendamentoDateTime.isAtSameMomentAs(dataAtual) || dataAgendamentoDateTime.isAfter(dataAtual))) {
+              agendamentos.add(agendamento);
             }
           }
         }
       }
 
-      if (agendamentosWidgets.length.isEqual(0)) {
-        agendamentosWidgets.add(const Text('Nenhuma salas agendada'));
+      // Ordenando os agendamentos por data
+      agendamentos.sort((a, b) {
+        String dataA = a['data'] ?? '';
+        String dataB = b['data'] ?? '';
+        return dataA.compareTo(dataB);
+      });
+
+      for (var agendamento in agendamentos) {
+        String dataAgendamentoString = agendamento['data'];
+        DateTime dataAgendamentoDateTime = DateFormat("dd/MM/yyyy").parse(dataAgendamentoString);
+        String dataAgendamentoText = DateFormat("dd/MM/yyyy").format(dataAgendamentoDateTime);
+
+        // Verifique se a data mudou e adicione o texto da data
+        if (dataAtualString != dataAgendamentoText) {
+          dataAtualString = dataAgendamentoText;
+          agendamentosWidgets.add(
+            Padding(
+              padding: const EdgeInsets.only(top: 24, bottom: 7),
+              child: Text(
+                'Data: $dataAgendamentoText',
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600
+                )
+              ),
+            )
+          );
+        }
+
+        // Crie o widget do agendamento
+        agendamentosWidgets.add(buildAgendamentoWidget(agendamento, context));
+      }
+
+      if (agendamentosWidgets.isEmpty) {
+        agendamentosWidgets.add(const Text('Nenhum agendamento disponível'));
       }
     } catch (error) {
       print('Erro ao obter agendamentos: $error');
     }
 
     return agendamentosWidgets;
+  }
+
+  Widget buildAgendamentoWidget(dynamic agendamento, BuildContext context) {
+    // Extrair os dados do agendamento
+    String titulo = agendamento['titulo'] ?? 'Sem título';
+    String data = agendamento['data'] ?? 'Sem data';
+    String horarioInicio = agendamento['timeInicial'] ?? 'Sem horário de início';
+    String horarioFim = agendamento['timeFinal'] ?? 'Sem horário de término';
+    String nota = agendamento['nota'] ?? '';
+    String nomeSala = agendamento['nomeSala'] ?? 'Sem nome de sala';
+    String professor = agendamento['professor'] ?? 'Sem nome de professor';
+
+    // Crie o ListTile com os dados extraídos
+    return cardAgendamento.getCard(
+      context,
+      horarioInicio,
+      horarioFim,
+      nomeSala,
+      professor,
+      nota,
+      titulo,
+      data
+    );
   }
 }
