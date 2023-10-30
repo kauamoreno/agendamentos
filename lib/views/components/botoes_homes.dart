@@ -27,7 +27,7 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color, String
                           BotoesHome(
                               context,
                               ' Professores ',
-                              Icons.people_rounded,
+                              Icons.manage_accounts,
                               Color.fromARGB(255, 233, 226, 226),
                               '/gerenciarProfessores'
                               
@@ -74,33 +74,36 @@ BotoesHome(BuildContext context, String text, IconData icon, Color color, String
             ),
           ],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 75, // Largura do botão
-              height: 75, // Altura do botão
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.red, // Cor do círculo
-              ),
-              child: Center(
-                child: Icon(
-                  icon,
-                  size: 45,
-                  color: Colors.white, // Cor do ícone
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 75, // Largura do botão
+                height: 75, // Altura do botão
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.red, // Cor do círculo
+                ),
+                child: Center(
+                  child: Icon(
+                    icon,
+                    size: 45,
+                    color: Colors.white, // Cor do ícone
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 8), // Espaçamento entre o círculo e o texto
-            Text(
-              text,
-              style: TextStyle(
-                color: Colors.black, // Cor do texto
-                fontSize: 18.0,
+              SizedBox(height: 8), // Espaçamento entre o círculo e o texto
+              Text(
+                text,
+                style: TextStyle(
+                  color: Colors.black, // Cor do texto
+                  fontSize: 18.0,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ));
 }

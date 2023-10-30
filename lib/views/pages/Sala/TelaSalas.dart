@@ -1,5 +1,6 @@
 import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:agendamentos/views/components/Cards/SalasCard.dart';
+import 'package:agendamentos/views/components/HeaderApp.dart';
 import 'package:flutter/material.dart';
 import '../../components/TextFieldComponent.dart';
 import '../../components/CustomAppBar.dart';
@@ -19,7 +20,6 @@ class TelaSalas extends StatefulWidget {
 class _TelaSalasState extends State<TelaSalas> {
   
   TextFieldComponent textFieldComponent = TextFieldComponent();
-  final _pesquisaController = TextEditingController();
   SalasCard salasCard = SalasCard();
   late VM_Salas vm;
 
@@ -44,27 +44,21 @@ class _TelaSalasState extends State<TelaSalas> {
             return ErrorPage(erroMensagem: snapshot.error);
 
           } else {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
-              child: Column(
-                children: [
-                  textFieldComponent.textFieldPesquisa(
-                    label: "Pesquisa",
-                    hint: 'Pesquisa...',
-                    controller: _pesquisaController
-                  ),
+            return Column(
+              children: [
+                HeaderApp(context, Icons.door_back_door),
 
-                  const SizedBox(height: 30), //Espaço
-
-                  Expanded(
-                    child: SingleChildScrollView(
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
                       child: Column(
                         children: snapshot.data ?? [], // Lista de widgets de cards.
                       ),
-                    )
+                    ),
                   )
-                ],
-              ),
+                )
+              ],
             );
           }
         },

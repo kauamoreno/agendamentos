@@ -9,7 +9,7 @@ class SalasCard {
       child: GestureDetector(
         child: Card(
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          color: Cores.fundoCard,
+          color: Cores.white,
           elevation: 2,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           child: Container(
@@ -36,8 +36,8 @@ class SalasCard {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('$titulo', style: TextStyle(fontSize: 25, color: Cores.letraCard)),
-                        Text('$subTitulo', style: TextStyle(fontSize: 18, color: Cores.letraCard))
+                        Text('$titulo', style: TextStyle(fontSize: 25, color: Cores.black)),
+                        Text('$subTitulo', style: TextStyle(fontSize: 18, color: Cores.black))
                       ],
                     ),
                   ),

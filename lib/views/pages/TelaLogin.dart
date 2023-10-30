@@ -21,7 +21,8 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(238, 248, 253, 1),
+      // ignore: prefer_const_constructors
+      backgroundColor: const Color.fromRGBO(238, 248, 253, 1),
       body: SingleChildScrollView(
         reverse: true,
 
