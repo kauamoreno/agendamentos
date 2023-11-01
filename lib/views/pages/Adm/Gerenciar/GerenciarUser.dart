@@ -1,5 +1,6 @@
 import 'package:agendamentos/view_model/Usuarios/VM_Usuarios.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
+import 'package:agendamentos/views/components/HeaderApp.dart';
 import '../../../components/Cards/Cards.dart';
 import '../../../components/Forms.dart';
 import 'package:agendamentos/views/constants/Cores.dart';
@@ -24,7 +25,7 @@ class _GerenciarProfState extends State<GerenciarProf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: 'Gerenciar', voltar: true),
+      appBar: const CustomAppBar(titulo: 'Gerenciar Professores', voltar: true),
       body: FutureBuilder(
         future: GerenciarUsuario().mostrarUsuarios(context),
         builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
@@ -39,32 +40,7 @@ class _GerenciarProfState extends State<GerenciarProf> {
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: Cores.fundoCard,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Icon(
-                          Icons.manage_accounts,
-                          color: Cores.letraCard,
-                          size: 75,
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                          child: Text('Gerenciar\nProfessores', textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Cores.letraCard))
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                HeaderApp(context, Icons.manage_accounts),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),

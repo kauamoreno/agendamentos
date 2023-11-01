@@ -1,5 +1,6 @@
 import 'package:agendamentos/view_model/Sala/VM_Salas.dart';
 import 'package:agendamentos/views/components/Forms.dart';
+import 'package:agendamentos/views/components/HeaderApp.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
 import '../../../components/CustomAppBar.dart';
@@ -34,7 +35,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: 'Gerenciar', voltar: true,),
+      appBar: const CustomAppBar(titulo: 'Gerenciar Salas', voltar: true,),
       body: FutureBuilder(
         future: vm.mostraGerenciaSalas(context),
         builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
@@ -49,32 +50,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-                  child: Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: Cores.fundoCard,
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const Icon(
-                          Icons.room_preferences_rounded,
-                          color: Cores.letraCard,
-                          size: 75,
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
-                          child: Text('Gerenciar\nSalas', textAlign: TextAlign.center, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Cores.letraCard))
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                HeaderApp(context, Icons.room_preferences),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),

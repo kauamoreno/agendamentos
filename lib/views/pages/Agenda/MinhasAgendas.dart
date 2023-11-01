@@ -1,5 +1,6 @@
 import 'package:agendamentos/view_model/Agenda/VM_MinhasAgendas.dart';
 import 'package:agendamentos/views/components/CustomAppBar.dart';
+import 'package:agendamentos/views/components/HeaderApp.dart';
 import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
 
@@ -27,21 +28,19 @@ class _MinhasAgendasState extends State<MinhasAgendas> {
             return ErrorPage(erroMensagem: snapshot.error);
             
           } else {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Center(
-                        child: Column(
-                          children: snapshot.data ?? [], // Lista de widgets de cards.
-                        ),
+            return Column(
+              children: [
+                HeaderApp(context, Icons.calendar_today),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        children: snapshot.data ?? [], // Lista de widgets de cards.
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }
         },

@@ -10,8 +10,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Login persistente
-  await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+  try {
+    // Login persistente
+    await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+  } catch (e) {
+    //Se entrar aqui, indica que o app foi executado no celular, e não na Web
+  }
 
   runApp(const App());
 }

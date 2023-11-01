@@ -1,5 +1,6 @@
 import 'package:agendamentos/view_model/Sala/VM_SalasConjunto.dart';
 import 'package:agendamentos/views/components/Cards/SalasCard.dart';
+import 'package:agendamentos/views/components/HeaderApp.dart';
 import 'package:flutter/material.dart';
 import '../../components/TextFieldComponent.dart';
 import '../../components/CustomAppBar.dart';
@@ -15,7 +16,6 @@ class SalasConjunto extends StatefulWidget {
 class _SalasConjuntoState extends State<SalasConjunto> {
   
   TextFieldComponent textFieldComponent = TextFieldComponent();
-  final _pesquisaController = TextEditingController();
   SalasCard salasCard = SalasCard();
   VM_SalasConjunto vm = VM_SalasConjunto();
 
@@ -34,27 +34,18 @@ class _SalasConjuntoState extends State<SalasConjunto> {
             return ErrorPage(erroMensagem: snapshot.error);
 
           } else {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 25, 0, 10),
-              child: Column(
-                children: [
-                  textFieldComponent.textFieldPesquisa(
-                    label: "Pesquisa",
-                    hint: 'Pesquisa...',
-                    controller: _pesquisaController
-                  ),
+            return Column(
+              children: [
+                HeaderApp(context, Icons.room),
 
-                  const SizedBox(height: 30), //Espaço
-
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: snapshot.data ?? [], // Lista de widgets de cards.
-                      ),
-                    )
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: snapshot.data ?? [], // Lista de widgets de cards.
+                    ),
                   )
-                ],
-              ),
+                )
+              ],
             );
           }
         },

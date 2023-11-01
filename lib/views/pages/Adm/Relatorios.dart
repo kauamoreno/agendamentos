@@ -1,3 +1,4 @@
+import 'package:agendamentos/views/components/HeaderApp.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,18 +35,11 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
       ),
       body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // Alinhar à esquerda
           children: <Widget>[
+            HeaderApp(context, Icons.analytics),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.analytics,
-                    color: Colors.red,
-                    size: 50.0,
-                  ),
-                ),
                 Text(
                   'Filtrar por Sala:',
                   style: TextStyle(
