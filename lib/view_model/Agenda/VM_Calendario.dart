@@ -57,7 +57,8 @@ class VM_Calendario {
                     agendamento['professor'],
                     agendamento['nota'],
                     agendamento['titulo'],
-                    agendamento['data']
+                    agendamento['data'],
+                    (){}
                   );
 
                   agendamentoWidgets.add(card);                  

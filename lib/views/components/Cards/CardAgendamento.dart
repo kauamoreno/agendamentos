@@ -12,7 +12,8 @@ class CardAgendamento {
     String professor, 
     String ?nota, 
     String titulo, 
-    String data
+    String data,
+    Function excluirAgenda
   ) {
     return SizedBox(
       width: 450,
@@ -36,7 +37,10 @@ class CardAgendamento {
                 professor,
                 nota,
                 titulo,
-                data
+                data,
+                () {
+                  excluirAgenda();
+                }
               );
             } else {
               _mostraModalSalaAgenda(
@@ -153,7 +157,8 @@ class CardAgendamento {
     String professor,
     String ?nota,
     String titulo,
-    String data
+    String data,
+    Function excluirAgenda
   ) {
     showDialog(
       context: context,
@@ -189,7 +194,7 @@ class CardAgendamento {
             ),
             ElevatedButton(
               onPressed: () {
-                print('Apagar e notificar todos');
+                excluirAgenda();
               },
               child: const Text('Excluir'),
             ),

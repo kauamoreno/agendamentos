@@ -27,16 +27,21 @@ class VM_MinhasAgendas {
 
       for (QueryDocumentSnapshot salaConjuntoDoc in salasConjunto!.docs) {
         nomeConjunto = salaConjuntoDoc['nomeConjunto'] ?? [];
+        String idConjunto = salaConjuntoDoc.id;
         List<dynamic> salas = salaConjuntoDoc['Salas'] ?? [];
 
         for (dynamic sala in salas) {
           List<dynamic> salaAgendamentos = sala['agendamentos'] ?? [];
+          String nomeSala = sala['nome'];
 
           for (dynamic agendamento in salaAgendamentos) {
             String idProfessorAgenda = agendamento['idProfessor'];
 
             String dataAgendamentoString = agendamento['data'];
             DateTime dataAgendamentoDateTime = DateFormat("dd/MM/yyyy").parse(dataAgendamentoString);
+
+            agendamento['idConjunto'] = idConjunto;
+            agendamento['nomeSala'] = nomeSala;
 
             if (idProfessorAgenda == idProfessor && (dataAgendamentoDateTime.isAtSameMomentAs(dataAtual) || dataAgendamentoDateTime.isAfter(dataAtual))) {
               agendamentos.add(agendamento);
@@ -97,6 +102,7 @@ class VM_MinhasAgendas {
     String nota = agendamento['nota'] ?? '';
     String nomeSala = agendamento['nomeSala'] ?? 'Sem nome de sala';
     String professor = agendamento['professor'] ?? 'Sem nome de professor';
+    String idConjunto = agendamento['idConjunto'] ?? 'Sem Id';
 
     // Crie o ListTile com os dados extraídos
     return cardAgendamento.getCard(
@@ -107,7 +113,16 @@ class VM_MinhasAgendas {
       professor,
       nota,
       titulo,
-      data
+      data,
+      () {
+        firestore.apagarAgendamento(
+          context: context, 
+          nomeConjunto: idConjunto, 
+          nomeSala: nomeSala, 
+          dataAgendamento: data,
+          tituloAgendamento: titulo
+        );
+      }
     );
   }
 }
