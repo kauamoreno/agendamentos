@@ -85,7 +85,15 @@ class GerenciarUsuario {
         var data = doc.data();
 
         if (!data['isAdm']) {
-          var usuarios = cardElemento.cardProfessor(context: context, nome: data['nome'], email: data['email'], id: doc.id);
+          var usuarios = cardElemento.cardProfessor(
+            context: context, 
+            nome: data['nome'], 
+            email: data['email'], 
+            id: doc.id,
+            verAgendas: () {
+              Navigator.of(context).pushReplacementNamed('/minhasAgendas', arguments: doc.id);
+            }
+          );
 
           print('${doc.id} => ${doc.data()}');
 

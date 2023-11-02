@@ -109,7 +109,8 @@ class ElementoCard {
     required BuildContext context, 
     required String nome, 
     required String email,
-    required String id
+    required String id,
+    required Function verAgendas
   }) {
     Text infoProf = Text('$nome\n$email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold));
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
@@ -119,7 +120,7 @@ class ElementoCard {
           EdgeInsetsDirectional.symmetric(horizontal: 5),
         child: ElevatedButton(
           onPressed: () {
-            print('Ver Agendas');
+            verAgendas();
           },
           child: Text('Ver Agendas', style: TextStyle(fontSize: 16, color: Cores.black)),//elementoTexto.escreverTexto(texto: 'Ver Agendas', corFonte: Cores.black),
           style: ElevatedButton.styleFrom(

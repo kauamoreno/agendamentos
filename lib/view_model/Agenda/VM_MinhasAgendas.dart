@@ -13,8 +13,10 @@ class VM_MinhasAgendas {
   CardAgendamento cardAgendamento = CardAgendamento();
   late String nomeConjunto;
 
-  Future<List<Widget>> minhasAgendas(BuildContext context) async {
-    String idProfessor = await auth.getIdNomeProfessorLogado(true) as String;
+  Future<List<Widget>> minhasAgendas({required BuildContext context, String idProfessor = ''}) async {
+    if (idProfessor == '') {
+      idProfessor = await auth.getIdNomeProfessorLogado(true) as String;
+    }
     List<Widget> agendamentosWidgets = [];
     String? dataAtualString;
 

@@ -5,7 +5,11 @@ import 'package:agendamentos/views/pages/Erros/ErrorPage.dart';
 import 'package:flutter/material.dart';
 
 class MinhasAgendas extends StatefulWidget {
-  const MinhasAgendas({Key? key}) : super(key: key);
+  final String idProfessor;
+  const MinhasAgendas({
+    super.key,
+    required this.idProfessor
+  });
 
   @override
   State<MinhasAgendas> createState() => _MinhasAgendasState();
@@ -19,7 +23,7 @@ class _MinhasAgendasState extends State<MinhasAgendas> {
     return Scaffold(
       appBar: const CustomAppBar(titulo: 'Minhas Agendas', voltar: true),
       body: FutureBuilder(
-        future: vm.minhasAgendas(context),
+        future: vm.minhasAgendas(context: context, idProfessor: widget.idProfessor),
         builder: (BuildContext context, AsyncSnapshot<List<Widget>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
