@@ -130,7 +130,43 @@ class SalasFirestore {
     }
   }
 
+  //DELETE
+  deletarAgendamento(
+    BuildContext context,
+    String nomeConjunto,
+    int capacidade,
+    String titulo,
+    String nomeSala,
+    String? nota,
+    String data,
+    String timeInicial,
+    String timeFinal,
+    String nomeProfessor,
+    String idProfessor,
+  ) {
+    final agendamentos = {
+      "idProfessor": idProfessor,
+      "titulo": titulo,
+      "nota": nota,
+      "data": data,
+      "timeInicial": timeInicial,
+      "timeFinal": timeFinal,
+      "professor": nomeProfessor,
+    };
 
+    db.doc(nomeConjunto).update({
+      'Salas': 
+        {
+          'capacidade': capacidade,
+          'nome': nomeSala,
+          'agendamentos': FieldValue.arrayRemove(
+            [
+              agendamentos
+            ]
+          )
+        }
+    });
+  }
 
   //DELETE
   deletarSala(BuildContext context, String nomeConjunto, String nomeSala, int capacidade, List agendamentos) {

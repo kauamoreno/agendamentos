@@ -48,7 +48,15 @@ class App extends StatelessWidget {
         '/gerenciarProfessores': (context) => const GerenciarProf(),
         '/gerenciarConjunto': (context) => const GerenciaConjunto(),
         '/salasConjunto': (context) => const SalasConjunto(),
-        '/minhasAgendas': (context) => const MinhasAgendas(),
+
+        '/minhasAgendas': (context) {
+          final args = ModalRoute.of(context)?.settings.arguments;
+          if(args is String) {
+            return MinhasAgendas(idProfessor: args);
+          }
+          return MinhasAgendas(idProfessor: '');
+        }, 
+
         '/calendario': (context) {
           final args = ModalRoute.of(context)?.settings.arguments;
           if (args is Map<String, String>) {
