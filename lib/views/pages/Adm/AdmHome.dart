@@ -18,8 +18,7 @@ class _AdmHomeState extends State<AdmHome> {
         child: GridView.count(
           crossAxisCount: 2, // 2 colunas
           children: <Widget>[
-            BotoesHome(context, 'Agenda', Icons.calendar_today,
-                Color.fromARGB(255, 233, 226, 226), '/calendario'),
+            BotoesHome(context, 'Agenda', Icons.calendar_today,Colors.grey, '/minhasAgendas'),
             BotoesHome(context, 'Feedback', Icons.feedback,
                 Color.fromARGB(255, 233, 226, 226), '/feedback'),
             BotoesHome(context, 'Salas', Icons.room,
