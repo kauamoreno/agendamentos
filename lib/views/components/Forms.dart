@@ -55,6 +55,7 @@ class FormsPopUp {
     required BuildContext context, 
     required TextEditingController tituloController, 
     required TextEditingController subtituloController,
+    required TextEditingController linkController,
     required Function funcaoCreate,
     required Function setState
   }) {
@@ -62,7 +63,8 @@ class FormsPopUp {
       Column(
         children: [
           textFieldComponent.textFieldCustom(label: 'Nome do Conjunto', icone: Icons.abc, hint: 'Ex. Mecânica, TI, Elétrica', controller: tituloController),
-          textFieldComponent.textFieldCustom(label: 'Descrição do Conjunto', icone: Icons.mail, hint: 'Ex. Salas que contém "tal" objeto', controller: subtituloController)
+          textFieldComponent.textFieldCustom(label: 'Descrição do Conjunto', icone: Icons.mail, hint: 'Ex. Salas que contém "tal" objeto', controller: subtituloController),
+          textFieldComponent.textFieldCustom(label: 'Imagem', icone: Icons.photo_camera, hint: 'Insira um Link', controller: linkController)
         ],
       );
 
@@ -73,17 +75,17 @@ class FormsPopUp {
     required BuildContext context,
     required TextEditingController nomeSalaController,
     required TextEditingController quantidadeController,
+    required TextEditingController linkController,
     required String uidConjunto,
     required Function funcaoCreate,
     required Function setState,
-    // required String valorSelecionado,
-    // required Function array,
   }) {
     Column colunaForms =
       Column(
         children: [
           textFieldComponent.textFieldCustom(label: 'Nome da Sala', icone: Icons.abc, hint: 'Sala 1', controller: nomeSalaController),
-          textFieldComponent.textFieldCustom(label: 'Quantidade', icone: Icons.person, hint: '32 Lugares', controller: quantidadeController, tipoTeclado: TextInputType.number)
+          textFieldComponent.textFieldCustom(label: 'Quantidade', icone: Icons.person, hint: '32 Lugares', controller: quantidadeController, tipoTeclado: TextInputType.number),
+          textFieldComponent.textFieldCustom(label: 'Imagem', icone: Icons.photo_camera, hint: 'Insira um Link', controller: linkController)
         ],
       );
 

@@ -9,19 +9,21 @@ class SalasFirestore {
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('salaConjunto');
 
   //CREATE
-  criarSalaConjunto(String nomeConjunto, String subTitulo) {
+  criarSalaConjunto(String nomeConjunto, String subTitulo, String linkFoto) {
     final salaConjunto = {
       "nomeConjunto": nomeConjunto,
       "subTitulo": subTitulo,
+      "linkFoto": linkFoto,
       "Salas": []
     };
     db.doc().set(salaConjunto);
   }
 
-  criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala) {
+  criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala, String linkFoto) {
     final sala = Sala(
       capacidade: capacidade,
       nome: nomeSala,
+      linkFoto: linkFoto,
       agendamentos: []
     );
     

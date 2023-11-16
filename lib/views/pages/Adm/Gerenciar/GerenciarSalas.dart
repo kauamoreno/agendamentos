@@ -24,6 +24,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
   FormsPopUp formsPopUp = FormsPopUp();
   final _nomeSalaController = TextEditingController();
   final _quantidadeController = TextEditingController();
+  final _linkController = TextEditingController();
   late VM_Salas vm;
 
   @override
@@ -77,13 +78,15 @@ class _GerenciaSalaState extends State<GerenciaSala> {
           formsPopUp.formsSala(
             context: context, 
             nomeSalaController: _nomeSalaController,
-            quantidadeController: _quantidadeController, 
+            quantidadeController: _quantidadeController,
+            linkController: _linkController,
             uidConjunto: vm.toString(),
             funcaoCreate: () {
               vm.criarSala(
                 context, 
                 _quantidadeController.text, 
-                _nomeSalaController.text
+                _nomeSalaController.text,
+                _linkController.text
               );
             }, 
             setState: () {
