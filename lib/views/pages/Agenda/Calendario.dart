@@ -145,7 +145,8 @@ class _CalendarioState extends State<Calendario> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            width: MediaQuery.of(context).size.width * 0.5,
+            margin: const EdgeInsets.only(left: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
