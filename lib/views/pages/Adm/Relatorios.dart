@@ -1,23 +1,8 @@
+import 'package:agendamentos/view_model/VM_Relatorios.dart';
+import 'package:agendamentos/views/components/CustomAppBar.dart';
+import 'package:agendamentos/views/components/GraficoDeBarras.dart';
 import 'package:agendamentos/views/components/HeaderApp.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Relatórios',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: RelatoriosPage(),
-    );
-  }
-}
 
 class RelatoriosPage extends StatefulWidget {
   @override
@@ -25,78 +10,37 @@ class RelatoriosPage extends StatefulWidget {
 }
 
 class _RelatoriosPageState extends State<RelatoriosPage> {
-  String selectedRoomType = 'Todas as Salas'; // Valor padrão
+  VM_Relatorios vm = VM_Relatorios();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Relatórios'),
-      ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            HeaderApp(context, Icons.analytics),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+      appBar: const CustomAppBar(titulo: 'Salas', voltar: true),
+      body: FutureBuilder(
+        future: vm.getTotalAgendamentosPorDiaSemanaAtual(),
+        builder: (BuildContext context, AsyncSnapshot<Map<String, int>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text('Erro ao carregar dados.'));
+          } else {
+            return Column(
               children: [
-                Text(
-                  'Filtrar por Sala:',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.5),
-                  child: DropdownButton<String>(
-                    icon: Icon(Icons.arrow_drop_down_sharp, color: Colors.black,),
-                    borderRadius: BorderRadius.circular(10),
-                    style: TextStyle(
-                      color: Colors.black,
-                      
+                HeaderApp(context, Icons.room),
+                Container(height: 50),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        GraficoDeBarras(snapshot)
+                      ],
                     ),
-                    value: selectedRoomType,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedRoomType = newValue!;
-                      });
-                    },
-                    items: <String>[
-                      'Todas as Salas',
-                      'Salas de Aula',
-                      'Salas de Informática',
-                      'Salas Eletroeletrônica',
-                      'Salas de Mecânica',
-                    ].map<DropdownMenuItem<String>>(
-                        (String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }
-                      ).toList(),
                   ),
                 ),
               ],
-            ),
-            //FUNÇÕES DE VISUALIZAÇÃO DE RELATORIO NESTA PARTE
-            Container(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    children: [
-                      Text("Carlos Ferreira"),
-                      Text("Instrutor"),
-                      Text("Agendou Sala de informatica"),
-                      Text("17:00 - 18:00")
-                    ]
-                  ),
-                ),
-              ),
-            ), 
-          ],
-        ),
+            );
+          }
+        },
       ),
     );
   }
