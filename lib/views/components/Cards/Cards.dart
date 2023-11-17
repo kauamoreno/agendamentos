@@ -2,106 +2,115 @@ import 'package:flutter/material.dart';
 import '../../constants/Cores.dart';
 
 class ElementoCard {
-  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar, Function funcaoEditar) {
-    return Card(
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.all(5),
-            child: Container(
-              width: tamanhoFoto,
-              height: tamanhoFoto,
-              clipBehavior: Clip.antiAlias,
-              decoration: caixaFoto,
-              child: Image.network(
-                foto,
-                fit: BoxFit.cover,
+  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar, Function funcaoEditar, double paddingValor, Function funcaoExtra) {
+    return GestureDetector(
+      child: Card(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsetsDirectional.all(paddingValor),
+              child: Container(
+                width: tamanhoFoto,
+                height: tamanhoFoto,
+                clipBehavior: Clip.antiAlias,
+                decoration: caixaFoto,
+                child: Image.network(
+                  foto,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: Padding(
-                    padding:
-                      EdgeInsetsDirectional.fromSTEB(0, 0, 5, 5),
-                    child: label
+            Expanded(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 10,
+                    child: Padding(
+                      padding:
+                        EdgeInsetsDirectional.fromSTEB(0, 0, 5, 5),
+                      child: label
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: PopupMenuButton(
-                    icon: Icon(Icons.more_vert),
-                    itemBuilder: (context) => [
-                      PopupMenuItem(
-                        child: Padding(
-                          padding: 
-                            EdgeInsetsDirectional.symmetric(horizontal: 5),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              funcaoEditar();
-                            },
-                            child: Text('Editar', style: TextStyle(fontSize: 16)),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Cores.azul
-                            )
-                          )
-                        ),
-                      ),
-                      PopupMenuItem(
-                        child: Padding(
-                          padding: 
-                            EdgeInsetsDirectional.symmetric(horizontal: 5),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              showDialog(context: context, builder: (context) => 
-                                AlertDialog(
-                                  content: Form(
-                                    child: Text('Deseja excluir este item permanentemente?', style: TextStyle(fontSize: 16))
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: Text('Cancelar', style: TextStyle(fontSize: 16, color: Cores.red)),
-                                      onPressed: () => Navigator.pop(context),
-                                    ),
-                                    TextButton(
-                                      child: Text('EXCLUIR', style: TextStyle(fontSize: 16, color: Cores.red)),
-                                      onPressed: () {
-                                        funcaoDeletar();
-                                        print(id);
-                                        Navigator.pop(context);
-                                      }
-                                    ), 
-                                  ],
+                  Expanded(
+                    flex: 2,
+                    child: PopupMenuButton(
+                      icon: Icon(Icons.more_vert),
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.symmetric(horizontal: 3),
+                            child: SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  funcaoEditar();
+                                },
+                                child: Text('Editar', style: TextStyle(fontSize: 16)),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Cores.azul
                                 )
-                              );
-                            },
-                            child: Text('Excluir', style: TextStyle(fontSize: 16))
-                          )
+                              ),
+                            )
+                          ),
                         ),
-                      ),
-                      PopupMenuItem(
-                        child: botaoExtra,
-                      ),
-                    ]
+                        PopupMenuItem(
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.symmetric(horizontal: 3),
+                            child: SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  showDialog(context: context, builder: (context) => 
+                                    AlertDialog(
+                                      content: Form(
+                                        child: Text('Deseja excluir este item permanentemente?', style: TextStyle(fontSize: 16))
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Cancelar', style: TextStyle(fontSize: 16, color: Cores.red)),
+                                          onPressed: () => Navigator.pop(context),
+                                        ),
+                                        TextButton(
+                                          child: Text('EXCLUIR', style: TextStyle(fontSize: 16, color: Cores.red)),
+                                          onPressed: () {
+                                            funcaoDeletar();
+                                            print(id);
+                                            Navigator.pop(context);
+                                          }
+                                        ), 
+                                      ],
+                                    )
+                                  );
+                                },
+                                child: Text('Excluir', style: TextStyle(fontSize: 16))
+                              ),
+                            )
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: botaoExtra,
+                        ),
+                      ]
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () {
+        funcaoExtra();
+      },
     );
   }
   
@@ -117,19 +126,22 @@ class ElementoCard {
     Padding botaoExtra =
       Padding(
         padding: 
-          EdgeInsetsDirectional.symmetric(horizontal: 5),
-        child: ElevatedButton(
-          onPressed: () {
-            verAgendas();
-          },
-          child: Text('Ver Agendas', style: TextStyle(fontSize: 16, color: Cores.black)),//elementoTexto.escreverTexto(texto: 'Ver Agendas', corFonte: Cores.black),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Cores.fundoCard
-          )
+          EdgeInsetsDirectional.symmetric(horizontal: 3),
+        child: SizedBox(
+          width: MediaQuery.sizeOf(context).width * 0.4,
+          child: ElevatedButton(
+            onPressed: () {
+              verAgendas();
+            },
+            child: Text('Ver Agendas', style: TextStyle(fontSize: 16, color: Cores.black)),//elementoTexto.escreverTexto(texto: 'Ver Agendas', corFonte: Cores.black),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Cores.fundoCard
+            )
+          ),
         )
       );
       
-    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, (){}, (){});
+    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, (){}, (){}, 5, (){verAgendas();});
   }
   
   cardSala({
@@ -145,7 +157,7 @@ class ElementoCard {
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
     Padding botaoExtra = Padding(padding: EdgeInsetsDirectional.zero);
       
-    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, deletarSala, editarSala);
+    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, deletarSala, editarSala, 5, (){});
   }
 
   cardConjunto({
@@ -158,25 +170,28 @@ class ElementoCard {
     required Function editarConjunto,
     required Function verSalas
   }) {
-    Text infoConjunto = Text('$nome\n$subtitulo', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));//elementoTexto.escreverTexto(texto: '$nome\n$subtitulo', expessura: FontWeight.bold, tamanho: 20);
-    BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
+    Text infoConjunto = Text('$nome\n$subtitulo', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+    BoxDecoration caixaFoto = BoxDecoration();
     Padding botaoExtra =
       Padding(
         padding: 
-          EdgeInsetsDirectional.symmetric(horizontal: 5),
-        child: ElevatedButton(
-          onPressed: () {
-            verSalas();
-          },
-          child: Text('Ver Salas', style: TextStyle(fontSize: 16, color: Cores.black)),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Cores.fundoCard
-          )
+          EdgeInsetsDirectional.symmetric(horizontal: 3),
+        child: SizedBox(
+          width: MediaQuery.sizeOf(context).width * 0.4,
+          child: ElevatedButton(
+            onPressed: () {
+              verSalas();
+            },
+            child: Text('Ver Salas', style: TextStyle(fontSize: 16, color: Cores.black)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Cores.fundoCard
+            )
+          ),
         )
       );
 
     editarConjunto;
 
-    return _Card(context, caixaFoto, foto, 100, infoConjunto, id, botaoExtra, deletarConjunto, editarConjunto);
+    return _Card(context, caixaFoto, foto, 80, infoConjunto, id, botaoExtra, deletarConjunto, editarConjunto, 10, () {verSalas();});
   }
 }

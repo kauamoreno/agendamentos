@@ -21,7 +21,7 @@ class VM_SalasConjunto {
         // Acesse os dados de cada documento usando doc.data()
         var data = doc.data();
         var salasConjunto = ListTile(
-          leading: Image.network('https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg'),
+          leading: Image.network(data['linkFoto']),
           title: Text(data['nomeConjunto']),
           subtitle: Text(data['subTitulo']),
           trailing: const Icon(Icons.chevron_right_sharp),
@@ -44,6 +44,7 @@ class VM_SalasConjunto {
   Future<List<Widget>> gerenciarSalasConjunto(BuildContext context) async {
     final _nomeConjuntoController = TextEditingController();
     final _subTituloConjuntoController = TextEditingController();
+    final _linkController = TextEditingController();
     QuerySnapshot<Map<String, dynamic>>? salasConjuntoWidget = await sala.getSalasConjunto();
     List<Widget> cards = [];
 
@@ -53,9 +54,9 @@ class VM_SalasConjunto {
         // Acesse os dados de cada documento usando doc.data()
         var data = doc.data();
 
-        Card salasConjunto = cardElemento.cardConjunto(
+        GestureDetector salasConjunto = cardElemento.cardConjunto(
           context: context,
-          foto: "https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg",
+          foto: data['linkFoto'],
           nome: data['nomeConjunto'],
           subtitulo: data['subTitulo'],
           id: doc.id,
@@ -65,12 +66,14 @@ class VM_SalasConjunto {
           editarConjunto: () {
             _nomeConjuntoController.text = data['nomeConjunto'];
             _subTituloConjuntoController.text = data['subTitulo'];
+            _linkController.text = data['linkFoto'];
             FormsPopUp().formsConjunto(
               context: context,
               tituloController: _nomeConjuntoController,
               subtituloController: _subTituloConjuntoController,
+              linkController: _linkController,
               funcaoCreate: () {
-                atualizarConjunto(context, doc.id, _nomeConjuntoController.text, _subTituloConjuntoController.text);
+                atualizarConjunto(context, doc.id, _nomeConjuntoController.text, _subTituloConjuntoController.text, _linkController.text);
               },
               setState: (){}
             );
@@ -100,7 +103,7 @@ class VM_SalasConjunto {
     return cards;
   }
 
-  cadastrarConjunto(BuildContext context, String nomeConjunto, String subTitulo) {
+  cadastrarConjunto(BuildContext context, String nomeConjunto, String subTitulo, String linkFoto) {
     var nomeValido = false;
     if (nomeConjunto.length < 1) {
       snack.erro(context, 'Insira um nome de conjunto maior');
@@ -119,9 +122,16 @@ class VM_SalasConjunto {
       subTituloValido = true;
     }
 
+    var linkFotoValido = false;
+    if (linkFoto.length < 10) {
+      snack.erro(context, "Este link parece ser pequeno demais");
+    } else {
+      linkFotoValido = true;
+    }
+
     //Chamar model
-    if (nomeValido & subTituloValido) {
-      SalasFirestore().criarSalaConjunto(nomeConjunto, subTitulo);
+    if (nomeValido & subTituloValido & linkFotoValido) {
+      SalasFirestore().criarSalaConjunto(nomeConjunto, subTitulo, linkFoto);
       print('deu certo');
       Navigator.pop(context);
     }
@@ -131,7 +141,7 @@ class VM_SalasConjunto {
     SalasFirestore().deletarConjunto(context, idConjunto);
   }
 
-  atualizarConjunto(BuildContext context, String id, String nomeConjunto, String subTitulo) {
+  atualizarConjunto(BuildContext context, String id, String nomeConjunto, String subTitulo, String fotoLink) {
     var nomeValido = false;
     if (nomeConjunto.length < 1) {
       snack.erro(context, 'Insira um nome de conjunto maior');
@@ -152,7 +162,7 @@ class VM_SalasConjunto {
 
     //Chamar model
     if (nomeValido & subTituloValido) {
-      SalasFirestore().atualizarSalaConjunto(context, id, nomeConjunto, subTitulo);
+      SalasFirestore().atualizarSalaConjunto(context, id, nomeConjunto, subTitulo, fotoLink);
       print('deu certo');
       Navigator.pop(context);
     }

@@ -20,6 +20,7 @@ class _GerenciaConjuntoState extends State<GerenciaConjunto> {
   TextFieldComponent textFieldComponent = TextFieldComponent();
   final _nomeConjuntoController = TextEditingController();
   final _subTituloConjuntoController = TextEditingController();
+  final _linkController = TextEditingController();
   ElementoCard cardElemento = ElementoCard();
   FormsPopUp formsPopUp = FormsPopUp();
 
@@ -70,11 +71,13 @@ class _GerenciaConjuntoState extends State<GerenciaConjunto> {
             context: context,
             tituloController: _nomeConjuntoController,
             subtituloController: _subTituloConjuntoController,
+            linkController: _linkController,
             funcaoCreate: (){
               VM_SalasConjunto().cadastrarConjunto(
                 context,
                 _nomeConjuntoController.text,
-                _subTituloConjuntoController.text
+                _subTituloConjuntoController.text,
+                _linkController.text
               );
             },
             setState: () {setState(() {});}

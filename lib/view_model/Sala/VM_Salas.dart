@@ -18,7 +18,7 @@ class VM_Salas {
   SalasCard salaCards = SalasCard();
   ElementoCard elementoCard = ElementoCard();
 
-  Future<void> criarSala(BuildContext context, String capacidadeString, String nomeSala) async {
+  Future<void> criarSala(BuildContext context, String capacidadeString, String nomeSala, String linkFoto) async {
     print(nomeConjunto);
 
     if(nomeSala.isEmpty || capacidadeString.isEmpty){
@@ -35,11 +35,16 @@ class VM_Salas {
       print('está com numero certo');
     }
 
+    if (linkFoto.length < 10) {
+      return snack.erro(context, "Este link parece ser pequeno demais");
+    }
+
     await firestore.criarSala(
       context, 
       nomeConjunto, 
       capacidade, 
-      nomeSala
+      nomeSala,
+      linkFoto
     );
   }
 
@@ -59,7 +64,7 @@ class VM_Salas {
 
           var salaWidget = salaCards.salaConjunto(
             context: context,
-            imgUrl: 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg',
+            imgUrl: salaData['linkFoto'],
             subTitulo: "Acrescentar subtitulo", //salaData['subTitulo']
             titulo: salaData['nome'], 
             nomeConjunto: nomeConjunto, 
@@ -82,6 +87,7 @@ class VM_Salas {
     DocumentSnapshot<Map<String, dynamic>> conjuntoDoc = await firestore.db.doc(nomeConjunto).get();
     final _nomeSalaController = TextEditingController();
     final _quantidadeController = TextEditingController();
+    final _linkController = TextEditingController();
 
     List<Widget> cards = [];
 
@@ -95,7 +101,7 @@ class VM_Salas {
 
           var salaWidget = elementoCard.cardSala(
             context: context,
-            foto: 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg',
+            foto: salaData['linkFoto'],
             nome: salaData['nome'],
             quantidade: salaData['capacidade'],
             id: nomeConjunto,
@@ -111,16 +117,19 @@ class VM_Salas {
             editarSala: () {
               _nomeSalaController.text = salaData['nome'];
               _quantidadeController.text = "${salaData['capacidade']}";
+              _linkController.text = salaData['linkFoto'];
               FormsPopUp().formsSala(
                 context: context, 
                 nomeSalaController: _nomeSalaController, 
-                quantidadeController: _quantidadeController, 
+                quantidadeController: _quantidadeController,
+                linkController: _linkController,
                 uidConjunto: nomeConjunto, 
                 funcaoCreate: () {
                   editarSala(
                     context, 
                     _quantidadeController.text, 
                     _nomeSalaController.text,
+                    _linkController.text,
                     salaData['nome']
                   );
                 }, 
@@ -141,7 +150,7 @@ class VM_Salas {
     return cards;
   }
 
-  Future<void> editarSala(BuildContext context, String capacidadeString, String nomeSala, String nomeAntigoSala) async {
+  Future<void> editarSala(BuildContext context, String capacidadeString, String nomeSala, String fotoLink, String nomeAntigoSala) async {
 
     if(nomeSala.isEmpty || capacidadeString.isEmpty){
       return snack.erro(context, 'Dados insuficientes, preencher todos os campos');
@@ -161,7 +170,8 @@ class VM_Salas {
       context: context,
       nomeConjunto: nomeConjunto, 
       novoNome: nomeSala, 
-      novaCapacidade: capacidade, 
+      novaCapacidade: capacidade,
+      fotoLink: fotoLink,
       nomeSala: nomeAntigoSala);
   }
 }

@@ -9,19 +9,21 @@ class SalasFirestore {
   CollectionReference<Map<String, dynamic>> db = FirebaseFirestore.instance.collection('salaConjunto');
 
   //CREATE
-  criarSalaConjunto(String nomeConjunto, String subTitulo) {
+  criarSalaConjunto(String nomeConjunto, String subTitulo, String linkFoto) {
     final salaConjunto = {
       "nomeConjunto": nomeConjunto,
       "subTitulo": subTitulo,
+      "linkFoto": linkFoto,
       "Salas": []
     };
     db.doc().set(salaConjunto);
   }
 
-  criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala) {
+  criarSala(BuildContext context, String nomeConjunto, int capacidade, String nomeSala, String linkFoto) {
     final sala = Sala(
       capacidade: capacidade,
       nome: nomeSala,
+      linkFoto: linkFoto,
       agendamentos: []
     );
     
@@ -190,16 +192,18 @@ class SalasFirestore {
 
   // Defina uma função chamada atualizarSala que recebe vários parâmetros
   atualizarSala({
-    required BuildContext context, 
-    required String nomeConjunto, 
-    required String novoNome, 
-    required int novaCapacidade, 
+    required BuildContext context,
+    required String nomeConjunto,
+    required String novoNome,
+    required int novaCapacidade,
+    required String fotoLink,
     required String nomeSala,
   }) async { 
 
     final salaAtualizada = {
       'capacidade': novaCapacidade,
       'nome': novoNome,
+      'linkFoto': fotoLink
     };
 
     try {
@@ -239,10 +243,11 @@ class SalasFirestore {
 
 
   // Cria uma função para atualizar o nomeConjunto e o subTitulo
-  atualizarSalaConjunto(BuildContext context, String id, String nomeConjunto, String subTitulo) {
+  atualizarSalaConjunto(BuildContext context, String id, String nomeConjunto, String subTitulo, String fotoLink) {
     final dadosAtualizados = {
       "nomeConjunto": nomeConjunto,
       "subTitulo": subTitulo,
+      "linkFoto": fotoLink
     };
     
     var docRef = db.doc(id);
