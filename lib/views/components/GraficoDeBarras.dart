@@ -22,26 +22,41 @@ class GraficoDeBarras extends StatelessWidget {
       ];
     }
 
+    final coresColunas = [
+      [Colors.red.shade300, Colors.red.shade500, Colors.red.shade900], 
+      [Colors.orange.shade300, Colors.orange.shade500, Colors.orange.shade900], 
+      [Colors.green.shade300, Colors.green.shade500, Colors.green.shade900], 
+      [Colors.teal.shade300, Colors.teal.shade500, Colors.teal.shade900], 
+      [Colors.blue.shade300, Colors.blue.shade500, Colors.blue.shade900], 
+      [Colors.purple.shade300, Colors.purple.shade500, Colors.purple.shade900]
+    ];
+
     return Column(
       children: [
-        const Text('Quantidade de agendamentos por dia'),
+        const Text('Quantidade de agendamentos por dia na semana'),
         Container(height: 30),
         SizedBox(
           height: 300,
           child: BarChart(
             BarChartData(
               barGroups: agendamentosPorDia
-                  .asMap()
-                  .entries
-                  .map(
-                    (entry) => BarChartGroupData(
-                      x: entry.key + 1,
-                      barRods: [
-                        BarChartRodData(y: entry.value.toDouble()),
-                      ],
-                    ),
-                  )
-                  .toList(),
+                .asMap()
+                .entries
+                .map(
+                  (entry) => BarChartGroupData(
+                    x: entry.key,
+                    barRods: [
+                      BarChartRodData(
+                        y: entry.value.toDouble(), 
+                        width: 20, 
+                        borderRadius: BorderRadius.circular(5),
+                        colors: coresColunas[entry.key],
+                      ),
+                    ],
+                  ),
+                )
+                .toList(),
+              
               borderData: FlBorderData(
                 show: true,
                 border: Border.all(color: Colors.black, width: 1.0, style: BorderStyle.solid),
@@ -64,7 +79,7 @@ class GraficoDeBarras extends StatelessWidget {
                 show: true,
                 bottomTitles: SideTitles(
                   showTitles: true,
-                  margin: 20,
+                  margin: 10,
                   reservedSize: 22,
                   getTitles: (value) {
                     final diasDaSemana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -76,7 +91,7 @@ class GraficoDeBarras extends StatelessWidget {
                 ),
                 leftTitles: SideTitles(
                   showTitles: true,
-                  margin: 20,
+                  margin: 10,
                   reservedSize: 22,
                 ),
               ),
