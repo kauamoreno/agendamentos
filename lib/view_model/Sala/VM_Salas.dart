@@ -64,7 +64,7 @@ class VM_Salas {
 
           var salaWidget = salaCards.salaConjunto(
             context: context,
-            imgUrl: 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg',
+            imgUrl: salaData['linkFoto'],
             subTitulo: "Acrescentar subtitulo", //salaData['subTitulo']
             titulo: salaData['nome'], 
             nomeConjunto: nomeConjunto, 
@@ -117,6 +117,7 @@ class VM_Salas {
             editarSala: () {
               _nomeSalaController.text = salaData['nome'];
               _quantidadeController.text = "${salaData['capacidade']}";
+              _linkController.text = salaData['linkFoto'];
               FormsPopUp().formsSala(
                 context: context, 
                 nomeSalaController: _nomeSalaController, 
@@ -128,6 +129,7 @@ class VM_Salas {
                     context, 
                     _quantidadeController.text, 
                     _nomeSalaController.text,
+                    _linkController.text,
                     salaData['nome']
                   );
                 }, 
@@ -148,7 +150,7 @@ class VM_Salas {
     return cards;
   }
 
-  Future<void> editarSala(BuildContext context, String capacidadeString, String nomeSala, String nomeAntigoSala) async {
+  Future<void> editarSala(BuildContext context, String capacidadeString, String nomeSala, String fotoLink, String nomeAntigoSala) async {
 
     if(nomeSala.isEmpty || capacidadeString.isEmpty){
       return snack.erro(context, 'Dados insuficientes, preencher todos os campos');
@@ -168,7 +170,8 @@ class VM_Salas {
       context: context,
       nomeConjunto: nomeConjunto, 
       novoNome: nomeSala, 
-      novaCapacidade: capacidade, 
+      novaCapacidade: capacidade,
+      fotoLink: fotoLink,
       nomeSala: nomeAntigoSala);
   }
 }
