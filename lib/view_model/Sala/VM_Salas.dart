@@ -36,7 +36,7 @@ class VM_Salas {
     }
 
     if (linkFoto.length < 10) {
-      return snack.erro(context, "Este link parece ser pequeno demais");
+      linkFoto = "https://yt3.googleusercontent.com/CtLABW19pvsUQBevGUun2y2AoHPrh9I3SkJq4dEXaMQsI8IBgvZ26Wcuyd7PYZdrWbhRAX6SObs=s900-c-k-c0x00ffffff-no-rj";
     }
 
     await firestore.criarSala(

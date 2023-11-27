@@ -37,9 +37,19 @@ class FormsPopUp {
     required TextEditingController emailProfController, 
     required TextEditingController senhaProfController,
     required Function funcaoCreate,
+    bool editar = false,
     required Function setState
   }) {
-    Column colunaForms = 
+    Column colunaForms;
+    if (editar) {
+      colunaForms = 
+      Column(
+        children: [
+          textFieldComponent.textFieldCustom(label: 'Nome do Professor', icone: Icons.abc, hint: 'Nome Completo', controller: nomeProfController)
+        ],
+      );
+    } else {
+      colunaForms = 
       Column(
         children: [
           textFieldComponent.textFieldCustom(label: 'Nome do Professor', icone: Icons.abc, hint: 'Nome Completo', controller: nomeProfController),
@@ -47,6 +57,8 @@ class FormsPopUp {
           textFieldComponent.textFieldCustom(label: 'Senha', icone: Icons.key, hint: 'Senha', mostrarSenha: true, controller: senhaProfController)
         ],
       );
+    }
+    
 
     return _forms(context, colunaForms, funcaoCreate, setState);
   }

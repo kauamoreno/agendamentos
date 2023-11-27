@@ -119,7 +119,9 @@ class ElementoCard {
     required String nome, 
     required String email,
     required String id,
-    required Function verAgendas
+    required Function verAgendas,
+    required Function editarProf,
+    required Function excluirProf
   }) {
     Text infoProf = Text('$nome\n$email', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold));
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.circle);
@@ -141,7 +143,7 @@ class ElementoCard {
         )
       );
       
-    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, (){}, (){}, 5, (){verAgendas();});
+    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, excluirProf, editarProf, 5, (){verAgendas();});
   }
   
   cardSala({
