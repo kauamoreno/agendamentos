@@ -1,5 +1,6 @@
 import 'package:agendamentos/view_model/SnackBarViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../models/services/Firestore/Feedback.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,11 +14,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(titulo),
       automaticallyImplyLeading: voltar,
+      actions: [
+        IconButton(
+          onPressed: (){
+            _launchUrl();
+          },
+          icon: Icon(Icons.help_outline)
+        )
+      ],
     );
   }
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+final Uri _url = Uri.parse('https://tasteful-orca-fad.notion.site/Manual-de-Usu-rio-AGS-42963e08e8624e069340f2a9ca30a6be'); //Manual do usuario
+Future<void> _launchUrl() async {
+  if (!await launchUrl(_url)) {
+    throw Exception('Could not launch $_url');
+  }
 }
 
 //DialogoAlerta-----------------------------------------------------------------------------------

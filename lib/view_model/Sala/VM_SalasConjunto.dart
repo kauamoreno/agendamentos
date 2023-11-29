@@ -41,6 +41,11 @@ class VM_SalasConjunto {
     return cards;
   }
 
+
+  
+
+
+
   Future<List<Widget>> gerenciarSalasConjunto(BuildContext context) async {
     final _nomeConjuntoController = TextEditingController();
     final _subTituloConjuntoController = TextEditingController();
@@ -82,13 +87,6 @@ class VM_SalasConjunto {
             Navigator.of(context).pushReplacementNamed('/gerenciarSalas', arguments: doc.id);
           }
         );
-        // var salasConjunto = ListTile(
-        //   leading: Image.network('https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg'),
-        //   title: Text(data['nomeConjunto']),
-        //   subtitle: Text(data['subTitulo']),
-        //   trailing: const Icon(Icons.chevron_right_sharp),
-        //   onTap: () => Navigator.of(context).pushReplacementNamed('/salas', arguments: doc.id)
-        // );
 
         print('${doc.id} => ${doc.data()}');
         
@@ -122,15 +120,12 @@ class VM_SalasConjunto {
       subTituloValido = true;
     }
 
-    var linkFotoValido = false;
     if (linkFoto.length < 10) {
-      snack.erro(context, "Este link parece ser pequeno demais");
-    } else {
-      linkFotoValido = true;
+      linkFoto = "https://scontent-gru2-2.xx.fbcdn.net/v/t39.30808-6/299995697_176545614938341_8571280725610840430_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=b4vfM0xvH88AX9yMQjB&_nc_ht=scontent-gru2-2.xx&oh=00_AfAusDf3tRJgUk4JDAexPrinyeW3OwBBhXpHkhmN3CwvBw&oe=6569DB8E";
     }
 
     //Chamar model
-    if (nomeValido & subTituloValido & linkFotoValido) {
+    if (nomeValido & subTituloValido) {
       SalasFirestore().criarSalaConjunto(nomeConjunto, subTitulo, linkFoto);
       print('deu certo');
       Navigator.pop(context);
