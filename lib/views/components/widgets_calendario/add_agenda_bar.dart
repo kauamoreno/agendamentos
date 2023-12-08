@@ -204,7 +204,6 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
               onTap: () {
                 setState(() {
                   _corSelecionada = index;
-                  print("$index");
                 });
               },
               child: Padding(
@@ -242,7 +241,6 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
     if (pegarData != null) {
       setState(() {
         dataSelecionada = pegarData;
-        print(dataSelecionada);
       });
     } else {}
   }
@@ -251,7 +249,7 @@ class _addAgendametoPaginaState extends State<addAgendametoPagina> {
     var pegarTempo = await exibirTempoDoUsuario();
     String _tempoFormatado = pegarTempo.format(context);
     if (pegarTempo == null) {
-      print("");
+      
     } else if (oTempoInicial == true) {
       setState(() {
         tempoInicial = _tempoFormatado;

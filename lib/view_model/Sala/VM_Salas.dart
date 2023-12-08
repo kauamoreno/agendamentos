@@ -19,8 +19,6 @@ class VM_Salas {
   ElementoCard elementoCard = ElementoCard();
 
   Future<void> criarSala(BuildContext context, String capacidadeString, String nomeSala, String linkFoto) async {
-    print(nomeConjunto);
-
     if(nomeSala.isEmpty || capacidadeString.isEmpty){
       return snack.erro(context, 'Dados insuficientes, preencher todos os campos');
     }
@@ -29,10 +27,7 @@ class VM_Salas {
     capacidade = int.tryParse(capacidadeString);
 
     if (capacidade == null || capacidade < 1) {
-      print('está com número errado');
       return snack.erro(context, 'Quantidade inválida');
-    } else {
-      print('está com numero certo');
     }
 
     if (linkFoto.length < 10) {
@@ -111,7 +106,8 @@ class VM_Salas {
                 nomeConjunto, 
                 salaData['nome'], 
                 salaData['capacidade'], 
-                salaData['agendamentos']
+                salaData['agendamentos'],
+                salaData['linkFoto']
               );
             },
             editarSala: () {
@@ -138,7 +134,6 @@ class VM_Salas {
             }
           );
           cards.add(salaWidget);
-          print(salaData);
         }
       } else {
         snack.erro(context, 'Não há salas neste conjunto');
@@ -160,10 +155,7 @@ class VM_Salas {
     capacidade = int.tryParse(capacidadeString);
 
     if (capacidade == null || capacidade < 1) {
-      print('está com número errado');
       return snack.erro(context, 'Quantidade inválida');
-    } else {
-      print('está com numero certo');
     }
 
     await firestore.atualizarSala(

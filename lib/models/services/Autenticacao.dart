@@ -74,7 +74,7 @@ class Autenticacao {
           Navigator.of(context).pushReplacementNamed('/userHome');
           break;
         default:
-          Navigator.of(context).pushReplacementNamed('/erro', arguments: 'Desculpe, mas parece que houve um problema ao tentar exibir a página inicial. Por favor, tente novamente');
+          mensagemSnackBar.erro(context, 'Permissão não encontrada. contate o Adm');
       }
 
     } on FirebaseAuthException catch (e) {

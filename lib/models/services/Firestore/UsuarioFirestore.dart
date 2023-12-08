@@ -27,6 +27,21 @@ class UsuarioFirestore {
     );
   }
 
+  editarNomeUsuario(BuildContext context, String id, String email, String nome, bool isAdm) {
+    final dadosAtualizados = {
+      "email": email,
+      "nome": nome,
+      "isAdm": isAdm
+    };
+    
+    var docRef = db.doc(id);
+    // Atualiza os campos usando o método update()
+    docRef.update(dadosAtualizados).then(
+      (doc) => mensagemSnackBar.sucesso(context, "Nome de Usuário Atualizado"),
+      onError: (e) => mensagemSnackBar.erro(context, "Erro ao Atualizar o Nome do Usuário")
+    );
+  }
+
   //READ ALL USERS
   getTodosUsuarios() async {
     try {

@@ -59,11 +59,9 @@ class GerenciarUsuario {
     //Chamar model
     if (nomeValido & mailValido & senhaValida) {
       if (await Autenticacao().criarUsuario(context: context, nome: nome, email: email, senha: senha)) {
-        print('deu certo');
         Navigator.pop(context);
         return true;
       }else {
-        print('não deu');
         return false;
       }
     } else {
@@ -78,7 +76,6 @@ class GerenciarUsuario {
     final _nomeProf = TextEditingController();
 
     QuerySnapshot<Map<String, dynamic>>? usuariosWidget = await user.getTodosUsuarios();
-    print(usuariosWidget);
     List<Widget> cards = [];
 
     if (usuariosWidget != null) {
@@ -103,16 +100,14 @@ class GerenciarUsuario {
                 emailProfController: TextEditingController(), 
                 senhaProfController: TextEditingController(), 
                 funcaoCreate: () {
-                  // CRIAR FUNÇÃO PARA EDITAR
+                  editarNomeUsuario(context, doc.id, _nomeProf.text, data['email'], data['isAdm']);
                 }, 
                 setState: (){},
                 editar: true
               );
             },
-            excluirProf: () {}
+            excluirProf: () {UsuarioFirestore().deletarUsuario(context, doc.id);}
           );
-
-          print('${doc.id} => ${doc.data()}');
 
           // Adicione a instância à lista de widgets
           cards.add(usuarios);
@@ -123,5 +118,13 @@ class GerenciarUsuario {
       mensagemSnackBar.erro(context, 'Erro ao obter os Usuarios');
     }
     return cards;
+  }
+
+  editarNomeUsuario(BuildContext context, String id, String nome, String email, bool isAdm) {
+    if (nome.length < 5) {
+      mensagemSnackBar.erro(context, 'Insira um nome maior');
+    } else {
+      UsuarioFirestore().editarNomeUsuario(context, id, email, nome, isAdm);
+    }
   }
 }

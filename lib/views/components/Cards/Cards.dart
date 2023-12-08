@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import '../../constants/Cores.dart';
 
 class ElementoCard {
-  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar, Function funcaoEditar, double paddingValor, Function funcaoExtra) {
+  _Card(BuildContext context, BoxDecoration caixaFoto, String foto, double tamanhoFoto, Text label, String id, Padding botaoExtra, Function funcaoDeletar, Function funcaoEditar, double paddingValor, Function funcaoExtra, String mensagemExcluir) {
+    if (mensagemExcluir == '') {
+      mensagemExcluir = 'Deseja excluir este item permanentemente?';
+    }
     return GestureDetector(
       child: Card(
         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -72,7 +75,7 @@ class ElementoCard {
                                   showDialog(context: context, builder: (context) => 
                                     AlertDialog(
                                       content: Form(
-                                        child: Text('Deseja excluir este item permanentemente?', style: TextStyle(fontSize: 16))
+                                        child: Text(mensagemExcluir, style: TextStyle(fontSize: 16))
                                       ),
                                       actions: [
                                         TextButton(
@@ -83,7 +86,6 @@ class ElementoCard {
                                           child: Text('EXCLUIR', style: TextStyle(fontSize: 16, color: Cores.red)),
                                           onPressed: () {
                                             funcaoDeletar();
-                                            print(id);
                                             Navigator.pop(context);
                                           }
                                         ), 
@@ -143,7 +145,7 @@ class ElementoCard {
         )
       );
       
-    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, excluirProf, editarProf, 5, (){verAgendas();});
+    return _Card(context, caixaFoto, 'https://www.offidocs.com/images/xtwitterdefaultpfpicon.jpg.pagespeed.ic.9q2wXBQmsW.jpg', 120, infoProf, id, botaoExtra, excluirProf, editarProf, 5, (){verAgendas();}, 'Deseja excluir esse item? O Usuário não terá mais acesso, mas será necessário uma exclusão manual do usuário no Firebase: Authentication\nID do Usuário: $id');
   }
   
   cardSala({
@@ -159,7 +161,7 @@ class ElementoCard {
     BoxDecoration caixaFoto = BoxDecoration(shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(8));
     Padding botaoExtra = Padding(padding: EdgeInsetsDirectional.zero);
       
-    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, deletarSala, editarSala, 5, (){});
+    return _Card(context, caixaFoto, foto, 110, infoSala, id, botaoExtra, deletarSala, editarSala, 5, (){}, '');
   }
 
   cardConjunto({
@@ -194,6 +196,6 @@ class ElementoCard {
 
     editarConjunto;
 
-    return _Card(context, caixaFoto, foto, 80, infoConjunto, id, botaoExtra, deletarConjunto, editarConjunto, 10, () {verSalas();});
+    return _Card(context, caixaFoto, foto, 80, infoConjunto, id, botaoExtra, deletarConjunto, editarConjunto, 10, () {verSalas();}, '');
   }
 }

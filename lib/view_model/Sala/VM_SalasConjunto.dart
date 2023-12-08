@@ -27,8 +27,6 @@ class VM_SalasConjunto {
           trailing: const Icon(Icons.chevron_right_sharp),
           onTap: () => Navigator.of(context).pushReplacementNamed('/salas', arguments: doc.id)
         );
-
-        print('${doc.id} => ${doc.data()}');
         
         // Adicione a instância à lista de widgets
         cards.add(salasConjunto);
@@ -87,8 +85,6 @@ class VM_SalasConjunto {
             Navigator.of(context).pushReplacementNamed('/gerenciarSalas', arguments: doc.id);
           }
         );
-
-        print('${doc.id} => ${doc.data()}');
         
         // Adicione a instância à lista de widgets
         cards.add(salasConjunto);
@@ -121,13 +117,12 @@ class VM_SalasConjunto {
     }
 
     if (linkFoto.length < 10) {
-      linkFoto = "https://scontent-gru2-2.xx.fbcdn.net/v/t39.30808-6/299995697_176545614938341_8571280725610840430_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=b4vfM0xvH88AX9yMQjB&_nc_ht=scontent-gru2-2.xx&oh=00_AfAusDf3tRJgUk4JDAexPrinyeW3OwBBhXpHkhmN3CwvBw&oe=6569DB8E";
+      linkFoto = "https://cdn-icons-png.flaticon.com/256/1387/1387964.png";
     }
 
     //Chamar model
     if (nomeValido & subTituloValido) {
       SalasFirestore().criarSalaConjunto(nomeConjunto, subTitulo, linkFoto);
-      print('deu certo');
       Navigator.pop(context);
     }
   }
@@ -158,7 +153,6 @@ class VM_SalasConjunto {
     //Chamar model
     if (nomeValido & subTituloValido) {
       SalasFirestore().atualizarSalaConjunto(context, id, nomeConjunto, subTitulo, fotoLink);
-      print('deu certo');
       Navigator.pop(context);
     }
   }

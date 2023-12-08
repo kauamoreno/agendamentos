@@ -171,13 +171,14 @@ class SalasFirestore {
   }
 
   //DELETE
-  deletarSala(BuildContext context, String nomeConjunto, String nomeSala, int capacidade, List agendamentos) {
+  deletarSala(BuildContext context, String nomeConjunto, String nomeSala, int capacidade, List agendamentos, String linkFoto) {
     db.doc(nomeConjunto).update({
       'Salas': FieldValue.arrayRemove([
         {
           'capacidade': capacidade,
           'nome': nomeSala,
-          'agendamentos': agendamentos
+          'agendamentos': agendamentos,
+          'linkFoto': linkFoto
         }
       ])
     });
@@ -257,5 +258,4 @@ class SalasFirestore {
       onError: (e) => mensagemSnackBar.erro(context, "Erro ao Atualizar o Conjunto")
     );
   }
-
 }
