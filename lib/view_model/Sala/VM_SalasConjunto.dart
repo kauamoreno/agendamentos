@@ -65,6 +65,10 @@ class VM_SalasConjunto {
           id: doc.id,
           deletarConjunto: () {
             excluirConjunto(context, doc.id);
+            for (var i = 0; i < 2; i++) {
+              Navigator.pop(context);
+            }
+            Future.delayed(Duration(milliseconds: 100), () {Navigator.pushNamed(context, '/gerenciarConjunto');});
           },
           editarConjunto: () {
             _nomeConjuntoController.text = data['nomeConjunto'];
@@ -77,6 +81,10 @@ class VM_SalasConjunto {
               linkController: _linkController,
               funcaoCreate: () {
                 atualizarConjunto(context, doc.id, _nomeConjuntoController.text, _subTituloConjuntoController.text, _linkController.text);
+                for (var i = 0; i < 3; i++) {
+                  Navigator.pop(context);
+                }
+                Navigator.pushNamed(context, '/gerenciarConjunto');
               },
               setState: (){}
             );
@@ -153,7 +161,6 @@ class VM_SalasConjunto {
     //Chamar model
     if (nomeValido & subTituloValido) {
       SalasFirestore().atualizarSalaConjunto(context, id, nomeConjunto, subTitulo, fotoLink);
-      Navigator.pop(context);
     }
   }
 }

@@ -15,7 +15,7 @@ class _RelatoriosPageState extends State<RelatoriosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(titulo: 'Salas', voltar: true),
+      appBar: const CustomAppBar(titulo: 'Relatório', voltar: true),
       body: FutureBuilder(
         future: vm.getTotalAgendamentosPorDiaSemanaAtual(),
         builder: (BuildContext context, AsyncSnapshot<Map<String, int>> snapshot) {

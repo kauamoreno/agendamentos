@@ -106,7 +106,13 @@ class GerenciarUsuario {
                 editar: true
               );
             },
-            excluirProf: () {UsuarioFirestore().deletarUsuario(context, doc.id);}
+            excluirProf: () {
+              UsuarioFirestore().deletarUsuario(context, doc.id);
+              for (var i = 0; i < 3; i++) {
+                Navigator.pop(context);
+              }
+              Future.delayed(Duration(milliseconds: 100), () {Navigator.pushNamed(context, '/gerenciarProfessores');});
+            }
           );
 
           // Adicione a instância à lista de widgets
@@ -125,6 +131,10 @@ class GerenciarUsuario {
       mensagemSnackBar.erro(context, 'Insira um nome maior');
     } else {
       UsuarioFirestore().editarNomeUsuario(context, id, email, nome, isAdm);
+      for (var i = 0; i < 3; i++) {
+        Navigator.pop(context);
+      }
+      Navigator.pushNamed(context, '/gerenciarProfessores');
     }
   }
 }

@@ -75,6 +75,9 @@ class _GerenciaSalaState extends State<GerenciaSala> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _nomeSalaController.text = '';
+          _quantidadeController.text = '';
+          _linkController.text = '';
           formsPopUp.formsSala(
             context: context, 
             nomeSalaController: _nomeSalaController,
@@ -91,9 +94,7 @@ class _GerenciaSalaState extends State<GerenciaSala> {
             }, 
             setState: () {
               setState(() {});
-            }, 
-            // valorSelecionado: valorSelecionado, 
-            // array: array, 
+            },
           );
         },
 

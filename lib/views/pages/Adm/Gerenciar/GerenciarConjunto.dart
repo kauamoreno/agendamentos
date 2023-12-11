@@ -67,6 +67,9 @@ class _GerenciaConjuntoState extends State<GerenciaConjunto> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _nomeConjuntoController.text = '';
+          _subTituloConjuntoController.text = '';
+          _linkController.text = '';
           formsPopUp.formsConjunto(
             context: context,
             tituloController: _nomeConjuntoController,
