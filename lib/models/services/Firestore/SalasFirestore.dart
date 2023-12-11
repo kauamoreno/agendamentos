@@ -182,6 +182,7 @@ class SalasFirestore {
         }
       ])
     });
+    mensagemSnackBar.sucesso(context, 'Sala Deletado');
   }
 
   deletarConjunto(BuildContext context, String idConjunto) {

@@ -41,6 +41,8 @@ class VM_Salas {
       nomeSala,
       linkFoto
     );
+
+    Navigator.pop(context);
   }
 
   Future<List<Widget>> mostrarSalas(BuildContext context) async {
@@ -60,7 +62,7 @@ class VM_Salas {
           var salaWidget = salaCards.salaConjunto(
             context: context,
             imgUrl: salaData['linkFoto'],
-            subTitulo: "Acrescentar subtitulo", //salaData['subTitulo']
+            subTitulo: "Capacidade: " + salaData['capacidade'].toString(), //salaData['subTitulo']
             titulo: salaData['nome'], 
             nomeConjunto: nomeConjunto, 
             nomeSala: salaData['nome'],
@@ -85,7 +87,7 @@ class VM_Salas {
     final _linkController = TextEditingController();
 
     List<Widget> cards = [];
-
+    
     if (conjuntoDoc.exists) {
       var conjuntoData = conjuntoDoc.data();
       var salas = conjuntoData?['Salas'];
@@ -109,6 +111,10 @@ class VM_Salas {
                 salaData['agendamentos'],
                 salaData['linkFoto']
               );
+              for (var i = 0; i < 1; i++) {
+                Navigator.pop(context);
+              }
+              Future.delayed(Duration(milliseconds: 100), () {Navigator.of(context).pushReplacementNamed('/gerenciarSalas', arguments: nomeConjunto);});
             },
             editarSala: () {
               _nomeSalaController.text = salaData['nome'];
@@ -145,7 +151,7 @@ class VM_Salas {
     return cards;
   }
 
-  Future<void> editarSala(BuildContext context, String capacidadeString, String nomeSala, String fotoLink, String nomeAntigoSala) async {
+  editarSala(BuildContext context, String capacidadeString, String nomeSala, String fotoLink, String nomeAntigoSala) async {
 
     if(nomeSala.isEmpty || capacidadeString.isEmpty){
       return snack.erro(context, 'Dados insuficientes, preencher todos os campos');
@@ -161,9 +167,14 @@ class VM_Salas {
     await firestore.atualizarSala(
       context: context,
       nomeConjunto: nomeConjunto, 
-      novoNome: nomeSala, 
+      novoNome: nomeSala,
       novaCapacidade: capacidade,
       fotoLink: fotoLink,
-      nomeSala: nomeAntigoSala);
+      nomeSala: nomeAntigoSala
+    );
+    for (var i = 0; i < 2; i++) {
+      Navigator.pop(context);
+    }
+    Navigator.of(context).pushReplacementNamed('/gerenciarSalas', arguments: nomeConjunto);
   }
 }
