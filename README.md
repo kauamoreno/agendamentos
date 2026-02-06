@@ -60,10 +60,16 @@ Siga as etapas abaixo para executar a calculadora em Flutter em seu ambiente:
 ```
 <br>
 
-4. Conecte seu dispositivo físico via USB ou inicie um emulador Android/iOS.
+4. Execute o comando para configurar o firebase ao projeto:
+```sh
+    flutterfire configure
+```
 <br>
 
-5. Execute o aplicativo com o seguinte comando:
+5. Conecte seu dispositivo físico via USB ou inicie um emulador Android/iOS.
+<br>
+
+6. Execute o aplicativo com o seguinte comando:
 ```sh
 flutter run
 ```
